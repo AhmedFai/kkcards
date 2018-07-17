@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#125688</color>
+    <color name="colorPrimaryDark">#336E9A</color>
+    <color name="colorAccent">#3F51B5</color>
+    <color name="button_color">#3F51B5</color>
+
+
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+
+    <drawable name="buttonbg">#707070</drawable>
+
+    <color name="silver">#707070</color>
+    <color name="light">#C0C0C0</color>
+
+    <color name="darkgrey">#696969</color>
+    <color name="background">#E4E4E4</color>
+
+    <color name="darkred">#B80629</color>
+    <color name="darkselector">#313131</color>
+    <color name="slidingdrawer_category_background">#082567</color>
+
+    <color name="light_grey">#efefef</color>
+    <color name="dark_grey">#999999</color>
+    <color name="black_border">#000000</color>
+    <color name="table_background_color">#CCCCCC</color>
+    <color name="orange_start">#FF9900</color>
+    <color name="Marromcolor">#800300</color>
+    <color name="Mustoerdcolor">#F5B203</color>
+    <color name="orange_end">#FF6633</color>
+
+    <color name="black_start">#333333</color>
+    <color name="black_end">#666666</color>
+    <color name="black_button_text">#FFFFFF</color>
+    <color name="black_start_button">#000000</color>
+    <color name="black_end_button">#666666</color>
+    <color name="relative_layout_start">#606060</color>
+    <color name="relative_layout_end">#606060</color>
+    <color name="grey_border">#CCCCCC</color>
+    <color name="seperator_line_dark_grey">#333333</color>
+    <color name="text_color_swipe_page">#D2D2D2</color>
+    <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_blue">#3333FF</color>
+    <color name="ORANGE">#FF9900</color>
+    <color name="header_text_color">#8B8B8B</color>
+    <color name="search_box_background_color_black">#98000000</color>
+    <color name="search_box_background_color_white">#98FFFFFF</color>
+    <color name="green_end_button">#00FF00</color>
+    <color name="green_center_button">#009900</color>
+    <color name="green_start_button">#009900</color>
+    <color name="red_start_button">#FF9900</color>
+    <color name="red_center_button">#FF3300</color>
+    <color name="red_end_button">#FF3300</color>
+    <color name="fragment_seperator">#A8A8A8A8</color>
+    <color name="skyblue">#00bfff</color>
+    <color name="light_yellow">#ffc82c</color>
+    <color name="light_gr">#d6cdc8</color>
+    <color name="cholate">#9c6262</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="secondary_text_transparent_70">#B3727272</color>
+
+    <color name="divider">#B6B6B6</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="chrome_grey">#F2F2F2</color>
+    <color name="background_color">#4682B4</color>
+
+    <color name="red">#F44336</color>
+    <color name="pink">#FF4081</color>
+    <color name="purple">#9C27B0</color>
+    <color name="deepblue">#7C4DFF</color>
+    <color name="indigo">#3F51B5</color>
+    <color name="blue">#448AFF</color>
+    <color name="lightblue">#03A9F4</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="teal">#009688</color>
+    <color name="green">#4CAF50</color>
+    <color name="lightgreen">#8BC34A</color>
+    <color name="lime">#CDDC39</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="amber">#FFC107</color>
+    <color name="orange">#FF9800</color>
+    <color name="deeporange">#FF5722</color>
+    <color name="brown">#795548</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="bluegrey">#607D8B</color>
+
+    <color name="trans_black_75">#BF000000</color>
+
+    <color name="trans_black_50">#80000000</color>
+
+    <color name="trans_black_25">#40000000</color>
+
+    <color name="green_theme">#017C67</color>
+    <color name="green_theme_dark">#00715C</color>
+    <color name="green_theme_pink">#AF3F3F</color>
+
+
+
+
+</resources>

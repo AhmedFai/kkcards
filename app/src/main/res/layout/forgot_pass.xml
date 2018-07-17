@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:id="@+id/mobile"
+            android:hint="Enter Mobile"
+            android:inputType="number"
+            android:padding="@dimen/dim_10"
+            android:layout_marginTop="@dimen/dim_30"
+
+
+            />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+           android:layout_margin="@dimen/dim_10"
+            android:padding="12dp"
+            android:textColor="@color/list_item_title"
+            android:text="Submit"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/resent_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dim_20"
+            android:text="Resend OTP"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dim_15"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:id="@+id/note"
+            android:textSize="@dimen/dim_15"
+            android:textStyle="bold"
+            android:text="Note: Please Wait for 2-3 minutes for Otp on your Registered Email and Mobile Number.... Also Check SPAM of your Email For OTP"
+            android:layout_marginTop="@dimen/dim_20"
+            android:visibility="gone"
+
+            />
+    </LinearLayout></ScrollView>

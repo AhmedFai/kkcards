@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="@dimen/dim_100"
+        android:layout_height="@dimen/dim_100"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/dummy"/>
+
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/text1"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/image1"
+        android:layout_toRightOf="@+id/image1"
+        android:layout_toEndOf="@+id/image1"
+        android:layout_marginLeft="15dp"
+        ></TextView>
+
+
+
+
+    <RatingBar
+        android:id="@+id/ratingBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="@dimen/dim_10"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/text1"
+        android:layout_toRightOf="@+id/image1"
+
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/image1"
+        android:layout_marginTop="10dp"
+        android:id="@+id/view2"
+        android:background="@color/light_grey"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/desc"
+        android:hint="Write your review"
+        android:padding="@dimen/dim_5"
+        android:layout_margin="@dimen/dim_10"
+        android:layout_below="@+id/view2"
+        android:layout_marginTop="@dimen/dim_30"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit"
+        android:text="Submit"
+        android:padding="@dimen/dim_5"
+        android:layout_below="@+id/desc"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/list_item_title"
+        android:layout_margin="@dimen/dim_10"
+        android:layout_marginTop="@dimen/dim_30"/>
+
+
+</RelativeLayout>

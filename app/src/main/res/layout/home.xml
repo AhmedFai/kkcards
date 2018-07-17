@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/list_item_title"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_layout"
+        android:orientation="vertical">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progress"/>
+
+
+
+        <!--   <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_horizontal"
+               android:text="Browse Categories"
+               android:textSize="16dp"
+               android:textColor="@color/list_item_title"
+               android:layout_margin="10dp"
+               android:id="@+id/name"
+               />
+   -->
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/dim_4">
+
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="left"
+                />
+        </android.support.v7.widget.CardView>
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+      >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <com.kk_cards.ClickableViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_200"
+            />
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_40"
+            android:layout_marginTop="@dimen/dim_150"
+
+            />
+    </RelativeLayout></LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#D6FCF6"
+            android:id="@+id/super_saverr"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Super Saver"
+                android:textSize="@dimen/dim_16"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="@dimen/dim_10"
+                />
+
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/super_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/list_item_title"
+                android:layout_gravity="left"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FBE0F1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Top Selling Products"
+                android:textSize="@dimen/dim_16"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="@dimen/dim_10"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/top_seling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/list_item_title"
+                android:layout_gravity="left"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:id="@+id/latset_linesr">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Latest"
+                android:id="@+id/latestt"
+                android:textSize="@dimen/dim_16"
+                android:textColor="@color/list_item_title"
+                android:layout_margin="@dimen/dim_10"
+                />
+
+            <com.kk_cards.ExpandableHeightGridView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/gridview_latest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_10"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:background="@color/list_item_title"
+                android:layout_margin="@dimen/dim_8"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4682B4"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Top Offers"
+                android:textSize="@dimen/dim_16"
+                android:textColor="@color/list_item_title"
+                android:layout_margin="@dimen/dim_10"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/top_offer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/list_item_title"
+                android:layout_gravity="left"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_grey"
+        android:id="@+id/pop_linear"
+            android:layout_marginBottom="@dimen/dim_50"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Popular"
+            android:textSize="@dimen/dim_16"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="@dimen/dim_10"
+            android:id="@+id/name"
+            />
+
+        <com.kk_cards.ExpandableHeightGridView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/gridview_popular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim_10"
+            android:numColumns="2"
+            android:background="@color/list_item_title"
+            android:layout_margin="@dimen/dim_8"
+
+            />
+
+    </LinearLayout>
+
+
+     </LinearLayout></ScrollView>

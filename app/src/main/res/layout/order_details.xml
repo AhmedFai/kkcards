@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:visibility="gone"
+    android:id="@+id/scroll">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_grey"
+  >
+
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress"/>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutttttt"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:background="@color/list_item_title">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/dim_18"
+            android:id="@+id/order_id"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="@dimen/dim_10"
+            android:layout_marginBottom="10dp"
+            ></TextView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/order_id"
+            android:layout_marginTop="10dp"
+            android:id="@+id/vieww1"
+            android:background="@color/light_grey"/>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layou"
+            android:layout_below="@+id/vieww1"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:background="@color/list_item_title">
+
+        <ImageView
+        android:id="@+id/image1"
+        android:layout_width="@dimen/dim_60"
+        android:layout_height="@dimen/dim_60"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dim_10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+      />
+
+    <!--  <TextView
+          android:id="@+id/time_on_image"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="10dp"
+          android:textColor="@color/list_item_title"
+          android:layout_alignTop="@+id/image1"
+          android:background="#00B0F0"
+          android:layout_alignRight="@+id/image1"
+          android:layout_alignEnd="@+id/image1" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/text1"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/image1"
+        android:layout_toRightOf="@+id/image1"
+        android:layout_toEndOf="@+id/image1"
+        android:layout_marginLeft="15dp"
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:id="@+id/price1"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="@dimen/dim_10"
+        android:layout_below="@+id/text1"
+        android:layout_toRightOf="@+id/image1"></TextView>
+  <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:id="@+id/quantity"
+        android:layout_marginLeft="@dimen/dim_15"
+        android:layout_marginTop="@dimen/dim_10"
+        android:layout_below="@+id/text1"
+        android:layout_toRightOf="@+id/price1"></TextView>
+
+        </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/layou"
+        android:layout_marginTop="10dp"
+        android:id="@+id/view1"
+        android:background="@color/light_grey"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="@dimen/dim_15"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/delivery_date"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="@dimen/dim_10"
+        android:layout_below="@+id/view1"
+        android:layout_marginBottom="10dp"
+        ></TextView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/delivery_date"
+        android:layout_marginTop="10dp"
+        android:id="@+id/view2"
+        android:background="@color/light_grey"/>
+
+    </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dim_5"
+            android:elevation="3dp"
+            android:layout_below="@+id/layoutttttt"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/list_item_title"
+                android:orientation="vertical">
+
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shipping Address"
+                    android:textSize="@dimen/dim_18"
+                    android:id="@+id/ship_address"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="@dimen/dim_10"
+                    android:layout_marginBottom="10dp"
+                    ></TextView>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/delivery_date"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/light_grey"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/name"
+                    android:textSize="16sp"
+                    android:textIsSelectable="true"
+                    android:layout_marginLeft="@dimen/dim_10"
+                    android:layout_marginRight="@dimen/dim_10"
+                    android:layout_marginBottom="@dimen/dim_10"
+                    ></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/address"
+                    android:textIsSelectable="true"
+                    android:layout_marginLeft="@dimen/dim_10"
+                    android:layout_marginRight="@dimen/dim_10"
+                    android:layout_marginBottom="@dimen/dim_10"
+                    ></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="phone"
+                    android:id="@+id/phone"
+                    android:textIsSelectable="true"
+                    android:layout_marginLeft="@dimen/dim_10"
+                    android:layout_marginRight="@dimen/dim_10"
+                    android:layout_marginBottom="@dimen/dim_10"
+                    ></TextView>
+
+
+
+
+            </LinearLayout></android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dim_5"
+        android:elevation="3dp"
+        android:layout_marginBottom="@dimen/dim_30"
+        android:layout_below="@+id/card_view"
+        card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pric_r_layout"
+        android:layout_below="@id/card_view"
+        android:layout_marginBottom="@dimen/dim_30"
+        android:background="@color/list_item_title">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:text="Price Details"
+            android:id="@+id/detail"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/detail"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view"
+            android:background="@color/light_grey"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/view"
+            android:text="Price"
+            android:id="@+id/no_item"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Rs. 2000"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/view"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tot_price_items"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/no_item"
+            android:text="Delivery Price"
+            android:id="@+id/sale_price"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text=""
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/no_item"
+            android:layout_alignParentRight="true"
+            android:id="@+id/sel_price"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/sale_price"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view3"
+            android:background="@color/light_grey"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/view3"
+            android:text="Total Price"
+            android:textStyle="bold"
+            android:id="@+id/totl_price"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="free"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/view3"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tot_price"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/totl_price"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view4"
+            android:background="@color/light_grey"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/view4"
+            android:id="@+id/layoutt"
+            android:weightSum="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dim_15"
+            android:id="@+id/pay_mode"
+            android:layout_weight="1"
+            android:textIsSelectable="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="@dimen/dim_10"
+            android:layout_marginBottom="10dp"
+            ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/dim_15"
+                android:id="@+id/track_id"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginLeft="15dp"
+                android:textIsSelectable="true"
+                android:layout_marginTop="@dimen/dim_10"
+                android:layout_marginBottom="10dp"
+                ></TextView>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layoutt"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view5"
+            android:background="@color/light_grey"/>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/cancel_order"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:textColor="@color/list_item_title"
+            android:layout_below="@+id/view5"
+            android:text="Cancel Order"
+            android:background="@color/colorAccent"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/replacement"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:textColor="@color/list_item_title"
+            android:layout_below="@+id/view5"
+            android:text="Replace Product"
+            android:background="@color/colorAccent"/>
+
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/track_order"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:textColor="@color/list_item_title"
+            android:layout_below="@+id/cancel_order"
+            android:text="Track your Order"
+            android:background="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/invoice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim_10"
+            android:layout_marginLeft="@dimen/dim_10"
+            android:layout_marginRight="@dimen/dim_10"
+            android:padding="12dp"
+            android:textColor="@color/list_item_title"
+            android:layout_below="@+id/track_order"
+            android:text="Generate Invoice"
+            android:layout_marginBottom="@dimen/dim_40"
+            android:background="@color/colorAccent"/>
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>
+</ScrollView>
+
+
+

@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@color/list_item_title">
+
+
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<!--
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/degree_value"
+                android:text="Degree"
+                android:paddingLeft="7dp"
+                android:layout_marginRight="10dp"
+                android:paddingRight="7dp"
+                android:textSize="18dp"
+                android:layout_marginLeft="10dp"
+                android:background="#f89219"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/title_value"
+                android:text="Title"
+                android:paddingLeft="7dp"
+                android:layout_marginRight="10dp"
+                android:paddingRight="7dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/comment"
+                android:gravity="top|left"
+                android:paddingLeft="5dp"
+                android:minLines="5"
+                android:scrollbars="vertical"
+                android:hint="Write your Comment"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/edit_border"
+                />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/cat_spin"
+                android:text="SUBMIT"
+                android:id="@+id/submit"
+                android:background="#3BBB89"
+                android:layout_marginTop="15dp"/>
+            &lt;!&ndash; <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+                 <EditText
+                     android:id="@+id/seek_to_text"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:inputType="number"
+                     android:hint="seek_to_hint"/>
+
+                 <Button
+                     android:id="@+id/seek_to_button"
+                     android:text="seek_to"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+
+             </LinearLayout>
+         &ndash;&gt;
+        </LinearLayout>
+
+    </ScrollView>-->
+</LinearLayout>

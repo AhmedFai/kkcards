@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+   <group
+       android:id="@+id/grp"
+      >
+
+       <item
+           android:id="@+id/home"
+           android:icon="@drawable/home"
+           android:title="Home" />
+        <item
+            android:id="@+id/my_account"
+            android:icon="@drawable/account"
+            android:title="My Account" />
+       <item
+           android:id="@+id/my_cart"
+           android:icon="@drawable/cart_black"
+           android:title="My Cart" />
+       <item
+           android:id="@+id/my_orders"
+           android:icon="@drawable/order"
+           android:title="My Orders" />
+       <item
+           android:id="@+id/log_out"
+           android:icon="@drawable/log_out"
+           android:title="Log Out" />
+
+       <item
+           android:id="@+id/share"
+           android:icon="@drawable/share"
+           android:title="Share" />
+       <item
+           android:id="@+id/rate"
+           android:icon="@drawable/rate"
+           android:title="Rate Us" />
+
+
+    </group>
+
+    <group android:visible="false" android:id="@+id/second_group"
+     >
+        <item android:title="Categories"
+            android:id="@+id/category"></item>
+    </group>
+
+
+</menu>

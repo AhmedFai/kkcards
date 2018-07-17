@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linear">
+
+
+
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:padding="@dimen/dim_10"
+            android:background="@drawable/image_border"
+            android:id="@+id/select_reason"
+
+
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:id="@+id/service_type"
+            android:visibility="gone"
+            android:hint="Service Type"
+            android:padding="@dimen/dim_10"
+
+
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:id="@+id/comments"
+            android:hint="Comments"
+            android:padding="@dimen/dim_10"
+
+
+            />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/cancel_order"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+           android:layout_margin="@dimen/dim_10"
+            android:padding="12dp"
+            android:layout_below="@+id/view5"
+            android:text="Cancel Order"
+            android:textColor="@color/list_item_title"
+            android:background="@color/colorAccent"/>
+
+
+
+
+    </LinearLayout></ScrollView>

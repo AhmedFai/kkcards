@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_height="fill_parent"
+    android:id="@+id/linear"
+    android:layout_width="fill_parent">
+
+    <TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:textColor="#000000"
+        android:textSize="24dp" android:layout_margin="5dp" android:text="Shopping Cart"></TextView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/city"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@color/list_item_title" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pric_r_layout"
+        android:background="@color/list_item_title">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:text="Price Details"
+            android:id="@+id/detail"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/detail"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view1"
+            android:background="@color/light_grey"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/view1"
+            android:text="Price(1 item)"
+            android:id="@+id/no_item"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Rs. 2000"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/view1"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tot_price_items"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/no_item"
+            android:text="Delivery"
+            android:id="@+id/delivery"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Rs. 40"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/no_item"
+            android:layout_alignParentRight="true"
+            android:id="@+id/del_price"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/delivery"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view2"
+            android:background="@color/light_grey"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/view2"
+            android:text="Amount Payable"
+            android:textColor="@color/black"
+            android:id="@+id/amt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Rs. 2040"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/view2"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:id="@+id/amount_payable"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/amt"
+            android:layout_marginTop="10dp"
+            android:id="@+id/view3"
+            android:layout_marginBottom="10dp"
+            android:background="@color/light_grey"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+   <!-- <LinearLayout android:id="@+id/LinearLayout01"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:layout_gravity="right"
+        android:layout_margin="5dip">
+        <TextView android:id="@+id/total" android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:background="@color/holo_green_light"
+            android:padding="10dp"
+            android:layout_height="wrap_content" android:text="Total"></TextView>
+        <Button android:id="@+id/checkout" android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" android:text="Proceed to Checkout"></Button>
+    </LinearLayout>
+-->
+
+    <include layout="@layout/footer_cart" />
+
+</LinearLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kk_cards">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <application
+        android:name="com.kk_cards.BroadcastReceiver.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/kk"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.kk_cards.splash"
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.kk_cards.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.kk_cards.SignupActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kk_cards.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kk_cards.youtube_video"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity
+            android:name="com.kk_cards.search_activity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.kk_cards.Fragment.product_details"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.Fragment.product_list"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.Fragment.no_product_details"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.select_address"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.add_address_activity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.kk_cards.Fragment.add_to_cart"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.payment_page"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:noHistory="true"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.kk_cards.forgot_password"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.kk_cards.All_reviews"></activity>
+
+        <activity
+            android:name="com.kk_cards.check_out_buy_now"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.write_review"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.invoice_pdf"
+            android:noHistory="true"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.kk_cards.check_out_activity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.kk_cards.Fragment.product_all_details"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
+
+
+        <receiver
+            android:name="com.kk_cards.BroadcastReceiver.NetworkStatusChangeReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <receiver android:name="swarajsaaj.smscodereader.receivers.OtpReader">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.kk_cards.verify_status_paytm"
+            android:noHistory="true"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.kk_cards.OtpActivity"></activity>
+
+    </application>
+
+
+</manifest>

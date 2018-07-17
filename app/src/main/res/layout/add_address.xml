@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="57dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/city"
+        android:hint="City*"
+        android:padding="@dimen/dim_10"
+
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/area"
+        android:hint="Locality/Area*"
+        android:padding="@dimen/dim_10" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/flat_no"
+        android:hint="Flat No/ Building Name*"
+        android:padding="@dimen/dim_10" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:weightSum="2">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:id="@+id/pincode"
+            android:hint="Pincode*"
+            android:inputType="number"
+            android:layout_weight="1"
+            android:padding="@dimen/dim_10" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim_10"
+            android:id="@+id/state"
+            android:hint="State*"
+            android:layout_weight="1"
+            android:padding="@dimen/dim_10" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/landmark"
+        android:hint="LandMark(Optional)"
+        android:padding="@dimen/dim_10"
+
+
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/name"
+        android:hint="Name*"
+        android:padding="@dimen/dim_10"
+
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/phone"
+        android:inputType="number"
+        android:hint="Phone Number*"
+        android:padding="@dimen/dim_10" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/alter_phone"
+        android:inputType="number"
+        android:hint="Alternate Phone Number(optional)"
+        android:padding="@dimen/dim_10" />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address type"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/dim_10"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/dim_10"
+        android:id="@+id/radiogrp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home (All day Delivery)"
+            android:id="@+id/radio1"/>
+
+          <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:text="Work (Delivery between 10 am - 6 pm)"
+            android:id="@+id/radio2"/>
+
+    </RadioGroup>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:textSize="20sp"
+        android:id="@+id/save"
+        android:textColor="@color/list_item_title"
+        android:layout_margin="@dimen/dim_10"
+        android:background="@color/colorPrimary"
+      />
+
+</LinearLayout>
+</ScrollView>

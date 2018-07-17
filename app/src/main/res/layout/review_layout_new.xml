@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/dim_4"
+        android:layout_marginTop="@dimen/dim_10"
+        card_view:cardBackgroundColor="@color/list_item_title"
+        >
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linear"
+        android:background="@color/green"
+        android:layout_margin="@dimen/dim_10"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textSize="8sp"
+            android:layout_margin="@dimen/dim_2"
+            android:padding="@dimen/dim_2"
+            android:textColor="@color/list_item_title"
+            android:id="@+id/star_val"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          android:background="@drawable/ss"
+          android:layout_margin="@dimen/dim_2"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:padding="@dimen/dim_2"
+            android:textColor="@color/list_item_title"
+          />
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:text="Super cool"
+        android:textAlignment="center"
+        android:layout_toRightOf="@+id/linear"
+        android:layout_marginTop="@dimen/dim_10"
+        android:id="@+id/brief_review"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:text="Super cool"
+        android:layout_below="@+id/linear"
+        android:layout_marginLeft="@dimen/dim_10"
+        android:layout_marginRight="@dimen/dim_10"
+        android:layout_marginTop="@dimen/dim_4"
+
+        android:id="@+id/long_review"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:text=""
+        android:layout_below="@+id/long_review"
+        android:layout_marginLeft="@dimen/dim_10"
+        android:layout_marginRight="@dimen/dim_10"
+        android:layout_marginTop="@dimen/dim_6"
+        android:maxLength="15"
+        android:id="@+id/user_name"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:text=""
+        android:layout_toRightOf="@+id/user_name"
+        android:layout_below="@+id/long_review"
+        android:layout_marginLeft="@dimen/dim_3"
+        android:layout_marginRight="@dimen/dim_10"
+        android:layout_marginTop="@dimen/dim_6"
+        android:id="@+id/date"/>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/up_vote"
+        android:id="@+id/up_vote_img"
+        android:layout_below="@+id/long_review"
+        android:layout_marginRight="@dimen/dim_4"
+        android:layout_marginLeft="@dimen/dim_4"
+        android:layout_marginTop="@dimen/dim_6"
+        android:layout_toLeftOf="@+id/up_vote_val"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:id="@+id/up_vote_val"
+        android:text=""
+        android:layout_below="@+id/long_review"
+        android:layout_toLeftOf="@+id/down_vote_img"
+        android:layout_marginRight="@dimen/dim_4"
+        android:layout_marginLeft="@dimen/dim_4"
+        android:layout_marginTop="@dimen/dim_6"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:id="@+id/down_vote_img"
+        android:layout_below="@+id/long_review"
+        android:layout_toLeftOf="@+id/down_vote_value"
+        android:layout_marginRight="@dimen/dim_4"
+        android:layout_marginLeft="@dimen/dim_4"
+        android:layout_marginTop="@dimen/dim_6"
+        android:background="@drawable/down_vote"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:id="@+id/down_vote_value"
+        android:layout_marginRight="@dimen/dim_4"
+        android:layout_marginLeft="@dimen/dim_4"
+        android:layout_below="@+id/long_review"
+        android:layout_marginTop="@dimen/dim_6"
+        android:layout_alignParentRight="true"
+      />
+
+        </RelativeLayout>
+<!--
+<view
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey"
+        android:layout_below="@+id/down_vote_value"
+        android:layout_marginTop="@dimen/dim_10"></view>
+-->
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
