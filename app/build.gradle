@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.active_india"
+        applicationId "com.kk_cards"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
@@ -41,5 +41,6 @@ dependencies {
     implementation 'com.paytm:pgplussdk:1.1.2'
     implementation 'swarajsaaj:otpreader:1.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.7.0'
+    implementation 'com.github.tcking:giraffeplayer2:0.1.19-full'
 
 }

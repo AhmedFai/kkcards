@@ -7,7 +7,7 @@ public final class Config {
 
     private Config() {
     }
-    public static final String Base_Url = "http://www.kkactionindia.in/admin";
+    public static final String Base_Url = "http://www.kkcardsdelhi.com/admin";
 
     public static final String YOUTUBE_API_KEY = "AIzaSyAe-zaKObYXNUHqzkJ8xQdOtbxFBe6v3FE";
 

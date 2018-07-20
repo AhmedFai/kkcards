@@ -605,7 +605,7 @@ TopSellingadapter sellingadapter;
                                 public void run() {
                                     handler.post(Update);
                                 }
-                            }, 15000, 15000);
+                            }, 5000, 5000);
 
 
 
