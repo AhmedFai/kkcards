@@ -178,9 +178,9 @@ public class product_list extends AppCompatActivity {
                                     int price = Integer.parseInt(objj.getString("price"));
 
 
-                                    int price_cut = (100 - discount) * price / 100;
+                                    //int price_cut = (100 - discount) * price / 100;
                                     feed.setPrice(objj.getString("price"));
-                                    feed.setPrice_cut(String.valueOf(price_cut));
+                                   // feed.setPrice_cut(String.valueOf(price_cut));
 
                                     os_versions.add(feed);
 

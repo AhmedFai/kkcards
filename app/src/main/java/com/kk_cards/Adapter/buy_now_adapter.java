@@ -75,10 +75,10 @@ public class buy_now_adapter extends RecyclerView.Adapter<buy_now_adapter.ViewHo
 
 
         viewHolder.cat_name.setText(fp.getCat_name());
-        viewHolder.price_cut.setText("\u20B9" + fp.getPrice());
-        viewHolder.price.setText("\u20B9" + fp.getPrice_cut());
+        viewHolder.price_cut.setText("\u20B9" + fp.getDiscount());
+        viewHolder.price.setText("\u20B9" + fp.getPrice());
         viewHolder.code.setText("Code: " + fp.getProduct_id());
-        viewHolder.discount.setText(fp.getDiscount() + "% off");
+       // viewHolder.discount.setText(fp.getDiscount() + "% off");
         Picasso.with(mContext).load(fp.getCat_image()).into(viewHolder.image);
 
 
@@ -145,7 +145,7 @@ public class buy_now_adapter extends RecyclerView.Adapter<buy_now_adapter.ViewHo
 
                         }
 
-                    grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice_cut()) + Integer.parseInt(os_versions.get(position).getDel_charge());
+                    grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDel_charge());
                     check_out_buy_now.total_amt.setText("\u20B9" + grand_total_adpter);
                     check_out_buy_now.tot_price_items.setText("\u20B9" + total_without_del);
 
@@ -232,7 +232,7 @@ public class buy_now_adapter extends RecyclerView.Adapter<buy_now_adapter.ViewHo
 
                     }
 
-                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice_cut()) + Integer.parseInt(os_versions.get(position).getDel_charge());
+                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDel_charge());
                 check_out_buy_now.total_amt.setText("\u20B9" + grand_total_adpter);
                 check_out_buy_now.tot_price_items.setText("\u20B9" + total_without_del);
 
@@ -296,8 +296,8 @@ public class buy_now_adapter extends RecyclerView.Adapter<buy_now_adapter.ViewHo
         TextView price;
         @BindView(R.id.code)
         TextView code;
-        @BindView(R.id.discount)
-        TextView discount;
+       /* @BindView(R.id.discount)
+        TextView discount;*/
         @BindView(R.id.image1)
         ImageView image;
         @BindView(R.id.subtract)

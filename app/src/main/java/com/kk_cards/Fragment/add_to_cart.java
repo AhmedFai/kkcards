@@ -456,7 +456,7 @@ public class add_to_cart extends AppCompatActivity {
                                 total_del = total_del + Integer.parseInt(feed.getDel_charge());
 
 
-                                int discount = 0, price = 0;
+                          /*      int discount = 0, price = 0;
                                 if (objj.has("discount")) {
                                     if (objj.getString("discount") == null) {
                                         discount = 0;
@@ -468,11 +468,11 @@ public class add_to_cart extends AppCompatActivity {
                                     if (objj.getString("price") != null)
                                         price = Integer.parseInt(objj.getString("price"));
                                 }
+*/
 
-
-                                int price_cut = (100 - discount) * price / 100;
+                              //  int price_cut = (100 - discount) * price / 100;
                                 feed.setPrice(objj.getString("price"));
-                                feed.setPrice_cut(String.valueOf(price_cut));
+                               // feed.setPrice_cut(String.valueOf(price_cut));
                                 feed.setDiscount(objj.getString("discount"));
 
                                 os_versions.add(feed);
@@ -481,9 +481,9 @@ public class add_to_cart extends AppCompatActivity {
                                 Boolean result = db.insert_server(os_versions.get(i).getCat_name(), os_versions.get(i).getPrice(), os_versions.get(i).getPrice_cut(), os_versions.get(i).getQuantity(), os_versions.get(i).getDiscount(), os_versions.get(i).getId(), os_versions.get(i).getCat_image(), objj.getString("dCharge"));
                                 Log.d("fffffff", String.valueOf(result));
 
-                                total_price_items = total_price_items + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice_cut());
+                                total_price_items = total_price_items + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
 
-                                grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice_cut());
+                                grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
                                 tot_price_items.setText("\u20B9" + total_price_items);
 
 

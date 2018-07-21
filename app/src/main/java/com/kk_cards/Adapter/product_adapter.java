@@ -116,7 +116,7 @@ public class product_adapter extends RecyclerView.Adapter {
                 ((StudentViewHolder)viewHolder).cat_name.setLayoutParams(params);
 
                 ((StudentViewHolder)viewHolder).price_cut.setVisibility(View.GONE);
-                ((StudentViewHolder)viewHolder).discount.setVisibility(View.GONE);
+               // ((StudentViewHolder)viewHolder).discount.setVisibility(View.GONE);
                 ((StudentViewHolder)viewHolder).image.setVisibility(View.GONE);
                 ((StudentViewHolder)viewHolder).code.setVisibility(View.GONE);
                 ((StudentViewHolder)viewHolder).price.setVisibility(View.GONE);
@@ -129,10 +129,10 @@ public class product_adapter extends RecyclerView.Adapter {
 
 
                 ((StudentViewHolder)viewHolder).cat_name.setText(fp.getCat_name());
-                ((StudentViewHolder)viewHolder).price_cut.setText("\u20B9"+fp.getPrice());
-                ((StudentViewHolder)viewHolder).price.setText("\u20B9"+fp.getPrice_cut());
+                ((StudentViewHolder)viewHolder).price_cut.setText("\u20B9"+fp.getDiscount());
+                ((StudentViewHolder)viewHolder).price.setText("\u20B9"+fp.getPrice());
                 ((StudentViewHolder)viewHolder).code.setText("Code: "+fp.getId());
-                ((StudentViewHolder)viewHolder).discount.setText(fp.getDiscount()+"% off");
+                //((StudentViewHolder)viewHolder).discount.setText(fp.getDiscount()+"% off");
 
                 Picasso.with(mContext).load(fp.getCat_image()).into(((StudentViewHolder)viewHolder).image);
 
@@ -164,7 +164,7 @@ public class product_adapter extends RecyclerView.Adapter {
         @BindView(R.id.price2) TextView price_cut;
         @BindView(R.id.price1) TextView price;
         @BindView(R.id.code) TextView code;
-        @BindView(R.id.discount) TextView discount;
+       /* @BindView(R.id.discount) TextView discount;*/
         @BindView(R.id.image1)
         ImageView image;
         public StudentViewHolder(View v) {

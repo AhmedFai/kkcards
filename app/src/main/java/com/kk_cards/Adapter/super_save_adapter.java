@@ -59,8 +59,8 @@ public class super_save_adapter extends RecyclerView.Adapter<super_save_adapter.
 
         if("Super_Saver".equals(super_list.get(position).getCheck())) {
             viewHolder.cat_name.setText(super_list.get(position).getCat_name());
-            viewHolder.cat_price_sale.setText("\u20B9" + super_list.get(position).getPrice_cut());
-            viewHolder.cat_price.setText("\u20B9" + super_list.get(position).getPrice());
+            viewHolder.cat_price_sale.setText("\u20B9" + super_list.get(position).getPrice());
+            viewHolder.cat_price.setText("\u20B9" + super_list.get(position).getDiscount());
             Picasso.with(mContext).load(super_list.get(position).getCat_image()).into(viewHolder.cat_image);
             viewHolder.cat_price.setPaintFlags(viewHolder.cat_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 

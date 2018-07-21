@@ -97,10 +97,10 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
 
         viewHolder.cat_name.setText(fp.getCat_name());
-        viewHolder.price_cut.setText(" \u20B9" + fp.getPrice());
-        viewHolder.price.setText(" \u20B9" + fp.getPrice_cut());
+        viewHolder.price_cut.setText(" \u20B9" + fp.getDiscount());
+        viewHolder.price.setText(" \u20B9" + fp.getPrice());
         viewHolder.code.setText("Code: " + fp.getProduct_id());
-        viewHolder.discount.setText(fp.getDiscount() + "% off");
+       // viewHolder.discount.setText(fp.getDiscount() + "% off");
         Picasso.with(mContext).load(fp.getCat_image()).into(viewHolder.image);
 
 
@@ -615,8 +615,8 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
         TextView price;
         @BindView(R.id.code)
         TextView code;
-        @BindView(R.id.discount)
-        TextView discount;
+        /*@BindView(R.id.discount)
+        TextView discount;*/
         @BindView(R.id.image1)
         ImageView image;
         @BindView(R.id.subtract)

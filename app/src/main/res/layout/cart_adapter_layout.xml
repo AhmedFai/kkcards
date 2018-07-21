@@ -84,6 +84,7 @@
             android:layout_marginLeft="@dimen/dim_15"
             android:layout_marginTop="@dimen/dim_10"
             android:layout_below="@+id/text1"
+            android:visibility="gone"
             android:layout_toRightOf="@+id/price2"></TextView>
 
         <TextView

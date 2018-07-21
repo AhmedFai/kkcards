@@ -97,8 +97,8 @@ public class Card_adapter extends BaseAdapter{
 
 
         holder.tv.setText(os_versions.get(position).getCat_name());
-        holder.sale_price.setText("\u20B9"+os_versions.get(position).getPrice_cut());
-        holder.price.setText("\u20B9"+os_versions.get(position).getPrice());
+        holder.sale_price.setText("\u20B9"+os_versions.get(position).getPrice());
+        holder.price.setText("\u20B9"+os_versions.get(position).getDiscount());
         Picasso.with(context).load(os_versions.get(position).getCat_image()).fit().into(holder.img);
 
       rowView.setOnClickListener(new OnClickListener() {

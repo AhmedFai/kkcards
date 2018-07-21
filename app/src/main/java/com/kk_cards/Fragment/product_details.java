@@ -894,11 +894,11 @@ public class product_details extends AppCompatActivity {
                                     int discount = Integer.parseInt(objj.getString("discount"));
                                     int price = Integer.parseInt(objj.getString("price"));
 
-                                    discount_txt.setText(discount + "% off");
+                                    //discount_txt.setText(discount + "% off");
 
-                                    int price_cut = (100 - discount) * price / 100;
+                                   // int price_cut = (100 - discount) * price / 100;
                                     feed.setPrice(objj.getString("price"));
-                                    feed.setPrice_cut(String.valueOf(price_cut));
+                                    feed.setDiscount(objj.getString("discount"));
 
 
                                     feed.setCat_image(objj.getString("image"));
@@ -906,12 +906,12 @@ public class product_details extends AppCompatActivity {
 
                                     code.setText("Code: " + feed.getId());
                                     name.setText(feed.getCat_name());
-                                    price_val.setText("\u20B9"+feed.getPrice_cut());
-                                    price2.setText("\u20B9"+feed.getPrice());
+                                    price_val.setText("\u20B9"+feed.getPrice());
+                                    price2.setText("\u20B9"+feed.getDiscount());
 
                                     price_txt=feed.getPrice();
                                     price_cut_txt=feed.getPrice_cut();
-                                    dicount_txt=objj.getString("discount");
+                                   // dicount_txt=objj.getString("discount");
 
 
 
@@ -974,7 +974,7 @@ public class product_details extends AppCompatActivity {
 
                                     feed.setWarenty(objj.getString("internationalWarranty"));
 
-                                    warrenty1.setText("International Warranty:  " + feed.getWarenty());
+                                    //warrenty1.setText("International Warranty:  " + feed.getWarenty());
 
                                     os_versions.add(feed);
 

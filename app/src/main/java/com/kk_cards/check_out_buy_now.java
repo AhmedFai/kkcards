@@ -151,9 +151,9 @@ public class check_out_buy_now extends AppCompatActivity {
             int price = Integer.parseInt(prefs.getString("price_value_product", null));
 
 
-            int price_cut = (100 - discount) * price / 100;
+           // int price_cut = (100 - discount) * price / 100;
             feed.setPrice(prefs.getString("price_value_product", null));
-            feed.setPrice_cut(String.valueOf(price_cut));
+           // feed.setPrice_cut(String.valueOf(price_cut));
             feed.setDiscount(String.valueOf(discount));
 
             feed.setDel_charge(prefs.getString("delivery_price", null));
@@ -161,7 +161,7 @@ public class check_out_buy_now extends AppCompatActivity {
             os_versions.add(feed);
 
             int grand_total=0,grand_tottttt=0;
-            grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice_cut());
+            grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
         tot_price_items.setText("\u20B9" + grand_total);
 
         grand_tottttt=grand_total;

@@ -106,7 +106,7 @@ public class product_specification extends Fragment {
                         ArrayList<String> war_val=new ArrayList<>();
 
                         war.add("Domestic Warranty");
-                        war.add("International Warranty");
+                        //war.add("International Warranty");
                         war.add("Covered in Warranty");
                         war.add("Not Covered in Warranty");
                         war.add("Warranty Service Type");
@@ -159,7 +159,7 @@ public class product_specification extends Fragment {
                               dim_val.add(objj.getString("inTheBox"));
                                 dim_val.add(objj.getString("pWeight"));
                                 war_val.add(objj.getString("intranationalWarranty"));
-                                war_val.add(objj.getString("internationalWarranty"));
+                                //war_val.add(objj.getString("internationalWarranty"));
                                 war_val.add("Manufacturing Defects Only");
                                 war_val.add("Physical Damage");
                                 war_val.add("Replacement");

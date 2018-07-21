@@ -15,9 +15,6 @@ public class ItemData {
     }
 
 
-
-
-
     private String cat_name;
     private String rate;
     private String review;
@@ -182,6 +179,7 @@ public class ItemData {
     }
 
     private String display;
+
     public String getProduct_id() {
         return product_id;
     }
@@ -361,7 +359,8 @@ public class ItemData {
     private String mobile;
     private String alter_mobile;
     private String pincode;
-private String cartquantity;
+    private String cartquantity;
+
     public String getTot_quantity() {
         return tot_quantity;
     }
@@ -378,7 +377,7 @@ private String cartquantity;
         this.tot_quantity = tot_quantity;
     }
 
-    private String landmark,tot_quantity;
+    private String landmark, tot_quantity;
 
 }
 
