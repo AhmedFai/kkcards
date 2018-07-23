@@ -297,7 +297,7 @@ public class add_to_cart extends AppCompatActivity {
                         feed.setCat_image(c.getString(c.getColumnIndex("product_image")));
                         feed.setDiscount(c.getString(c.getColumnIndex("discount")));
 
-                        grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice_cut());
+                        grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
 
 
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();

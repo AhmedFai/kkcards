@@ -94,8 +94,8 @@ public class product_details extends AppCompatActivity {
     FragmentTransaction mFragmentTransaction;
 
    public static  TextView add_to_cart;
-    @BindView(R.id.buy_now)
-    TextView buy_now;
+  /*  @BindView(R.id.buy_now)
+    TextView buy_now;*/
     @BindView(R.id.footer)
     RelativeLayout footer;
     ArrayList<String> feature_list;
@@ -595,6 +595,7 @@ public class product_details extends AppCompatActivity {
 }
 
 
+/*
     @OnClick(R.id.buy_now)
     public void buy_now() {
 
@@ -768,12 +769,15 @@ public class product_details extends AppCompatActivity {
                 finish();
 
             }
-                                      /*  */
+                                      */
+/*  *//*
+
 
 
         }
 
     }
+*/
 
 
     public void get_product_detail(String url) {
@@ -879,7 +883,7 @@ public class product_details extends AppCompatActivity {
 
                                         add_to_cart.setText("OUT OF STOCK");
                                         add_to_cart.setClickable(false);
-                                        buy_now.setText("NOTIFY ME");
+                                       // buy_now.setText("NOTIFY ME");
 
                                     }
 

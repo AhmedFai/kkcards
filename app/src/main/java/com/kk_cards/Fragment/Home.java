@@ -653,8 +653,12 @@ TopSellingadapter sellingadapter;
         // Request a string response
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
+
+
                     @Override
                     public void onResponse(String response) {
+
+                        Log.d("getpopuler", response.toString());
                         hidePDialog();
                         os_versions = new ArrayList<ItemData>();
 

@@ -156,7 +156,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                     //if (counter=
                     counter=counter+1;
                     viewHolder.count_txt.setText(Integer.toString(counter));
-                    grand_total = grand_total + Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice_cut());
+                    grand_total = grand_total + Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice());
                     // viewHolder.count_txt.setText(Integer.toString(counter[0]));
                     SharedPreferences.Editor editor = mContext.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                     editor.putInt("total_price", grand_total);
@@ -177,10 +177,10 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                 if (c.moveToFirst()) {
                                     do {
                                         c.getString(c.getColumnIndex("quantity"));
-                                        c.getString(c.getColumnIndex("sale_price"));
+                                        c.getString(c.getColumnIndex("regular_price"));
                                         //    Log.d("quuuuuuuuuuu", c.getString(c.getColumnIndex("quantity")));
                                         //  Log.d("salllll", c.getString(c.getColumnIndex("sale_price")));
-                                        grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("sale_price")));
+                                        grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("regular_price")));
                                     }
                                     while (c.moveToNext());
                                     add_to_cart.total_amt.setText(" \u20B9" + grand_total_adpter);
@@ -202,8 +202,8 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                         else {
                             if ("check_out".equals(check_value) && "buy_now".equals(buy_type)) {
                                 int grand_total_adpter = 0, total_without_del = 0;
-                                total_without_del = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice_cut());
-                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice_cut()) + Integer.parseInt(os_versions.get(position).getDel_charge());
+                                total_without_del = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice());
+                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDel_charge());
                                 check_out_activity.total_amt.setText("\u20B9" + grand_total_adpter);
                                 check_out_activity.tot_price_items.setText("\u20B9" + total_without_del);
                             } else {
@@ -215,9 +215,9 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                     if (c.moveToFirst()) {
                                         do {
                                             c.getString(c.getColumnIndex("quantity"));
-                                            c.getString(c.getColumnIndex("sale_price"));
-                                            total_without_del = total_without_del + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("sale_price")));
-                                            grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("del_charge"))) + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("sale_price")));
+                                            c.getString(c.getColumnIndex("regular_price"));
+                                            total_without_del = total_without_del + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("regular_price")));
+                                            grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("del_charge"))) + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("regular_price")));
                                         }
                                         while (c.moveToNext());
                                     }
@@ -283,7 +283,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                             counter = counter - 1;
                         }
                         viewHolder.count_txt.setText(Integer.toString(counter));
-                        grand_total = grand_total + Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice_cut());
+                        grand_total = grand_total + Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice());
 
                         //     Toast.makeText(mContext, ""+grand_total, Toast.LENGTH_SHORT).show();
 
@@ -306,9 +306,9 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
 
                                         c.getString(c.getColumnIndex("quantity"));
-                                        c.getString(c.getColumnIndex("sale_price"));
+                                        c.getString(c.getColumnIndex("regular_price"));
 
-                                        grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("sale_price")));
+                                        grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("regular_price")));
 
                                     }
                                     while (c.moveToNext());
@@ -337,9 +337,9 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                         } else {
                             if ("check_out".equals(check_value) && "buy_now".equals(buy_type)) {
                                 int grand_total_adpter = 0, total_without_del = 0;
-                                total_without_del =Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice_cut());
+                                total_without_del =Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice());
 
-                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString())* Integer.parseInt(os_versions.get(position).getPrice_cut()) + Integer.parseInt(os_versions.get(position).getDel_charge());
+                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString())* Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDel_charge());
                                 check_out_activity.total_amt.setText("\u20B9" + grand_total_adpter);
                                 check_out_activity.tot_price_items.setText("\u20B9" + total_without_del);
 
@@ -358,11 +358,11 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
 
                                             c.getString(c.getColumnIndex("quantity"));
-                                            c.getString(c.getColumnIndex("sale_price"));
-                                            total_without_del = total_without_del + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("sale_price")));
+                                            c.getString(c.getColumnIndex("regular_price"));
+                                            total_without_del = total_without_del + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("regular_price")));
 
 
-                                            grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("del_charge"))) + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("sale_price")));
+                                            grand_total_adpter = grand_total_adpter + Integer.parseInt(c.getString(c.getColumnIndex("del_charge"))) + Integer.parseInt(c.getString(c.getColumnIndex("quantity"))) * Integer.parseInt(c.getString(c.getColumnIndex("regular_price")));
 
 
                                         }
