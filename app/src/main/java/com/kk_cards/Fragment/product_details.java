@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +41,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.exoplayer2.C;
 import com.kk_cards.Adapter.no_product_adapter;
 import com.kk_cards.Adapter.review_Adapter;
 import com.kk_cards.All_reviews;
@@ -85,17 +89,31 @@ import butterknife.OnClick;
  * Created by user on 1/23/2018.
  */
 
-public class product_details extends AppCompatActivity {
+public class product_details extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.recyclerview)
     RecyclerView mAdapter;
-    ArrayList<ItemData> os_versions,review_versions,rate_versions;
+    ArrayList<ItemData> os_versions, review_versions, rate_versions;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
 
-   public static  TextView add_to_cart;
-  /*  @BindView(R.id.buy_now)
-    TextView buy_now;*/
+    @BindView(R.id.bottom)
+    TextView btnBottomSheet;
+
+    LinearLayout lin1, lin2, lin3, mainLin;
+
+    TextView device, lense, both, simple, medium, high, piece1, piece2, piece3;
+
+    ImageView cancel;
+
+    @BindView(R.id.bottom_sheet)
+    LinearLayout layoutBottomSheet;
+
+    BottomSheetBehavior sheetBehavior;
+
+    public static Button add_to_cart;
+    /*  @BindView(R.id.buy_now)
+      TextView buy_now;*/
     @BindView(R.id.footer)
     RelativeLayout footer;
     ArrayList<String> feature_list;
@@ -154,6 +172,8 @@ public class product_details extends AppCompatActivity {
     private HashMap<String, ArrayList<String>> words;
     String product_id, image;
 
+    String catId;
+
     SessionManagement session;
 
     private String MY_PREFS_NAME;
@@ -166,9 +186,9 @@ public class product_details extends AppCompatActivity {
     String id, quantity_val;
     String price_txt, price_cut_txt, dicount_txt;
     ArrayList<String> path_list, fname_list;
-    int quantity=0;
+    int quantity = 0;
 
-    Boolean visibility_cart=false;
+    Boolean visibility_cart = false;
     int cartquantity;
 
     @BindView(R.id.recyclerview_rating)
@@ -184,7 +204,7 @@ public class product_details extends AppCompatActivity {
 
     List<Integer> percent_list = new ArrayList<Integer>();
 
-            int postion_val=0;
+    int postion_val = 0;
     ProgressDialog progress;
 
     @Override
@@ -193,11 +213,86 @@ public class product_details extends AppCompatActivity {
         setContentView(R.layout.product_details);
         ButterKnife.bind(this);
 
-        add_to_cart=(TextView)findViewById(R.id.add_cart);
+        add_to_cart = (Button) findViewById(R.id.add_cart);
+        // cancel = (ImageView)findViewById(R.id.cancel);
+
+        lin1 = (LinearLayout) findViewById(R.id.lin1);
+        lin2 = (LinearLayout) findViewById(R.id.lin2);
+        lin3 = (LinearLayout) findViewById(R.id.lin3);
+        device = (TextView) findViewById(R.id.forDevice);
+        device.setOnClickListener(this);
+        lense = (TextView) findViewById(R.id.forLence);
+        lense.setOnClickListener(this);
+        both = (TextView) findViewById(R.id.forBoth);
+        both.setOnClickListener(this);
+        mainLin = (LinearLayout) findViewById(R.id.mainLin);
+        simple = (TextView) findViewById(R.id.simple);
+        simple.setOnClickListener(this);
+        medium = (TextView) findViewById(R.id.medium);
+        medium.setOnClickListener(this);
+        high = (TextView) findViewById(R.id.high);
+        high.setOnClickListener(this);
+        piece1 = (TextView) findViewById(R.id.piece1);
+        piece1.setOnClickListener(this);
+        piece2 = (TextView) findViewById(R.id.piece6);
+        piece2.setOnClickListener(this);
+        piece3 = (TextView) findViewById(R.id.piece12);
+        piece3.setOnClickListener(this);
         session = new SessionManagement(getApplicationContext());
+
+
+        // hide();
 
         cart_list = new ArrayList<ArrayList<String>>();
         split_list = new ArrayList<>();
+
+        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+        sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+
+
+
+/*
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.d("notworking","yeah its not");
+                if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    // btnBottomSheet.setText("Close sheet");
+                }
+            }
+        });
+*/
+
+
+        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        break;
+               /*     case BottomSheetBehavior.STATE_EXPANDED: {
+                       // btnBottomSheet.setText("Close Sheet");
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_COLLAPSED: {
+                       // btnBottomSheet.setText("Expand Sheet");
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        break;*/
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
 
 
         if (getSupportActionBar() != null) {
@@ -218,8 +313,7 @@ public class product_details extends AppCompatActivity {
 
         os_versions = new ArrayList<ItemData>();
         review_versions = new ArrayList<ItemData>();
-        rate_versions=new ArrayList<ItemData>();
-
+        rate_versions = new ArrayList<ItemData>();
 
 
         id = getIntent().getStringExtra("id_value");
@@ -230,9 +324,7 @@ public class product_details extends AppCompatActivity {
         get_product_detail(Config.Base_Url + "/API/productDetailApi.php?product_id=" + id);
 
 
-
-
-                get_review(new CallBack() {
+        get_review(new CallBack() {
             @Override
             public void onSuccess(String data) {
 
@@ -245,16 +337,14 @@ public class product_details extends AppCompatActivity {
                         @Override
                         public void onSuccess(String data) {
 
-                            try
-                            {
-                                JSONObject obj=new JSONObject(data);
+                            try {
+                                JSONObject obj = new JSONObject(data);
 
-                                JSONArray array=obj.getJSONArray("review");
+                                JSONArray array = obj.getJSONArray("review");
 
-                                for(int i=0;i<array.length();i++)
-                                {
-                                    ItemData feed=new ItemData();
-                                    JSONObject objj=array.getJSONObject(i);
+                                for (int i = 0; i < array.length(); i++) {
+                                    ItemData feed = new ItemData();
+                                    JSONObject objj = array.getJSONObject(i);
                                     feed.setId(objj.getString("id"));
                                     feed.setUp_vote(objj.getString("uvote"));
                                     feed.setDown_vote(objj.getString("dvote"));
@@ -265,24 +355,21 @@ public class product_details extends AppCompatActivity {
                                 }
 
 
-                            }
-                            catch(JSONException e)
-                            {
+                            } catch (JSONException e) {
 
 
                             }
                         }
 
-                            @Override
-                            public void onFail (String msg){
+                        @Override
+                        public void onFail(String msg) {
 
-                                // Toast.makeText(product_details.this, "Invalid Login Details", Toast.LENGTH_SHORT).show();
-                                Log.d("jhvfff", "failed");
-                                // Do Stuff
-                            }
-                        });
-                  //  Log.d("tjhjjj", String.valueOf(rate_versions.size()));
-
+                            // Toast.makeText(product_details.this, "Invalid Login Details", Toast.LENGTH_SHORT).show();
+                            Log.d("jhvfff", "failed");
+                            // Do Stuff
+                        }
+                    });
+                    //  Log.d("tjhjjj", String.valueOf(rate_versions.size()));
 
 
                     if (obj.has("review")) {
@@ -320,20 +407,19 @@ public class product_details extends AppCompatActivity {
                             average_rate = average_rate + Integer.parseInt(feed.getRate());
 
 
-
                             Log.d("nhiudyi", String.valueOf(average_rate));
 
                             review_versions.add(feed);
 
-                         //   Log.d("khh", feed.getRate());
+                            //   Log.d("khh", feed.getRate());
 
 
                         }
 
-                        average_rate=average_rate/review_versions.size();
+                        average_rate = average_rate / review_versions.size();
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), GridLayoutManager.VERTICAL);
-                   //   Log.d("gjjkkk", String.valueOf(rate_versions.size()));
-                        review_Adapter mAdapter1 = new review_Adapter(getApplicationContext(), review_versions, recyclerview_rating,rate_versions);
+                        //   Log.d("gjjkkk", String.valueOf(rate_versions.size()));
+                        review_Adapter mAdapter1 = new review_Adapter(getApplicationContext(), review_versions, recyclerview_rating, rate_versions);
                         recyclerview_rating.setHasFixedSize(true);
                         // mAdapter.setLayoutManager(new StaggeredGridLayoutManager(2,1)); for tils
 
@@ -343,27 +429,26 @@ public class product_details extends AppCompatActivity {
                         recyclerview_rating.setAdapter(mAdapter1);
 
 
-
                         if (obj.has("summary")) {
 
                             JSONObject summary = obj.getJSONObject("summary");
 
                             rating.setText(summary.getString("rate") + " Rating, ");
                             review_txt.setText(summary.getString("rNum") + " Reviews");
-                            ProgressBar progressbar5 = new ProgressBar(getApplicationContext(),null,android.R.attr.progressBarStyleHorizontal);
-                            progressbar5 = (ProgressBar)findViewById(R.id.pb_5);
-                            ProgressBar progressbar4 = new ProgressBar(getApplicationContext(),null,android.R.attr.progressBarStyleHorizontal);
-                            progressbar4 = (ProgressBar)findViewById(R.id.pb_4);
-                            ProgressBar progressbar3 = new ProgressBar(getApplicationContext(),null,android.R.attr.progressBarStyleHorizontal);
-                            progressbar3 = (ProgressBar)findViewById(R.id.pb_3);
-                            ProgressBar progressbar2 = new ProgressBar(getApplicationContext(),null,android.R.attr.progressBarStyleHorizontal);
-                            progressbar2 = (ProgressBar)findViewById(R.id.pb_2);
-                            ProgressBar progressbar1 = new ProgressBar(getApplicationContext(),null,android.R.attr.progressBarStyleHorizontal);
-                            progressbar1 = (ProgressBar)findViewById(R.id.pb_1);
+                            ProgressBar progressbar5 = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                            progressbar5 = (ProgressBar) findViewById(R.id.pb_5);
+                            ProgressBar progressbar4 = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                            progressbar4 = (ProgressBar) findViewById(R.id.pb_4);
+                            ProgressBar progressbar3 = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                            progressbar3 = (ProgressBar) findViewById(R.id.pb_3);
+                            ProgressBar progressbar2 = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                            progressbar2 = (ProgressBar) findViewById(R.id.pb_2);
+                            ProgressBar progressbar1 = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                            progressbar1 = (ProgressBar) findViewById(R.id.pb_1);
 
                             try {
-                                double per = 0.0,per1=0.0;
-                                per =Double.parseDouble(summary.getString("rate5")) / Double.parseDouble(summary.getString("rate")) * 100;
+                                double per = 0.0, per1 = 0.0;
+                                per = Double.parseDouble(summary.getString("rate5")) / Double.parseDouble(summary.getString("rate")) * 100;
                                 progressbar5.setProgress((int) per);
                                 progressbar5.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
 
@@ -392,8 +477,6 @@ public class product_details extends AppCompatActivity {
                                 progressbar1.setProgress((int) per);
 
 
-
-
                             } catch (Exception e) {
 
 
@@ -404,9 +487,7 @@ public class product_details extends AppCompatActivity {
                         try {
 
 
-
                             average_rate = average_rate / os_versions.size();
-
 
 
                         } catch (Exception e) {
@@ -419,8 +500,6 @@ public class product_details extends AppCompatActivity {
 
                             card_view_review.setVisibility(View.VISIBLE);
                         }
-
-
 
 
                         //  String success_val = obj.getString("success");
@@ -453,10 +532,6 @@ public class product_details extends AppCompatActivity {
         Log.d("ihuf", String.valueOf(percent_list.size()));
 
 
-
-
-
-
         mAdapter.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(final View view, int position) {
@@ -479,10 +554,10 @@ public class product_details extends AppCompatActivity {
                             //progress.setProgress(0);
                             progress.show();
 
-                             postion_val=position;
+                            postion_val = position;
                             Picasso.with(getApplicationContext())
                                     .load(path_list.get(position))
-                                    .into(product_image, new Callback(){
+                                    .into(product_image, new Callback() {
 
                                         @Override
                                         public void onSuccess() {
@@ -516,18 +591,27 @@ public class product_details extends AppCompatActivity {
         );
 
 
+    }
 
+
+    @OnClick(R.id.bottom)
+    public void toggleBottomSheet() {
+        if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            // btnBottomSheet.setText("Close sheet");
+        } else {
+            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            //btnBottomSheet.setText("Expand sheet");
+        }
     }
 
     @OnClick(R.id.card_view_review)
     public void all_viewss() {
 
 
-
-        Intent i=new Intent(getApplicationContext(), All_reviews.class);
-        i.putExtra("id_value",getIntent().getStringExtra("id_value"));
+        Intent i = new Intent(getApplicationContext(), All_reviews.class);
+        i.putExtra("id_value", getIntent().getStringExtra("id_value"));
         startActivity(i);
-
 
 
     }
@@ -572,27 +656,27 @@ public class product_details extends AppCompatActivity {
 
     @OnClick(R.id.product_image)
     public void product_imagee() {
-        ArrayList<String> image_list=new ArrayList<>();
+        ArrayList<String> image_list = new ArrayList<>();
 
 
-        for(int i=0;i<path_list.size();i++)
+        for (int i = 0; i < path_list.size(); i++)
 
-    {
+        {
 
-        if ("Image".equals(fname_list.get(i))) {
-            image_list.add(path_list.get(i));
+            if ("Image".equals(fname_list.get(i))) {
+                image_list.add(path_list.get(i));
+            }
+
+
         }
+
+        Intent j = new Intent(getApplicationContext(), no_product_details.class);
+        j.putExtra("image_path", image_list);
+        j.putExtra("position", postion_val);
+        startActivity(j);
 
 
     }
-
-    Intent j=new Intent(getApplicationContext(),no_product_details.class);
-        j.putExtra("image_path",image_list);
-        j.putExtra("position",postion_val);
-    startActivity(j);
-
-
-}
 
 
 /*
@@ -770,7 +854,7 @@ public class product_details extends AppCompatActivity {
 
             }
                                       */
-/*  *//*
+    /*  *//*
 
 
 
@@ -787,16 +871,16 @@ public class product_details extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                       // hidePDialog();
+                        // hidePDialog();
 
 
-                      path_list=new ArrayList<>();
-                      fname_list=new ArrayList<>();
+                        path_list = new ArrayList<>();
+                        fname_list = new ArrayList<>();
 
-                        feature_list=new ArrayList<>();
+                        feature_list = new ArrayList<>();
 
                         try {
-                            JSONObject obj=new JSONObject(response);
+                            JSONObject obj = new JSONObject(response);
 
                             if (obj.has("products")) {
                                 JSONArray banner_array = obj.getJSONArray("products");
@@ -807,18 +891,24 @@ public class product_details extends AppCompatActivity {
                                     feed.setCat_name(objj.getString("name"));
                                     feed.setId(objj.getString("id"));
 
+                                    feed.setCid(objj.getString("cid"));
+
+                                    Log.d("categoryId", feed.getCid());
+
+                                    catId = feed.getCid();
+
                                     feed.setQuantity(objj.getString("quantity"));
 
-                                    quantity=Integer.parseInt(feed.getQuantity());
+                                    quantity = Integer.parseInt(feed.getQuantity());
 
                                     feed.setFeature(objj.getString("feature"));
 
                                     product_id = objj.getString("id");
                                     image = objj.getString("image");
-                                    path_list.add( objj.getString("image"));
+                                    path_list.add(objj.getString("image"));
                                     fname_list.add("Image");
 
-                                    if(session.isLoggedIn()==true) {
+                                    if (session.isLoggedIn() == true) {
 
                                         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
@@ -843,9 +933,7 @@ public class product_details extends AppCompatActivity {
 
                                             }
 
-                                    }
-
-                                    else
+                                    } else
 
                                     {
 
@@ -878,15 +966,13 @@ public class product_details extends AppCompatActivity {
 
                                     feed.setDel_charge(objj.getString("dCharge"));
 
-                                    if(quantity<1)
-                                    {
+                                    if (quantity < 1) {
 
                                         add_to_cart.setText("OUT OF STOCK");
                                         add_to_cart.setClickable(false);
-                                       // buy_now.setText("NOTIFY ME");
+                                        // buy_now.setText("NOTIFY ME");
 
                                     }
-
 
 
                                     // feed.setFeature(objj.getString("feature"));
@@ -900,7 +986,7 @@ public class product_details extends AppCompatActivity {
 
                                     //discount_txt.setText(discount + "% off");
 
-                                   // int price_cut = (100 - discount) * price / 100;
+                                    // int price_cut = (100 - discount) * price / 100;
                                     feed.setPrice(objj.getString("price"));
                                     feed.setDiscount(objj.getString("discount"));
 
@@ -910,28 +996,21 @@ public class product_details extends AppCompatActivity {
 
                                     code.setText("Code: " + feed.getId());
                                     name.setText(feed.getCat_name());
-                                    price_val.setText("\u20B9"+feed.getPrice());
-                                    price2.setText("\u20B9"+feed.getDiscount());
+                                    price_val.setText("\u20B9" + feed.getPrice());
+                                    price2.setText("\u20B9" + feed.getDiscount());
 
-                                    price_txt=feed.getPrice();
-                                    price_cut_txt=feed.getPrice_cut();
-                                   // dicount_txt=objj.getString("discount");
-
-
+                                    price_txt = feed.getPrice();
+                                    price_cut_txt = feed.getPrice_cut();
+                                    // dicount_txt=objj.getString("discount");
 
 
-                                    if(!"no_images".equals(getIntent().getStringExtra("image_path")))
-                                    {
+                                    if (!"no_images".equals(getIntent().getStringExtra("image_path"))) {
 //                                     Log.d("dhdhjdj",getIntent().getStringExtra("image_path"));
                                         Picasso.with(getApplicationContext())
                                                 .load(getIntent().getStringExtra("image_path")).into(product_image);
 
 
-
-                                    }
-
-                                    else
-                                    {
+                                    } else {
 
                                         // Log.d("nbvngklj",feed.getCat_image()) ;
                                         Picasso.with(getApplicationContext()).load(feed.getCat_image()).into(product_image);
@@ -949,10 +1028,11 @@ public class product_details extends AppCompatActivity {
                                     editor.putString("code", code.getText().toString());
                                     editor.putString("price_value_cut_product", price_val.getText().toString());
                                     editor.putString("product_id", objj.getString("id"));
+                                    editor.putString("cat_id", objj.getString("cid"));
                                     editor.putString("discount_value", objj.getString("discount"));
                                     editor.putString("image", objj.getString("image"));
                                     editor.putString("quantity_value", "1");
-                                    editor.putString("total_quantity",  objj.getString("quantity"));
+                                    editor.putString("total_quantity", objj.getString("quantity"));
 
                                     editor.putString("delivery_price", objj.getString("dCharge"));
                                     editor.putString("delivery_time", obj.getString("deliveryTime"));
@@ -989,39 +1069,34 @@ public class product_details extends AppCompatActivity {
                             }
 
                             if (obj.has("media")) {
-                                 JSONArray media_array = obj.getJSONArray("media");
+                                JSONArray media_array = obj.getJSONArray("media");
 
 
-                                 for(int i=0;i<media_array.length();i++) {
-                                     JSONObject objj=media_array.getJSONObject(i);
+                                for (int i = 0; i < media_array.length(); i++) {
+                                    JSONObject objj = media_array.getJSONObject(i);
 
 
-
-                                     path_list.add(objj.getString("fname"));
-                                           fname_list.add(objj.getString("ftype"));
-
-
-                                 }
-                                 LinearLayoutManager gridLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-
-                                 no_product_adapter mAdapter1 = new no_product_adapter(getApplicationContext(), path_list,fname_list,id);
-                                 mAdapter.setHasFixedSize(true);
-                                 // mAdapter.setLayoutManager(new StaggeredGridLayoutManager(2,1)); for tils
-
-                                 mAdapter.setLayoutManager(gridLayoutManager);
+                                    path_list.add(objj.getString("fname"));
+                                    fname_list.add(objj.getString("ftype"));
 
 
-                                 mAdapter.setAdapter(mAdapter1);
+                                }
+                                LinearLayoutManager gridLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+
+                                no_product_adapter mAdapter1 = new no_product_adapter(getApplicationContext(), path_list, fname_list, id);
+                                mAdapter.setHasFixedSize(true);
+                                // mAdapter.setLayoutManager(new StaggeredGridLayoutManager(2,1)); for tils
+
+                                mAdapter.setLayoutManager(gridLayoutManager);
 
 
+                                mAdapter.setAdapter(mAdapter1);
 
 
-
-                             }
-
+                            }
 
 
-                                if (obj.has("general")) {
+                            if (obj.has("general")) {
                                 JSONArray general = obj.getJSONArray("general");
 
                                 for (int i = 0; i < general.length(); i++) {
@@ -1056,18 +1131,14 @@ public class product_details extends AppCompatActivity {
 
                                 }
 
+                            } else {
+
+                                feature_list.add(os_versions.get(0).getFeature());
+
+                                ArrayAdapter adapter = new ArrayAdapter<String>(product_details.this, R.layout.list_row, feature_list);
+                                listv.setAdapter(adapter);
+                                more_features.setVisibility(View.GONE);
                             }
-
-                            else
-                                {
-
-                                    feature_list.add(os_versions.get(0).getFeature());
-
-                                    ArrayAdapter adapter = new ArrayAdapter<String>(product_details.this, R.layout.list_row, feature_list);
-                                    listv.setAdapter(adapter);
-                                    more_features.setVisibility(View.GONE);
-                                }
-
 
 
                         } catch (JSONException e) {
@@ -1076,7 +1147,7 @@ public class product_details extends AppCompatActivity {
 
 
                         // Result handling
-                        Log.d("sub_category",response);
+                        Log.d("sub_category", response);
 
 
                     }
@@ -1094,15 +1165,15 @@ public class product_details extends AppCompatActivity {
 
 // Add the request to the queue
 
-        RequestQueue mRequestQueue=Volley.newRequestQueue(getApplicationContext());
+        RequestQueue mRequestQueue = Volley.newRequestQueue(getApplicationContext());
 
         mRequestQueue.add(stringRequest);
 
         mRequestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<String>() {
             @Override
             public void onRequestFinished(Request<String> request) {
-                if (p_bar !=  null && p_bar.isShown())
-                  hidePDialog();
+                if (p_bar != null && p_bar.isShown())
+                    hidePDialog();
             }
         });
 
@@ -1113,12 +1184,9 @@ public class product_details extends AppCompatActivity {
     public void add_cart() {
 
 
+        if (session.isLoggedIn() == true) {
 
-
-        if(session.isLoggedIn()==true)
-        {
-
-            if(visibility_cart==false) {
+            if (visibility_cart == false) {
 
 
                 JSONObject jo = new JSONObject();
@@ -1168,22 +1236,14 @@ public class product_details extends AppCompatActivity {
                                 AppRater.showRateDialog(product_details.this);
 
 
-
-
-
-
-
-
-
-
                                 // AppRater.app_launched(product_details.this);
 
                       /*   Intent i=new Intent(getApplicationContext(), com.active_india.Fragment.add_to_cart.class);
                          startActivity(i);*/
 
                             } else {
-                                Intent i=new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                                i.putExtra("test","");
+                                Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
+                                i.putExtra("test", "");
                                 startActivity(i);
                                 Toast.makeText(product_details.this, "Item already exist in cart", Toast.LENGTH_SHORT).show();
 
@@ -1211,21 +1271,16 @@ public class product_details extends AppCompatActivity {
                     }
                 });
 
-            }
+            } else {
 
-            else
-            {
-
-                Intent i=new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                i.putExtra("test","");
+                Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
+                i.putExtra("test", "");
                 startActivity(i);
 
 
             }
 
-        }
-
-        else {
+        } else {
 
 
             if (visibility_cart == false) {
@@ -1237,9 +1292,9 @@ public class product_details extends AppCompatActivity {
                 Log.d("count", product_id);
                 //((MyApplication)this.getApplication()).setCartquantity(String.valueOf(quantity));
 
-                SharedPreferences preferences = getSharedPreferences("AUTHENTICATION_FILE_NAME",Context.MODE_PRIVATE);
+                SharedPreferences preferences = getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("Name",quantity);
+                editor.putInt("Name", quantity);
                 editor.apply();
 
                 if (result == true) {
@@ -1255,27 +1310,23 @@ public class product_details extends AppCompatActivity {
             /*   Intent i = new Intent(getApplicationContext(), add_to_cart.class);
                startActivity(i);*/
                 } else {
-                    Intent i=new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                    i.putExtra("test","");
+                    Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
+                    i.putExtra("test", "");
                     startActivity(i);
                     Toast.makeText(this, "Item Already available in cart", Toast.LENGTH_SHORT).show();
 
                /*Intent i = new Intent(getApplicationContext(), add_to_cart.class);
                startActivity(i);*/
                 }
-            }
+            } else {
 
-            else
-            {
-
-                Intent i=new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                i.putExtra("test","");
+                Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
+                i.putExtra("test", "");
                 startActivity(i);
 
 
             }
         }
-
 
 
     }
@@ -1288,62 +1339,116 @@ public class product_details extends AppCompatActivity {
 
         }
     }
-    static class VersionHelper
-    {
-        static void refreshActionBarMenu(Activity activity)
-        {
+
+    @Override
+    public void onClick(View view) {
+
+
+        switch (view.getId()) {
+            case R.id.forDevice: {
+                device.setBackgroundResource(R.drawable.background_blue);
+                device.setTextColor(Color.parseColor("#ffffff"));
+                lense.setBackgroundResource(R.drawable.background);
+                lense.setTextColor(Color.parseColor("#125688"));
+                both.setBackgroundResource(R.drawable.background);
+                both.setTextColor(Color.parseColor("#125688"));
+                lin2.setVisibility(View.VISIBLE);
+
+
+                break;
+            }
+
+            case R.id.forLence: {
+                lense.setBackgroundResource(R.drawable.background_blue);
+                lense.setTextColor(Color.parseColor("#ffffff"));
+                device.setBackgroundResource(R.drawable.background);
+                device.setTextColor(Color.parseColor("#125688"));
+                both.setBackgroundResource(R.drawable.background);
+                both.setTextColor(Color.parseColor("#125688"));
+                lin2.setVisibility(View.GONE);
+                lin3.setVisibility(View.VISIBLE);
+
+                break;
+
+            }
+
+            case R.id.forBoth: {
+                device.setBackgroundResource(R.drawable.background);
+                device.setTextColor(Color.parseColor("#125688"));
+                lense.setBackgroundResource(R.drawable.background);
+                lense.setTextColor(Color.parseColor("#125688"));
+                both.setBackgroundResource(R.drawable.background_blue);
+                both.setTextColor(Color.parseColor("#ffffff"));
+                lin2.setVisibility(View.GONE);
+                lin3.setVisibility(View.GONE);
+                break;
+
+            }
+        }
+
+
+    }
+
+    static class VersionHelper {
+        static void refreshActionBarMenu(Activity activity) {
             activity.invalidateOptionsMenu();
         }
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
+
 
         VersionHelper.refreshActionBarMenu(this);
         // put your code here...
 
     }
 
+
+    public void hide() {
+        if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+            sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            // btnBottomSheet.setText("Close sheet");
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         View menu_item_cart = menu.findItem(R.id.cart).getActionView();
-       cartcounterTV = (TextView) menu_item_cart.findViewById(R.id.cartcounter);
+        cartcounterTV = (TextView) menu_item_cart.findViewById(R.id.cartcounter);
         ImageView cart_icon = (ImageView) menu_item_cart.findViewById(R.id.carticon);
-
 
 
         cart_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                i.putExtra("test","");
+                Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
+                i.putExtra("test", "");
                 startActivity(i);
 
             }
         });
-        if(session.isLoggedIn()==true) {
+        if (session.isLoggedIn() == true) {
             cart_counter(new CallBack() {
                 @Override
                 public void onSuccess(String data) {
 
 
                     try {
-                        JSONObject obj=new JSONObject(data);
-                        cart_counter_real=obj.getString("count");
+                        JSONObject obj = new JSONObject(data);
+                        cart_counter_real = obj.getString("count");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
 
-
-                    if(session.isLoggedIn()==true) {
+                    if (session.isLoggedIn() == true) {
                         if (!"0".equals(cart_counter_real)) {
                             cartcounterTV.setVisibility(View.VISIBLE);
                             cartcounterTV.setText(cart_counter_real);
-                        }
-                        else
+                        } else
                             cartcounterTV.setVisibility(View.GONE);
 
                     }
@@ -1358,25 +1463,17 @@ public class product_details extends AppCompatActivity {
                 }
             });
 
-        }
+        } else {
+            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
-
-
-        else
-        {
-            DatabaseHandler db=new DatabaseHandler(getApplicationContext());
-
-            String cart_value= String.valueOf(db.count_rows());
-
+            String cart_value = String.valueOf(db.count_rows());
 
 
             if (!"0".equals(cart_value)) {
                 cartcounterTV.setVisibility(View.VISIBLE);
                 cartcounterTV.setText(cart_value);
-            }
-            else
+            } else
                 cartcounterTV.setVisibility(View.GONE);
-
 
 
         }
@@ -1394,25 +1491,20 @@ public class product_details extends AppCompatActivity {
 
 
         if (id == android.R.id.home) {
-           finish();
+            finish();
 
-        }
-        else if(item.getItemId()==R.id.action_search){
-            Intent i = new Intent(this,search_activity.class);
+        } else if (item.getItemId() == R.id.action_search) {
+            Intent i = new Intent(this, search_activity.class);
             startActivity(i);
             return true;
-        }
-
-       else if (id == R.id.cart) {
-            Intent i=new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-            i.putExtra("test","");
+        } else if (id == R.id.cart) {
+            Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
+            i.putExtra("test", "");
             startActivity(i);
 
 
-        }
-
-        else if(item.getItemId()==R.id.action_search){
-            Intent i = new Intent(this,search_activity.class);
+        } else if (item.getItemId() == R.id.action_search) {
+            Intent i = new Intent(this, search_activity.class);
             startActivity(i);
             return true;
         }
@@ -1432,15 +1524,15 @@ public class product_details extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void add_cart(final String cart_data, final CallBack onCallBack){
+    private void add_cart(final String cart_data, final CallBack onCallBack) {
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url+"/API/cartApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/cartApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         onCallBack.onSuccess(response);
-                        Log.d("derailss",response);
+                        Log.d("derailss", response);
 
                         //  callback.onSuccessResponse(response);
                       /*  SharedPreferences.Editor editor =getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
@@ -1455,27 +1547,26 @@ public class product_details extends AppCompatActivity {
                         //  Toast.makeText(getActivity(), "Please check your network connection and try again", Toast.LENGTH_SHORT).show();
 
                     }
-                }){
+                }) {
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("cart",cart_data);
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("cart", cart_data);
                 params.put("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
 
                 return params;
             }
 
-            private Map<String, String> checkParams(Map<String, String> map){
+            private Map<String, String> checkParams(Map<String, String> map) {
                 Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
                 while (it.hasNext()) {
-                    Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();
-                    if(pairs.getValue()==null){
+                    Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
+                    if (pairs.getValue() == null) {
                         map.put(pairs.getKey(), "");
                     }
                 }
                 return map;
             }
-
 
 
             @Override
@@ -1493,7 +1584,8 @@ public class product_details extends AppCompatActivity {
                 }
 
                 return super.parseNetworkResponse(response);
-            } };
+            }
+        };
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -1504,13 +1596,13 @@ public class product_details extends AppCompatActivity {
     protected void cart_counter(final CallBack mResultCallback) {
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url+"/API/cartCounterApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/cartCounterApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         mResultCallback.onSuccess(response);
 
-                        Log.d("sssssssssss",response);
+                        Log.d("sssssssssss", response);
 
 
                         //  callback.onSuccessResponse(response);
@@ -1540,17 +1632,17 @@ public class product_details extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
+
     protected void get_review(final CallBack mResultCallback) {
 
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url+"/API/fetchReviewApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/fetchReviewApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         mResultCallback.onSuccess(response);
 
-                        Log.d("sssss5555ssssss",response);
+                        Log.d("sssss5555ssssss", response);
 
 
                         //  callback.onSuccessResponse(response);
@@ -1580,17 +1672,17 @@ public class product_details extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
+
     protected void notify_user(final String email, final CallBack mResultCallback) {
 
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url+"/API/notifyMeApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/notifyMeApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         mResultCallback.onSuccess(response);
 
-                        Log.d("sssss5555ssssss",response);
+                        Log.d("sssss5555ssssss", response);
 
 
                         //  callback.onSuccessResponse(response);
@@ -1611,7 +1703,7 @@ public class product_details extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("productID", getIntent().getStringExtra("id_value"));
-                params.put("email",email);
+                params.put("email", email);
 
                 return params;
             }
@@ -1621,18 +1713,15 @@ public class product_details extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
+
     protected void get_vote(final CallBack mResultCallback) {
 
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url+"/API/fraLoginApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/fraLoginApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         mResultCallback.onSuccess(response);
-
-
-
 
 
                         //  callback.onSuccessResponse(response);
@@ -1653,7 +1742,7 @@ public class product_details extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("productID", getIntent().getStringExtra("id_value"));
-                params.put("mobile",session.getUserDetails().get(SessionManagement.KEY_MOBILE));
+                params.put("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
 
                 return params;
             }
