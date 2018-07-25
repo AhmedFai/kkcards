@@ -100,7 +100,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.bottom)
     TextView btnBottomSheet;
 
-    LinearLayout lin1, lin2, lin3, mainLin;
+    LinearLayout lin1, lin2, lin3, mainLin,mainLin1;
 
     TextView device, lense, both, simple, medium, high, piece1, piece2, piece3;
 
@@ -172,7 +172,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     private HashMap<String, ArrayList<String>> words;
     String product_id, image;
 
-    String catId;
+    String catId ;
 
     SessionManagement session;
 
@@ -226,6 +226,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         both = (TextView) findViewById(R.id.forBoth);
         both.setOnClickListener(this);
         mainLin = (LinearLayout) findViewById(R.id.mainLin);
+        mainLin1 = (LinearLayout)findViewById(R.id.mainLin1);
         simple = (TextView) findViewById(R.id.simple);
         simple.setOnClickListener(this);
         medium = (TextView) findViewById(R.id.medium);
@@ -241,7 +242,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         session = new SessionManagement(getApplicationContext());
 
 
-        // hide();
+        // hide(
+        // );
 
         cart_list = new ArrayList<ArrayList<String>>();
         split_list = new ArrayList<>();
@@ -249,6 +251,19 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
         sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
+
+        Log.d("categoryIdCatWali",String.valueOf(catId));
+
+   /*     if (catId.equals("1")){
+
+            Log.d("main","main wala");
+            mainLin.setVisibility(View.VISIBLE);
+
+        }else {
+
+            Log.d("duantity", "quantity wala");
+            mainLin1.setVisibility(View.VISIBLE);
+        }*/
 
 
 
@@ -868,6 +883,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
         // Request a string response
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -895,7 +911,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     Log.d("categoryId", feed.getCid());
 
-                                    catId = feed.getCid();
+                                    Log.d("CatID",objj.getString("cid"));
+
+                                    catId=objj.getString("cid");
 
                                     feed.setQuantity(objj.getString("quantity"));
 
@@ -1353,6 +1371,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 both.setBackgroundResource(R.drawable.background);
                 both.setTextColor(Color.parseColor("#125688"));
                 lin2.setVisibility(View.VISIBLE);
+                lin3.setVisibility(View.VISIBLE);
 
 
                 break;
