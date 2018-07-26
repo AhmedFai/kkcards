@@ -9,6 +9,8 @@ public final class Config {
     }
     public static final String Base_Url = "http://www.kkcardsdelhi.com/admin";
 
+    public static String catId = "";
+
     public static final String YOUTUBE_API_KEY = "AIzaSyAe-zaKObYXNUHqzkJ8xQdOtbxFBe6v3FE";
 
 }

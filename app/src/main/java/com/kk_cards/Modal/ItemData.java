@@ -149,7 +149,15 @@ public class ItemData {
         this.id = id;
     }
 
+    private String internationalWarranty;
 
+    public String getInternationalWarranty() {
+        return internationalWarranty;
+    }
+
+    public void setInternationalWarranty(String internationalWarranty) {
+        this.internationalWarranty = internationalWarranty;
+    }
 
     private String cid;
 

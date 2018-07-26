@@ -1,8 +1,10 @@
 package com.kk_cards;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -37,7 +39,7 @@ public class OtpActivity extends AppCompatActivity implements OTPListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
-        OtpReader.bind(this, "HP-KKCARD");
+        OtpReader.bind(this, "TX-KKCARD");
 
         phn = (EditText) findViewById(R.id.number);
         otp = (EditText) findViewById(R.id.potp);
@@ -47,6 +49,11 @@ public class OtpActivity extends AppCompatActivity implements OTPListener {
         get.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                ActivityCompat.requestPermissions(OtpActivity.this,
+                        new String[]{Manifest.permission.READ_SMS,Manifest.permission.RECEIVE_SMS},
+                        1);
 
                 final ProgressDialog progressDialog = new ProgressDialog(OtpActivity.this,
                         R.style.AppTheme_Dark_Dialog);

@@ -172,7 +172,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     private HashMap<String, ArrayList<String>> words;
     String product_id, image;
 
-    String catId ;
+    //int catId ;
 
     SessionManagement session;
 
@@ -187,6 +187,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     String price_txt, price_cut_txt, dicount_txt;
     ArrayList<String> path_list, fname_list;
     int quantity = 0;
+
+    String amount[];
 
     Boolean visibility_cart = false;
     int cartquantity;
@@ -252,9 +254,16 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 
-        Log.d("categoryIdCatWali",String.valueOf(catId));
 
-   /*     if (catId.equals("1")){
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
+        Log.d("categoryIdCatWali",prefs.getString("cat_id",null));
+
+
+
+
+        if (prefs.getString("cat_id",null).equals("1")){
 
             Log.d("main","main wala");
             mainLin.setVisibility(View.VISIBLE);
@@ -263,7 +272,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
             Log.d("duantity", "quantity wala");
             mainLin1.setVisibility(View.VISIBLE);
-        }*/
+        }
 
 
 
@@ -893,6 +902,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                         path_list = new ArrayList<>();
                         fname_list = new ArrayList<>();
 
+                        //amount = new ArrayList<>();
+
                         feature_list = new ArrayList<>();
 
                         try {
@@ -913,7 +924,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     Log.d("CatID",objj.getString("cid"));
 
-                                    catId=objj.getString("cid");
+                                   // Config.catId = feed.getCid();
+
+                                    //catId=Integer.parseInt(objj.getString("cid"));
 
                                     feed.setQuantity(objj.getString("quantity"));
 
@@ -997,6 +1010,16 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     //feed.setPackage_in(objj.getString("package_include"));
                                     //feed.setSpecification(objj.getString("specification"));
                                     feed.setWarenty(objj.getString("intranationalWarranty"));
+
+                                  //  amount.add(objj.getString("internationalWarranty"));
+
+                                    feed.setInternationalWarranty(objj.getString("internationalWarranty"));
+
+                                    String am = feed.getInternationalWarranty();
+
+                                    amount = am.split(",");
+
+                                    Log.d("amount", String.valueOf(amount.length));
 
 
                                     int discount = Integer.parseInt(objj.getString("discount"));
@@ -1260,6 +1283,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                          startActivity(i);*/
 
                             } else {
+
+                                Log.d("firstLog","firstwala");
                                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                                 i.putExtra("test", "");
                                 startActivity(i);
@@ -1292,6 +1317,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             } else {
 
                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
+
+                Log.d("secondLog","Secondwala");
                 i.putExtra("test", "");
                 startActivity(i);
 
@@ -1328,6 +1355,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             /*   Intent i = new Intent(getApplicationContext(), add_to_cart.class);
                startActivity(i);*/
                 } else {
+                    Log.d("thirdLog","thirdwala");
                     Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                     i.putExtra("test", "");
                     startActivity(i);
@@ -1337,6 +1365,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                startActivity(i);*/
                 }
             } else {
+
+                Log.d("forthLog","forthwala");
 
                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                 i.putExtra("test", "");
@@ -1371,7 +1401,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 both.setBackgroundResource(R.drawable.background);
                 both.setTextColor(Color.parseColor("#125688"));
                 lin2.setVisibility(View.VISIBLE);
-                lin3.setVisibility(View.VISIBLE);
+                lin3.setVisibility(View.GONE);
 
 
                 break;
@@ -1403,6 +1433,85 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 break;
 
             }
+
+            case R.id.simple: {
+                high.setBackgroundResource(R.drawable.background);
+                high.setTextColor(Color.parseColor("#125688"));
+                medium.setBackgroundResource(R.drawable.background);
+                medium.setTextColor(Color.parseColor("#125688"));
+                simple.setBackgroundResource(R.drawable.background_blue);
+                simple.setTextColor(Color.parseColor("#ffffff"));
+                //lin2.setVisibility(View.GONE);
+                lin3.setVisibility(View.VISIBLE);
+                break;
+
+            }
+
+            case R.id.medium: {
+                high.setBackgroundResource(R.drawable.background);
+                high.setTextColor(Color.parseColor("#125688"));
+                simple.setBackgroundResource(R.drawable.background);
+                simple.setTextColor(Color.parseColor("#125688"));
+                medium.setBackgroundResource(R.drawable.background_blue);
+                medium.setTextColor(Color.parseColor("#ffffff"));
+                //lin2.setVisibility(View.GONE);
+                lin3.setVisibility(View.VISIBLE);
+                break;
+
+            }
+
+            case R.id.high: {
+                simple.setBackgroundResource(R.drawable.background);
+                simple.setTextColor(Color.parseColor("#125688"));
+                medium.setBackgroundResource(R.drawable.background);
+                medium.setTextColor(Color.parseColor("#125688"));
+                high.setBackgroundResource(R.drawable.background_blue);
+                high.setTextColor(Color.parseColor("#ffffff"));
+                //lin2.setVisibility(View.GONE);
+                lin3.setVisibility(View.VISIBLE);
+                break;
+
+            }
+
+            case R.id.piece1: {
+                piece2.setBackgroundResource(R.drawable.background);
+                piece2.setTextColor(Color.parseColor("#125688"));
+                piece3.setBackgroundResource(R.drawable.background);
+                piece3.setTextColor(Color.parseColor("#125688"));
+                piece1.setBackgroundResource(R.drawable.background_blue);
+                piece1.setTextColor(Color.parseColor("#ffffff"));
+                //lin2.setVisibility(View.GONE);
+                //lin3.setVisibility(View.VISIBLE);
+                break;
+
+            }
+
+            case R.id.piece6: {
+                piece1.setBackgroundResource(R.drawable.background);
+                piece1.setTextColor(Color.parseColor("#125688"));
+                piece3.setBackgroundResource(R.drawable.background);
+                piece3.setTextColor(Color.parseColor("#125688"));
+                piece2.setBackgroundResource(R.drawable.background_blue);
+                piece2.setTextColor(Color.parseColor("#ffffff"));
+                //lin2.setVisibility(View.GONE);
+                //lin3.setVisibility(View.VISIBLE);
+                break;
+
+            }
+
+            case R.id.piece12: {
+                piece1.setBackgroundResource(R.drawable.background);
+                piece1.setTextColor(Color.parseColor("#125688"));
+                piece2.setBackgroundResource(R.drawable.background);
+                piece2.setTextColor(Color.parseColor("#125688"));
+                piece3.setBackgroundResource(R.drawable.background_blue);
+                piece3.setTextColor(Color.parseColor("#ffffff"));
+                //lin2.setVisibility(View.GONE);
+                //lin3.setVisibility(View.VISIBLE);
+                break;
+
+            }
+
         }
 
 
