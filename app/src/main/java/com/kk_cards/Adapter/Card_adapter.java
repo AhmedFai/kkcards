@@ -96,10 +96,10 @@ public class Card_adapter extends BaseAdapter{
         holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
 
-        holder.tv.setText(os_versions.get(position).getCat_name());
+        holder.tv.setText(os_versions.get(position).getProductName());
         holder.sale_price.setText("\u20B9"+os_versions.get(position).getPrice());
-        holder.price.setText("\u20B9"+os_versions.get(position).getDiscount());
-        Picasso.with(context).load(os_versions.get(position).getCat_image()).fit().into(holder.img);
+        holder.price.setText("\u20B9"+os_versions.get(position).getMrp());
+        Picasso.with(context).load(os_versions.get(position).getProductImage()).fit().into(holder.img);
 
       rowView.setOnClickListener(new OnClickListener() {
 
@@ -109,7 +109,7 @@ public class Card_adapter extends BaseAdapter{
                 Intent i=new Intent(context,product_details.class);
                 i.putExtra("image_path","no_images");
 
-                i.putExtra("id_value",os_versions.get(position).getId());
+                i.putExtra("id_value",os_versions.get(position).getProductID());
                 context.startActivity(i);
 
             }

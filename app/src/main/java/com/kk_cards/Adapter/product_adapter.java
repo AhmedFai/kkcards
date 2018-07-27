@@ -108,7 +108,7 @@ public class product_adapter extends RecyclerView.Adapter {
 
             if("sub_category".equals(check_value))
             {
-                ((StudentViewHolder)viewHolder).cat_name.setText(os_versions.get(position).getCat_name());
+                ((StudentViewHolder)viewHolder).cat_name.setText(os_versions.get(position).getProductName());
 
                 ((StudentViewHolder)viewHolder).cat_name.setTextSize(20);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -128,13 +128,13 @@ public class product_adapter extends RecyclerView.Adapter {
                 ((StudentViewHolder)viewHolder).price_cut.setPaintFlags(((StudentViewHolder) viewHolder).price_cut.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
 
-                ((StudentViewHolder)viewHolder).cat_name.setText(fp.getCat_name());
-                ((StudentViewHolder)viewHolder).price_cut.setText("\u20B9"+fp.getDiscount());
+                ((StudentViewHolder)viewHolder).cat_name.setText(fp.getProductName());
+                ((StudentViewHolder)viewHolder).price_cut.setText("\u20B9"+fp.getMrp());
                 ((StudentViewHolder)viewHolder).price.setText("\u20B9"+fp.getPrice());
-                ((StudentViewHolder)viewHolder).code.setText("Code: "+fp.getId());
+                ((StudentViewHolder)viewHolder).code.setText("Code: "+fp.getProductID());
                 //((StudentViewHolder)viewHolder).discount.setText(fp.getDiscount()+"% off");
 
-                Picasso.with(mContext).load(fp.getCat_image()).into(((StudentViewHolder)viewHolder).image);
+                Picasso.with(mContext).load(fp.getProductImage()).into(((StudentViewHolder)viewHolder).image);
 
 
 

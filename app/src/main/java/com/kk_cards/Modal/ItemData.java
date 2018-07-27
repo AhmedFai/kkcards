@@ -159,6 +159,15 @@ public class ItemData {
         this.internationalWarranty = internationalWarranty;
     }
 
+    private String mrp;
+
+    public String getMrp() {
+        return mrp;
+    }
+
+    public void setMrp(String mrp) {
+        this.mrp = mrp;
+    }
     private String cid;
 
     public String getCid() {
@@ -218,7 +227,51 @@ public class ItemData {
 
     private String quantity;
     private String product_id;
+    private String productID;
+    private String categoryID;
+    private String productName;
+    private String productDescription;
+    private String productImage;
 
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public String getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
 
     public String getPrice_cut() {
         return price_cut;

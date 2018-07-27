@@ -78,9 +78,9 @@ public class category_fragment extends Fragment {
 
                                 JSONObject objj=arry.getJSONObject(i);
 
-                                id_list.add(objj.getString("id"));
-                                image_list.add(objj.getString("image"));
-                                name_list.add(objj.getString("name"));
+                                id_list.add(objj.getString("categoryID"));
+                                image_list.add(objj.getString("categoryImage"));
+                                name_list.add(objj.getString("categoryName"));
                                 count_list.add(objj.getString("count"));
 
 

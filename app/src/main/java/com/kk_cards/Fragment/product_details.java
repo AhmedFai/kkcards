@@ -904,7 +904,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         //amount = new ArrayList<>();
 
-                        feature_list = new ArrayList<>();
+                        feature_list = new ArrayList<String>();
 
                         try {
                             JSONObject obj = new JSONObject(response);
@@ -915,14 +915,14 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                 for (int i = 0; i < banner_array.length(); i++) {
                                     JSONObject objj = banner_array.getJSONObject(i);
                                     ItemData feed = new ItemData();
-                                    feed.setCat_name(objj.getString("name"));
-                                    feed.setId(objj.getString("id"));
+                                    feed.setProductName(objj.getString("productName"));
+                                    feed.setProductID(objj.getString("productID"));
 
-                                    feed.setCid(objj.getString("cid"));
+                                    feed.setCategoryID(objj.getString("categoryID"));
 
-                                    Log.d("categoryId", feed.getCid());
+                                    Log.d("categoryId", feed.getCategoryID());
 
-                                    Log.d("CatID",objj.getString("cid"));
+                                    Log.d("CatID",objj.getString("categoryID"));
 
                                    // Config.catId = feed.getCid();
 
@@ -934,10 +934,10 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     feed.setFeature(objj.getString("feature"));
 
-                                    product_id = objj.getString("id");
-                                    image = objj.getString("image");
-                                    path_list.add(objj.getString("image"));
-                                    fname_list.add("Image");
+                                    product_id = objj.getString("productID");
+                                    image = objj.getString("productImage");
+                                    path_list.add(objj.getString("productImage"));
+                                    fname_list.add("productImage");
 
                                     if (session.isLoggedIn() == true) {
 
@@ -952,7 +952,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                                 do {
 
 
-                                                    if (c.getString(c.getColumnIndex("product_id")).equals(feed.getId())) {
+                                                    if (c.getString(c.getColumnIndex("product_id")).equals(feed.getProductID())) {
 
                                                         add_to_cart.setText("GO TO CART");
 
@@ -979,7 +979,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                                 do {
 
 
-                                                    if (c.getString(c.getColumnIndex("product_id")).equals(feed.getId())) {
+                                                    if (c.getString(c.getColumnIndex("product_id")).equals(feed.getProductID())) {
 
                                                         add_to_cart.setText("GO TO CART");
 
@@ -995,7 +995,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     }
 
 
-                                    feed.setDel_charge(objj.getString("dCharge"));
+                                    feed.setDel_charge(objj.getString("deliveryCharge"));
 
                                     if (quantity < 1) {
 
@@ -1009,39 +1009,40 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     // feed.setFeature(objj.getString("feature"));
                                     //feed.setPackage_in(objj.getString("package_include"));
                                     //feed.setSpecification(objj.getString("specification"));
-                                    feed.setWarenty(objj.getString("intranationalWarranty"));
+                                    feed.setWarenty(objj.getString("warranty"));
 
                                   //  amount.add(objj.getString("internationalWarranty"));
 
-                                    feed.setInternationalWarranty(objj.getString("internationalWarranty"));
+                                    feed.setInternationalWarranty(objj.getString("otherPrices"));
 
                                     String am = feed.getInternationalWarranty();
 
-                                    amount = am.split(",");
+                                     amount = am.split(",");
 
                                     Log.d("amount", String.valueOf(amount.length));
 
 
-                                    int discount = Integer.parseInt(objj.getString("discount"));
-                                    int price = Integer.parseInt(objj.getString("price"));
+                                    /*int discount = Integer.parseInt(objj.getString("discount"));
+                                    int price = Integer.parseInt(objj.getString("price"));*/
 
                                     //discount_txt.setText(discount + "% off");
 
                                     // int price_cut = (100 - discount) * price / 100;
                                     feed.setPrice(objj.getString("price"));
-                                    feed.setDiscount(objj.getString("discount"));
+                                    feed.setMrp(objj.getString("mrp"));
 
 
-                                    feed.setCat_image(objj.getString("image"));
+
+                                    feed.setProductImage(objj.getString("productImage"));
 
 
-                                    code.setText("Code: " + feed.getId());
-                                    name.setText(feed.getCat_name());
+                                    code.setText("Code: " + feed.getProductID());
+                                    name.setText(feed.getProductName());
                                     price_val.setText("\u20B9" + feed.getPrice());
-                                    price2.setText("\u20B9" + feed.getDiscount());
+                                    price2.setText("\u20B9" + feed.getMrp());
 
                                     price_txt = feed.getPrice();
-                                    price_cut_txt = feed.getPrice_cut();
+                                    price_cut_txt = feed.getMrp();
                                     // dicount_txt=objj.getString("discount");
 
 
@@ -1054,7 +1055,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     } else {
 
                                         // Log.d("nbvngklj",feed.getCat_image()) ;
-                                        Picasso.with(getApplicationContext()).load(feed.getCat_image()).into(product_image);
+                                        Picasso.with(getApplicationContext()).load(feed.getProductImage()).into(product_image);
 
 
                                     }
@@ -1068,14 +1069,15 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     editor.putString("price_value_product", objj.getString("price"));
                                     editor.putString("code", code.getText().toString());
                                     editor.putString("price_value_cut_product", price_val.getText().toString());
-                                    editor.putString("product_id", objj.getString("id"));
-                                    editor.putString("cat_id", objj.getString("cid"));
-                                    editor.putString("discount_value", objj.getString("discount"));
-                                    editor.putString("image", objj.getString("image"));
+                                    editor.putString("product_id", objj.getString("productID"));
+                                    editor.putString("cat_id", objj.getString("categoryID"));
+                                    editor.putString("mrp", objj.getString("mrp"));
+                                   // editor.putString("discount_value", objj.getString("discount"));
+                                    editor.putString("image", objj.getString("productImage"));
                                     editor.putString("quantity_value", "1");
                                     editor.putString("total_quantity", objj.getString("quantity"));
 
-                                    editor.putString("delivery_price", objj.getString("dCharge"));
+                                    editor.putString("delivery_price", objj.getString("deliveryCharge"));
                                     editor.putString("delivery_time", obj.getString("deliveryTime"));
 
 
@@ -1097,7 +1099,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     //      package_in.setText("Package Include"+objj.getString("package_include"));
                                     warrenty.setText("Domestic Warranty:  " + feed.getWarenty());
 
-                                    feed.setWarenty(objj.getString("internationalWarranty"));
+                                    //feed.setWarenty(objj.getString("internationalWarranty"));
 
                                     //warrenty1.setText("International Warranty:  " + feed.getWarenty());
 
@@ -1117,8 +1119,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     JSONObject objj = media_array.getJSONObject(i);
 
 
-                                    path_list.add(objj.getString("fname"));
-                                    fname_list.add(objj.getString("ftype"));
+                                    path_list.add(objj.getString("mediaName"));
+                                    fname_list.add(objj.getString("mediaType"));
 
 
                                 }

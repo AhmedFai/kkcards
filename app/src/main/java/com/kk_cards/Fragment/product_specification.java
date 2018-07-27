@@ -128,7 +128,7 @@ public class product_specification extends Fragment {
                                 for (int i = 0; i < description_array.length(); i++) {
                                     JSONObject objj = description_array.getJSONObject(i);
 
-                                    value = value + Html.fromHtml("<p>" + Html.fromHtml(objj.getString("productDesc")) + "</p>");
+                                    value = value + Html.fromHtml("<p>" + Html.fromHtml(objj.getString("productDescription")) + "</p>");
 
 
                                 }
@@ -158,7 +158,7 @@ public class product_specification extends Fragment {
 
                               dim_val.add(objj.getString("inTheBox"));
                                 dim_val.add(objj.getString("pWeight"));
-                                war_val.add(objj.getString("intranationalWarranty"));
+                                war_val.add(objj.getString("warranty"));
                                 //war_val.add(objj.getString("internationalWarranty"));
                                 war_val.add("Manufacturing Defects Only");
                                 war_val.add("Physical Damage");
