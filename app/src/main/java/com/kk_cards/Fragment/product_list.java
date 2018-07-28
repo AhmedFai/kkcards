@@ -122,6 +122,7 @@ public class product_list extends AppCompatActivity {
 
                             Intent i=new Intent(getApplicationContext(),product_details.class);
                             i.putExtra("id_value",os_versions.get(position).getProductID());
+                            i.putExtra("catId",os_versions.get(position).getCategoryID());
                             i.putExtra("image_path","no_images");
                             startActivity(i);
 
@@ -403,19 +404,20 @@ public class product_list extends AppCompatActivity {
                                     ItemData feed = new ItemData();
                                     JSONObject objj = product_list.getJSONObject(i);
 
-                                    feed.setId(objj.getString("id"));
-                                    feed.setCat_name(objj.getString("name"));
-                                    feed.setCat_image(objj.getString("image"));
+                                    feed.setProductID(objj.getString("productID"));
+                                    feed.setProductName(objj.getString("productName"));
+                                    feed.setProductImage(objj.getString("productImage"));
 
-                                    feed.setDiscount(objj.getString("discount"));
+                                    feed.setMrp(objj.getString("mrp"));
+                                    feed.setCategoryID(objj.getString("categoryID"));
 
-                                    int discount = Integer.parseInt(objj.getString("discount"));
-                                    int price = Integer.parseInt(objj.getString("price"));
+                                 /*   int discount = Integer.parseInt(objj.getString("discount"));
+                                    int price = Integer.parseInt(objj.getString("price"));*/
 
 
-                                    int price_cut = (100 - discount) * price / 100;
+                                  //  int price_cut = (100 - discount) * price / 100;
                                     feed.setPrice(objj.getString("price"));
-                                    feed.setPrice_cut(String.valueOf(price_cut));
+                                   // feed.setPrice_cut(String.valueOf(price_cut));
 
                                     os_versions.add(feed);
 
@@ -473,19 +475,20 @@ public class product_list extends AppCompatActivity {
                                                     JSONObject objj = null;
                                                     try {
                                                         objj = product_list.getJSONObject(i);
-                                                        feed.setId(objj.getString("id"));
-                                                        feed.setCat_name(objj.getString("name"));
-                                                        feed.setCat_image(objj.getString("image"));
+                                                        feed.setProductID(objj.getString("productID"));
+                                                        feed.setProductName(objj.getString("productName"));
+                                                        feed.setProductImage(objj.getString("productImage"));
 
-                                                        feed.setDiscount(objj.getString("discount"));
+                                                        feed.setMrp(objj.getString("mrp"));
+                                                        feed.setCategoryID(objj.getString("categoryID"));
 
-                                                        int discount = Integer.parseInt(objj.getString("discount"));
-                                                        int price = Integer.parseInt(objj.getString("price"));
+                                                      /*  int discount = Integer.parseInt(objj.getString("discount"));
+                                                        int price = Integer.parseInt(objj.getString("price"));*/
 
 
-                                                        int price_cut = (100 - discount) * price / 100;
+                                                        //int price_cut = (100 - discount) * price / 100;
                                                         feed.setPrice(objj.getString("price"));
-                                                        feed.setPrice_cut(String.valueOf(price_cut));
+                                                       // feed.setPrice_cut(String.valueOf(price_cut));
 
                                                         os_versions.add(feed);
                                                     } catch (JSONException e1) {
@@ -514,19 +517,20 @@ public class product_list extends AppCompatActivity {
                                     ItemData feed = new ItemData();
                                     JSONObject objj = product_list.getJSONObject(i);
 
-                                    feed.setId(objj.getString("id"));
-                                    feed.setCat_name(objj.getString("name"));
-                                    feed.setCat_image(objj.getString("image"));
+                                    feed.setProductID(objj.getString("productID"));
+                                    feed.setProductName(objj.getString("productName"));
+                                    feed.setProductImage(objj.getString("productImage"));
 
-                                    feed.setDiscount(objj.getString("discount"));
+                                    feed.setMrp(objj.getString("mrp"));
+                                    feed.setCategoryID(objj.getString("categoryID"));
 
-                                    int discount = Integer.parseInt(objj.getString("discount"));
-                                    int price = Integer.parseInt(objj.getString("price"));
+                                    /*int discount = Integer.parseInt(objj.getString("discount"));
+                                    int price = Integer.parseInt(objj.getString("price"));*/
 
 
-                                    int price_cut = (100 - discount) * price / 100;
+                                    //int price_cut = (100 - discount) * price / 100;
                                     feed.setPrice(objj.getString("price"));
-                                    feed.setPrice_cut(String.valueOf(price_cut));
+                                   // feed.setPrice_cut(String.valueOf(price_cut));
 
                                     os_versions.add(feed);
 

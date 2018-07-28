@@ -149,6 +149,7 @@ TopSellingadapter sellingadapter;
                     Intent i=new Intent(getContext(),product_details.class);
                     i.putExtra("id_value",product_id_list.get(position));
                     i.putExtra("image_path","no_images");
+                    i.putExtra("catId",cat_list.get(position));
                     startActivity(i);
 
                 }
@@ -159,6 +160,7 @@ TopSellingadapter sellingadapter;
                     Intent i=new Intent(getContext(),product_list.class);
                     i.putExtra("id_value",cat_list.get(position));
                     i.putExtra("sub_cat_val", sub_cat_list.get(position));
+                    i.putExtra("catId",cat_list.get(position));
                     i.putExtra("sub_cat_name","");
                     startActivity(i);
 
@@ -175,8 +177,9 @@ TopSellingadapter sellingadapter;
                     @Override public void onItemClick(View view, int position) {
 
                         Intent i=new Intent(getContext(),product_details.class);
-                        i.putExtra("id_value",super_list.get(position).getProduct_id());
-                        Log.d("pppppp",super_list.get(position).getProduct_id());
+                        i.putExtra("id_value",super_list.get(position).getProductID());
+                        i.putExtra("catId",super_list.get(position).getCategoryID());
+                        Log.d("pppppp",super_list.get(position).getProductID());
                         i.putExtra("image_path","no_images");
                         startActivity(i);
 
@@ -191,8 +194,9 @@ TopSellingadapter sellingadapter;
                     @Override public void onItemClick(View view, int position) {
 
                         Intent i=new Intent(getContext(),product_details.class);
-                        i.putExtra("id_value",super_list.get(position).getProduct_id());
-                        Log.d("iiiddd",super_list.get(position).getProduct_id());
+                        i.putExtra("id_value",super_list.get(position).getProductID());
+                        i.putExtra("catId",super_list.get(position).getCategoryID());
+                        Log.d("iiiddd",super_list.get(position).getProductID());
                         i.putExtra("image_path","no_images");
                         startActivity(i);
 
@@ -209,7 +213,8 @@ TopSellingadapter sellingadapter;
                     @Override public void onItemClick(View view, int position) {
 
                         Intent i=new Intent(getContext(),product_details.class);
-                        i.putExtra("id_value",topselling_list.get(position).getProduct_id());
+                        i.putExtra("id_value",topselling_list.get(position).getProductID());
+                        i.putExtra("catId",topselling_list.get(position).getCategoryID());
                         i.putExtra("image_path","no_images");
                         startActivity(i);
 
@@ -250,7 +255,7 @@ TopSellingadapter sellingadapter;
                                 JSONObject objj=arry.getJSONObject(i);
 
                                 ItemData feed = new ItemData();
-                                feed.setProduct_id(objj.getString("productID"));
+                                feed.setProductID(objj.getString("productID"));
                                 feed.setProductName(objj.getString("productName"));
                                 feed.setProductImage(objj.getString("productImage"));
                                 feed.setCategoryID(objj.getString("categoryID"));
@@ -345,7 +350,7 @@ TopSellingadapter sellingadapter;
                                 JSONObject objj=arry.getJSONObject(i);
 
                                 ItemData feed = new ItemData();
-                                feed.setProduct_id(objj.getString("productID"));
+                                feed.setProductID(objj.getString("productID"));
                                 feed.setCategoryID(objj.getString("categoryID"));
                                 feed.setProductName(objj.getString("productName"));
                                 feed.setProductImage(objj.getString("productImage"));
@@ -432,7 +437,7 @@ TopSellingadapter sellingadapter;
                                 JSONObject objj=arry.getJSONObject(i);
 
                                 ItemData feed = new ItemData();
-                                feed.setProduct_id(objj.getString("productID"));
+                                feed.setProductID(objj.getString("productID"));
                                 feed.setCategoryID(objj.getString("categoryID"));
                                 feed.setProductName(objj.getString("productName"));
                                 feed.setProductImage(objj.getString("productImage"));

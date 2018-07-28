@@ -110,6 +110,7 @@ public class Card_adapter extends BaseAdapter{
                 i.putExtra("image_path","no_images");
 
                 i.putExtra("id_value",os_versions.get(position).getProductID());
+                i.putExtra("catId",os_versions.get(position).getCategoryID());
                 context.startActivity(i);
 
             }

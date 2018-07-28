@@ -152,7 +152,8 @@ public class search_activity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position) {
 
                         Intent i=new Intent(search_activity.this,product_details.class);
-                        i.putExtra("id_value",os_versions.get(position).getId());
+                        i.putExtra("id_value",os_versions.get(position).getProductID());
+                        i.putExtra("catId",os_versions.get(position).getCategoryID());
                         i.putExtra("sub_cat_val", "0");
                         i.putExtra("image_path", "no_images");
                         startActivity(i);
@@ -316,11 +317,13 @@ public class search_activity extends AppCompatActivity {
                                       ItemData feed = new ItemData();
                                       JSONObject objj = product_list.getJSONObject(i);
 
-                                      feed.setId(objj.getString("id"));
-                                      list_data[i] = objj.getString("name");
+                                      feed.setProductID(objj.getString("productID"));
+                                      feed.setCategoryID(objj.getString("categoryID"));
+                                      list_data[i] = objj.getString("productName");
                                       //    list_data(objj.getString("name"));
 
 
+                                      os_versions.add(feed);
                                   }
 
                                   ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list_data);

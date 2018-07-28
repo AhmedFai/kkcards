@@ -102,7 +102,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
     LinearLayout lin1, lin2, lin3, mainLin,mainLin1;
 
-    TextView device, lense, both, simple, medium, high, piece1, piece2, piece3;
+    TextView device, lense, both, simple, medium, high, piece1, piece2, piece3, money;
 
     ImageView cancel;
 
@@ -221,6 +221,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         lin1 = (LinearLayout) findViewById(R.id.lin1);
         lin2 = (LinearLayout) findViewById(R.id.lin2);
         lin3 = (LinearLayout) findViewById(R.id.lin3);
+        money = (TextView)findViewById(R.id.money);
         device = (TextView) findViewById(R.id.forDevice);
         device.setOnClickListener(this);
         lense = (TextView) findViewById(R.id.forLence);
@@ -258,12 +259,12 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-        Log.d("categoryIdCatWali",prefs.getString("cat_id",null));
+        Log.d("categoryIdCatWali",getIntent().getStringExtra("catId"));
 
 
 
 
-        if (prefs.getString("cat_id",null).equals("1")){
+        if ("1".equals(getIntent().getStringExtra("catId"))){
 
             Log.d("main","main wala");
             mainLin.setVisibility(View.VISIBLE);
