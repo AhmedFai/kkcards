@@ -206,6 +206,10 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
     List<Integer> percent_list = new ArrayList<Integer>();
 
+    String step;
+
+    String cardType;
+
     int postion_val = 0;
     ProgressDialog progress;
 
@@ -1020,6 +1024,14 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                      amount = am.split(",");
 
+                                     if (amount[amount.length - 1].equals("0"))
+                                     {
+                                         cardType = "paper";
+                                     }
+                                     else {
+                                         cardType = "plastic";
+                                     }
+
                                     Log.d("amount", String.valueOf(amount.length));
 
 
@@ -1043,6 +1055,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     price2.setText("\u20B9" + feed.getMrp());
 
                                     price_txt = feed.getPrice();
+
+                                    money.setText(price_txt);
+
                                     price_cut_txt = feed.getMrp();
                                     // dicount_txt=objj.getString("discount");
 
@@ -1397,6 +1412,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
         switch (view.getId()) {
             case R.id.forDevice: {
+
+                step = "device";
+
                 device.setBackgroundResource(R.drawable.background_blue);
                 device.setTextColor(Color.parseColor("#ffffff"));
                 lense.setBackgroundResource(R.drawable.background);
@@ -1411,6 +1429,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.forLence: {
+
+                step = "lense";
+
                 lense.setBackgroundResource(R.drawable.background_blue);
                 lense.setTextColor(Color.parseColor("#ffffff"));
                 device.setBackgroundResource(R.drawable.background);
@@ -1425,6 +1446,14 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.forBoth: {
+
+                step = "both";
+
+                int b = Integer.parseInt(amount[12]);
+
+                money.setText(String.valueOf(b));
+
+
                 device.setBackgroundResource(R.drawable.background);
                 device.setTextColor(Color.parseColor("#125688"));
                 lense.setBackgroundResource(R.drawable.background);
@@ -1438,6 +1467,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.simple: {
+
+                step = "simple";
+
                 high.setBackgroundResource(R.drawable.background);
                 high.setTextColor(Color.parseColor("#125688"));
                 medium.setBackgroundResource(R.drawable.background);
@@ -1451,6 +1483,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.medium: {
+
+                step = "medium";
+
                 high.setBackgroundResource(R.drawable.background);
                 high.setTextColor(Color.parseColor("#125688"));
                 simple.setBackgroundResource(R.drawable.background);
@@ -1464,6 +1499,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.high: {
+
+                step = "high";
+
                 simple.setBackgroundResource(R.drawable.background);
                 simple.setTextColor(Color.parseColor("#125688"));
                 medium.setBackgroundResource(R.drawable.background);
@@ -1477,6 +1515,49 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.piece1: {
+
+                switch (step)
+                {
+                    case "lense":
+                    {
+
+                       // int a = Integer.parseInt(price_txt);
+                        int b = Integer.parseInt(amount[0]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "simple":
+                    {
+
+                        int b = Integer.parseInt(amount[3]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "medium":
+                    {
+
+                        int b = Integer.parseInt(amount[6]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "high":
+                    {
+
+                        int b = Integer.parseInt(amount[9]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                }
+
+
                 piece2.setBackgroundResource(R.drawable.background);
                 piece2.setTextColor(Color.parseColor("#125688"));
                 piece3.setBackgroundResource(R.drawable.background);
@@ -1490,6 +1571,52 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.piece6: {
+
+                switch (step)
+                {
+                    case "lense":
+                    {
+
+                        // int a = Integer.parseInt(price_txt);
+                        int b = Integer.parseInt(amount[1]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "simple":
+                    {
+
+                        int b = Integer.parseInt(amount[4]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "medium":
+                    {
+
+                        int b = Integer.parseInt(amount[7]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "high":
+                    {
+
+                        int b = Integer.parseInt(amount[10]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                }
+
+
+
+
+
                 piece1.setBackgroundResource(R.drawable.background);
                 piece1.setTextColor(Color.parseColor("#125688"));
                 piece3.setBackgroundResource(R.drawable.background);
@@ -1503,6 +1630,51 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.piece12: {
+
+                switch (step)
+                {
+                    case "lense":
+                    {
+
+                        // int a = Integer.parseInt(price_txt);
+                        int b = Integer.parseInt(amount[2]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "simple":
+                    {
+
+                        int b = Integer.parseInt(amount[5]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "medium":
+                    {
+
+                        int b = Integer.parseInt(amount[8]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                    case "high":
+                    {
+
+                        int b = Integer.parseInt(amount[11]);
+
+                        money.setText(String.valueOf(b));
+
+                        break;
+                    }
+                }
+
+
+
+
                 piece1.setBackgroundResource(R.drawable.background);
                 piece1.setTextColor(Color.parseColor("#125688"));
                 piece2.setBackgroundResource(R.drawable.background);
