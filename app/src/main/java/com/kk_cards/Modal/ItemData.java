@@ -232,6 +232,24 @@ public class ItemData {
     private String productName;
     private String productDescription;
     private String productImage;
+    private String cartID;
+    private String deliveryCharge;
+
+    public String getDeliveryCharge() {
+        return deliveryCharge;
+    }
+
+    public void setDeliveryCharge(String deliveryCharge) {
+        this.deliveryCharge = deliveryCharge;
+    }
+
+    public String getCartID() {
+        return cartID;
+    }
+
+    public void setCartID(String cartID) {
+        this.cartID = cartID;
+    }
 
     public String getProductID() {
         return productID;

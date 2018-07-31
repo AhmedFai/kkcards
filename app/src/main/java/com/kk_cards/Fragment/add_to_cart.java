@@ -286,15 +286,15 @@ public class add_to_cart extends AppCompatActivity {
                         ItemData feed = new ItemData();
 
 
-                        feed.setId(c.getString(c.getColumnIndex("id")));
-                        feed.setProduct_id(c.getString(c.getColumnIndex("product_id")));
-                        feed.setCat_name(c.getString(c.getColumnIndex("product_name")));
+                        feed.setCartID(c.getString(c.getColumnIndex("id")));
+                        feed.setProductID(c.getString(c.getColumnIndex("product_id")));
+                        feed.setProductName(c.getString(c.getColumnIndex("product_name")));
                         String quantity = c.getString(c.getColumnIndex("quantity"));
-                        Log.d("iddddddddd", feed.getId());
+                       // Log.d("iddddddddd", feed.getId());
                         feed.setQuantity(c.getString(c.getColumnIndex("quantity")));
                         feed.setPrice(c.getString(c.getColumnIndex("regular_price")));
-                        feed.setPrice_cut(c.getString(c.getColumnIndex("sale_price")));
-                        feed.setCat_image(c.getString(c.getColumnIndex("product_image")));
+                        feed.setMrp(c.getString(c.getColumnIndex("sale_price")));
+                        feed.setProductImage(c.getString(c.getColumnIndex("product_image")));
                         feed.setDiscount(c.getString(c.getColumnIndex("discount")));
 
                         grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
@@ -443,17 +443,17 @@ public class add_to_cart extends AppCompatActivity {
                                 JSONObject objj = product_list.getJSONObject(i);
 
 
-                                feed.setId(objj.getString("id"));
+                                feed.setCartID(objj.getString("cartID"));
 
-                                feed.setProduct_id(objj.getString("productID"));
+                                feed.setProductID(objj.getString("productID"));
                                 feed.setQuantity(objj.getString("quantity"));
-                                feed.setCat_name(objj.getString("pname"));
-                                feed.setCat_image(objj.getString("image"));
-                                feed.setDel_charge(objj.getString("dCharge"));
-                                feed.setTot_quantity(objj.getString("balance"));
+                                feed.setProductName(objj.getString("productName"));
+                                feed.setProductImage(objj.getString("image"));
+                                feed.setDeliveryCharge(objj.getString("deliveryCharge"));
+                                feed.setPrice(objj.getString("price"));
 
 
-                                total_del = total_del + Integer.parseInt(feed.getDel_charge());
+                                total_del = total_del + Integer.parseInt(feed.getDeliveryCharge());
 
 
                           /*      int discount = 0, price = 0;
@@ -473,12 +473,12 @@ public class add_to_cart extends AppCompatActivity {
                               //  int price_cut = (100 - discount) * price / 100;
                                 feed.setPrice(objj.getString("price"));
                                // feed.setPrice_cut(String.valueOf(price_cut));
-                                feed.setDiscount(objj.getString("discount"));
+                               // feed.setDiscount(objj.getString("discount"));
 
                                 os_versions.add(feed);
 
 
-                                Boolean result = db.insert_server(os_versions.get(i).getCat_name(), os_versions.get(i).getPrice(), os_versions.get(i).getPrice_cut(), os_versions.get(i).getQuantity(), os_versions.get(i).getDiscount(), os_versions.get(i).getId(), os_versions.get(i).getCat_image(), objj.getString("dCharge"));
+                                Boolean result = db.insert_server(os_versions.get(i).getProductName(), os_versions.get(i).getPrice(), os_versions.get(i).getMrp(), os_versions.get(i).getQuantity(), os_versions.get(i).getDiscount(), os_versions.get(i).getCartID(), os_versions.get(i).getProductImage(), objj.getString("deliveryCharge"));
                                 Log.d("fffffff", String.valueOf(result));
 
                                 total_price_items = total_price_items + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
@@ -487,7 +487,7 @@ public class add_to_cart extends AppCompatActivity {
                                 tot_price_items.setText("\u20B9" + total_price_items);
 
 
-                                grand_total = grand_total + Integer.valueOf(objj.getString("dCharge"));
+                                grand_total = grand_total + Integer.valueOf(objj.getString("deliveryCharge"));
 
                                 SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                 editor.putInt("total_price", grand_total);
@@ -700,7 +700,7 @@ public class add_to_cart extends AppCompatActivity {
             for (int i = 0; i < os_versions.size(); i++) {
 
                 JSONObject item1 = new JSONObject();
-                item1.put("tempid", os_versions.get(i).getId());
+                item1.put("tempid", os_versions.get(i).getCartID());
                 item1.put("quantity", os_versions.get(i).getQuantity());
                 items.add(item1);
             }

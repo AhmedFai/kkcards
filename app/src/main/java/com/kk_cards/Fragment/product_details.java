@@ -100,9 +100,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.bottom)
     TextView btnBottomSheet;
 
-    LinearLayout lin1, lin2, lin3, mainLin,mainLin1;
+    LinearLayout lin1, lin2, lin3, mainLin, mainLin1;
 
-    TextView device, lense, both, simple, medium, high, piece1, piece2, piece3, money;
+    TextView device, lense, both, simple, medium, high, piece1, piece2, piece3, money, minus, plus, countText;
 
     ImageView cancel;
 
@@ -171,6 +171,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     int count = 0;
     private HashMap<String, ArrayList<String>> words;
     String product_id, image;
+    int cardId;
+    int quant = 1;
 
     //int catId ;
 
@@ -225,7 +227,10 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         lin1 = (LinearLayout) findViewById(R.id.lin1);
         lin2 = (LinearLayout) findViewById(R.id.lin2);
         lin3 = (LinearLayout) findViewById(R.id.lin3);
-        money = (TextView)findViewById(R.id.money);
+        money = (TextView) findViewById(R.id.money);
+        minus = (TextView) findViewById(R.id.minus);
+        countText = (TextView) findViewById(R.id.counting);
+        plus = (TextView) findViewById(R.id.plus);
         device = (TextView) findViewById(R.id.forDevice);
         device.setOnClickListener(this);
         lense = (TextView) findViewById(R.id.forLence);
@@ -233,7 +238,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         both = (TextView) findViewById(R.id.forBoth);
         both.setOnClickListener(this);
         mainLin = (LinearLayout) findViewById(R.id.mainLin);
-        mainLin1 = (LinearLayout)findViewById(R.id.mainLin1);
+        mainLin1 = (LinearLayout) findViewById(R.id.mainLin1);
         simple = (TextView) findViewById(R.id.simple);
         simple.setOnClickListener(this);
         medium = (TextView) findViewById(R.id.medium);
@@ -259,26 +264,67 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 
-
-
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-        Log.d("categoryIdCatWali",getIntent().getStringExtra("catId"));
+        Log.d("categoryIdCatWali", getIntent().getStringExtra("catId"));
 
 
+        if ("1".equals(getIntent().getStringExtra("catId"))) {
 
-
-        if ("1".equals(getIntent().getStringExtra("catId"))){
-
-            Log.d("main","main wala");
+            Log.d("main", "main wala");
             mainLin.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
 
             Log.d("duantity", "quantity wala");
             mainLin1.setVisibility(View.VISIBLE);
+            cardId = 50;
+
         }
 
+
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Integer.parseInt(countText.getText().toString()) <= 4) {
+
+                    int counter = Integer.parseInt(countText.getText().toString());
+
+                    counter = counter + 1;
+
+                    countText.setText(Integer.toString(counter));
+
+                    int grand_total_adpter = 0, total_without_del = 0;
+
+                    grand_total_adpter = Integer.parseInt(countText.getText().toString()) * Integer.parseInt(price_txt);
+
+                    money.setText("\u20B9" + grand_total_adpter);
+
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "You can only select maximum 5 items", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int counter = Integer.parseInt(countText.getText().toString());
+                if (counter == 1) {
+                    counter = 1;
+                } else {
+                    counter = counter - 1;
+                }
+                countText.setText(Integer.toString(counter));
+
+                int grand_total_adpter = 0, total_without_del = 0;
+
+                grand_total_adpter = Integer.parseInt(countText.getText().toString()) * Integer.parseInt(price_txt);
+
+                money.setText("\u20B9" + grand_total_adpter);
+            }
+        });
 
 
 /*
@@ -927,9 +973,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     Log.d("categoryId", feed.getCategoryID());
 
-                                    Log.d("CatID",objj.getString("categoryID"));
+                                    Log.d("CatID", objj.getString("categoryID"));
 
-                                   // Config.catId = feed.getCid();
+                                    // Config.catId = feed.getCid();
 
                                     //catId=Integer.parseInt(objj.getString("cid"));
 
@@ -1016,21 +1062,32 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     //feed.setSpecification(objj.getString("specification"));
                                     feed.setWarenty(objj.getString("warranty"));
 
-                                  //  amount.add(objj.getString("internationalWarranty"));
+                                    //  amount.add(objj.getString("internationalWarranty"));
 
                                     feed.setInternationalWarranty(objj.getString("otherPrices"));
 
                                     String am = feed.getInternationalWarranty();
 
-                                     amount = am.split(",");
+                                    amount = am.split(",");
 
-                                     if (amount[amount.length - 1].equals("0"))
-                                     {
-                                         cardType = "paper";
-                                     }
-                                     else {
-                                         cardType = "plastic";
-                                     }
+                                    if (amount[amount.length - 1].equals("0")) {
+                                        cardType = "paper";
+                                    } else {
+                                        cardType = "plastic";
+                                       /*  simple.setEnabled(false);
+                                         simple.setBackgroundResource(R.drawable.background_grey);
+                                         simple.setTextColor(Color.parseColor("#e2e2e2"));
+                                         medium.setEnabled(false);
+                                         medium.setBackgroundResource(R.drawable.background_grey);
+                                         medium.setTextColor(Color.parseColor("#e2e2e2"));*/
+
+                                        /* if (step.equals("high")){
+                                             simple.setBackgroundResource(R.drawable.background_grey);
+                                             simple.setTextColor(Color.parseColor("#e2e2e2"));
+                                             medium.setBackgroundResource(R.drawable.background_grey);
+                                             medium.setTextColor(Color.parseColor("#e2e2e2"));
+                                         }*/
+                                    }
 
                                     Log.d("amount", String.valueOf(amount.length));
 
@@ -1045,7 +1102,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     feed.setMrp(objj.getString("mrp"));
 
 
-
                                     feed.setProductImage(objj.getString("productImage"));
 
 
@@ -1056,7 +1112,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     price_txt = feed.getPrice();
 
-                                    money.setText(price_txt);
+                                    money.setText("\u20B9" + price_txt);
 
                                     price_cut_txt = feed.getMrp();
                                     // dicount_txt=objj.getString("discount");
@@ -1088,7 +1144,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     editor.putString("product_id", objj.getString("productID"));
                                     editor.putString("cat_id", objj.getString("categoryID"));
                                     editor.putString("mrp", objj.getString("mrp"));
-                                   // editor.putString("discount_value", objj.getString("discount"));
+                                    // editor.putString("discount_value", objj.getString("discount"));
                                     editor.putString("image", objj.getString("productImage"));
                                     editor.putString("quantity_value", "1");
                                     editor.putString("total_quantity", objj.getString("quantity"));
@@ -1243,9 +1299,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     public void add_cart() {
 
 
-        if (session.isLoggedIn() == true) {
+        if (session.isLoggedIn()) {
 
-            if (visibility_cart == false) {
+            if (!visibility_cart) {
 
 
                 JSONObject jo = new JSONObject();
@@ -1260,11 +1316,31 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         JSONObject item1 = new JSONObject();
                         item1.put("product_id", product_id);
-                        item1.put("quantity", count_txt.getText().toString());
+
+
+                        if ("1".equals(getIntent().getStringExtra("catId"))) {
+
+                            Log.d("Marked", "marked");
+                            item1.put("quantity", String.valueOf(quant));
+                            item1.put("cardId", cardId);
+
+                        } else {
+
+                            item1.put("quantity", countText.getText().toString());
+                            item1.put("cardId", 50);
+                            Log.d("poker", "poker");
+
+                        }
+
+
+                        item1.put("price", money.getText().toString());
                         items.add(item1);
                     }
 
                     jo.put("cart_data", new JSONArray(items));
+
+                    Log.d("jsonmaidata", new JSONArray(items).toString());
+
                     System.out.println(jo.toString());
                 } catch (Exception e) {
 
@@ -1302,7 +1378,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                             } else {
 
-                                Log.d("firstLog","firstwala");
+                                Log.d("firstLog", "firstwala");
                                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                                 i.putExtra("test", "");
                                 startActivity(i);
@@ -1336,7 +1412,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
 
-                Log.d("secondLog","Secondwala");
+                Log.d("secondLog", "Secondwala");
                 i.putExtra("test", "");
                 startActivity(i);
 
@@ -1373,7 +1449,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             /*   Intent i = new Intent(getApplicationContext(), add_to_cart.class);
                startActivity(i);*/
                 } else {
-                    Log.d("thirdLog","thirdwala");
+                    Log.d("thirdLog", "thirdwala");
                     Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                     i.putExtra("test", "");
                     startActivity(i);
@@ -1384,7 +1460,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 }
             } else {
 
-                Log.d("forthLog","forthwala");
+                Log.d("forthLog", "forthwala");
 
                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                 i.putExtra("test", "");
@@ -1425,6 +1501,16 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 lin3.setVisibility(View.GONE);
 
 
+                if (cardType.equals("plastic")) {
+                    simple.setEnabled(false);
+                    simple.setBackgroundResource(R.drawable.background_grey);
+                    simple.setTextColor(Color.parseColor("#e2e2e2"));
+                    medium.setEnabled(false);
+                    medium.setBackgroundResource(R.drawable.background_grey);
+                    medium.setTextColor(Color.parseColor("#e2e2e2"));
+                }
+
+
                 break;
             }
 
@@ -1451,7 +1537,11 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                 int b = Integer.parseInt(amount[12]);
 
-                money.setText(String.valueOf(b));
+                cardId = 12;
+
+                Log.d("amount ki position", String.valueOf(cardId));
+
+                money.setText("\u20B9" + String.valueOf(b));
 
 
                 device.setBackgroundResource(R.drawable.background);
@@ -1510,48 +1600,63 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 high.setTextColor(Color.parseColor("#ffffff"));
                 //lin2.setVisibility(View.GONE);
                 lin3.setVisibility(View.VISIBLE);
+
+
+                if (cardType.equals("plastic")) {
+                    simple.setEnabled(false);
+                    simple.setBackgroundResource(R.drawable.background_grey);
+                    simple.setTextColor(Color.parseColor("#e2e2e2"));
+                    medium.setEnabled(false);
+                    medium.setBackgroundResource(R.drawable.background_grey);
+                    medium.setTextColor(Color.parseColor("#e2e2e2"));
+                }
+
+
                 break;
 
             }
 
             case R.id.piece1: {
 
-                switch (step)
-                {
-                    case "lense":
-                    {
+                switch (step) {
+                    case "lense": {
 
-                       // int a = Integer.parseInt(price_txt);
+                        // int a = Integer.parseInt(price_txt);
                         int b = Integer.parseInt(amount[0]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 0;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "simple":
-                    {
+                    case "simple": {
 
                         int b = Integer.parseInt(amount[3]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 3;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "medium":
-                    {
+                    case "medium": {
 
                         int b = Integer.parseInt(amount[6]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 6;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "high":
-                    {
+                    case "high": {
 
                         int b = Integer.parseInt(amount[9]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 9;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
@@ -1572,49 +1677,49 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
             case R.id.piece6: {
 
-                switch (step)
-                {
-                    case "lense":
-                    {
+                switch (step) {
+                    case "lense": {
 
                         // int a = Integer.parseInt(price_txt);
                         int b = Integer.parseInt(amount[1]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 1;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "simple":
-                    {
+                    case "simple": {
 
                         int b = Integer.parseInt(amount[4]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 4;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "medium":
-                    {
+                    case "medium": {
 
                         int b = Integer.parseInt(amount[7]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 7;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "high":
-                    {
+                    case "high": {
 
                         int b = Integer.parseInt(amount[10]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 10;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
                 }
-
-
-
 
 
                 piece1.setBackgroundResource(R.drawable.background);
@@ -1631,48 +1736,49 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
             case R.id.piece12: {
 
-                switch (step)
-                {
-                    case "lense":
-                    {
+                switch (step) {
+                    case "lense": {
 
                         // int a = Integer.parseInt(price_txt);
                         int b = Integer.parseInt(amount[2]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 2;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "simple":
-                    {
+                    case "simple": {
 
                         int b = Integer.parseInt(amount[5]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 5;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "medium":
-                    {
+                    case "medium": {
 
                         int b = Integer.parseInt(amount[8]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 8;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
-                    case "high":
-                    {
+                    case "high": {
 
                         int b = Integer.parseInt(amount[11]);
 
-                        money.setText(String.valueOf(b));
+                        cardId = 11;
+
+                        money.setText("\u20B9" + String.valueOf(b));
 
                         break;
                     }
                 }
-
-
 
 
                 piece1.setBackgroundResource(R.drawable.background);

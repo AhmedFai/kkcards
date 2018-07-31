@@ -96,12 +96,12 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
         viewHolder.price_cut.setPaintFlags(viewHolder.price_cut.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
 
-        viewHolder.cat_name.setText(fp.getCat_name());
-        viewHolder.price_cut.setText(" \u20B9" + fp.getDiscount());
+        viewHolder.cat_name.setText(fp.getProductName());
+        viewHolder.price_cut.setText(" \u20B9" + fp.getMrp());
         viewHolder.price.setText(" \u20B9" + fp.getPrice());
-        viewHolder.code.setText("Code: " + fp.getProduct_id());
+        viewHolder.code.setText("Code: " + fp.getProductID());
        // viewHolder.discount.setText(fp.getDiscount() + "% off");
-        Picasso.with(mContext).load(fp.getCat_image()).into(viewHolder.image);
+        Picasso.with(mContext).load(fp.getProductImage()).into(viewHolder.image);
 
 
 //        Log.d("coden",fp.getProduct_id());
@@ -112,7 +112,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
 
 
-            Boolean result = db.insert_quantity(os_versions.get(position).getQuantity(), os_versions.get(position).getId());
+            Boolean result = db.insert_quantity(os_versions.get(position).getQuantity(), os_versions.get(position).getCartID());
 
             Log.d("result_dbb", String.valueOf(result));
 
@@ -169,7 +169,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 //                        SharedPreferences prefs = mContext.getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE);
 //                        counter2 = prefs.getString("Name"," ");
 //                        Toast.makeText(mContext,String.valueOf(counter2),Toast.LENGTH_SHORT).show();
-                            Boolean result = db.update_quantity(viewHolder.count_txt.getText().toString(), os_versions.get(position).getId());
+                            Boolean result = db.update_quantity(viewHolder.count_txt.getText().toString(), os_versions.get(position).getCartID());
                             Log.d("counttttt", viewHolder.count_txt.getText().toString());
                             Cursor c = db.getall_data1();
                             int grand_total_adpter = 0;
@@ -203,7 +203,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                             if ("check_out".equals(check_value) && "buy_now".equals(buy_type)) {
                                 int grand_total_adpter = 0, total_without_del = 0;
                                 total_without_del = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice());
-                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDel_charge());
+                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDeliveryCharge());
                                 check_out_activity.total_amt.setText("\u20B9" + grand_total_adpter);
                                 check_out_activity.tot_price_items.setText("\u20B9" + total_without_del);
                             } else {
@@ -293,7 +293,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                         editor.commit();
 
                         if (session.isLoggedIn() == false) {
-                            Boolean result = db.update_quantity(viewHolder.count_txt.getText().toString(), os_versions.get(position).getId());
+                            Boolean result = db.update_quantity(viewHolder.count_txt.getText().toString(), os_versions.get(position).getCartID());
                             //Log.d("resilt", "wwwwwww");
                             Cursor c = db.getall_data1();
 
@@ -339,13 +339,13 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                 int grand_total_adpter = 0, total_without_del = 0;
                                 total_without_del =Integer.parseInt(viewHolder.count_txt.getText().toString()) * Integer.parseInt(os_versions.get(position).getPrice());
 
-                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString())* Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDel_charge());
+                                grand_total_adpter = Integer.parseInt(viewHolder.count_txt.getText().toString())* Integer.parseInt(os_versions.get(position).getPrice()) + Integer.parseInt(os_versions.get(position).getDeliveryCharge());
                                 check_out_activity.total_amt.setText("\u20B9" + grand_total_adpter);
                                 check_out_activity.tot_price_items.setText("\u20B9" + total_without_del);
 
 
                             } else {
-                                Boolean result1 = db.update_server_table(viewHolder.count_txt.getText().toString(), os_versions.get(position).getId());
+                                Boolean result1 = db.update_server_table(viewHolder.count_txt.getText().toString(), os_versions.get(position).getCartID());
 
                                 Cursor c = db.getall_data_server();
 
@@ -462,7 +462,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
                                                     DatabaseHandler db = new DatabaseHandler(mContext);
 
-                                                    Cursor c=db.select_id_go_cart_log_out(os_versions.get(position).getProduct_id());
+                                                    Cursor c=db.select_id_go_cart_log_out(os_versions.get(position).getProductID());
 
                                                     if (c != null)
                                                         if (c.moveToFirst()) {
@@ -478,8 +478,8 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                                             while (c.moveToNext());
 
                                                         }
-                                                    Boolean check = db.delete_cart(os_versions.get(position).getId());
-                                                    product_details.add_to_cart.setText("ADD TO CART");
+                                                    Boolean check = db.delete_cart(os_versions.get(position).getCartID());
+                                                  //  product_details.add_to_cart.setText("ADD TO CART");
 
                                                     Log.d("delete", String.valueOf(check));
                                                     Intent i = new Intent(mContext, add_to_cart.class);
@@ -507,7 +507,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                                                 {
 
 
-                                                                    Cursor c=db.select_id_go_cart(os_versions.get(position).getProduct_id());
+                                                                    Cursor c=db.select_id_go_cart(os_versions.get(position).getProductID());
 
                                                                     if (c != null)
                                                                         if (c.moveToFirst()) {

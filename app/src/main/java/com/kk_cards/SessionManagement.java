@@ -59,7 +59,7 @@ public class SessionManagement {
         editor.putString(KEY_MOBILE, mobile);
 
         // commit changes
-        editor.commit();
+        editor.apply();
     }
 
     /**
