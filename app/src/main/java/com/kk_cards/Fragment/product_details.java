@@ -278,7 +278,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
             Log.d("duantity", "quantity wala");
             mainLin1.setVisibility(View.VISIBLE);
-            cardId = 50;
+            //cardId = 50;
 
         }
 
@@ -1299,9 +1299,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     public void add_cart() {
 
 
-        if (session.isLoggedIn()) {
+        if (session.isLoggedIn() == true) {
 
-            if (!visibility_cart) {
+            if (visibility_cart == false) {
 
 
                 JSONObject jo = new JSONObject();
@@ -1322,12 +1322,12 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                             Log.d("Marked", "marked");
                             item1.put("quantity", String.valueOf(quant));
-                            item1.put("cardId", cardId);
+                            item1.put("cardId", String.valueOf(cardId));
 
                         } else {
 
                             item1.put("quantity", countText.getText().toString());
-                            item1.put("cardId", 50);
+                            item1.put("cardId", String.valueOf(50));
                             Log.d("poker", "poker");
 
                         }
@@ -1344,10 +1344,15 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                     System.out.println(jo.toString());
                 } catch (Exception e) {
 
+                    e.printStackTrace();
+
 
                 }
 
+                Log.d("checkJO", String.valueOf(jo));
+
                 add_cart(String.valueOf(jo), new CallBack() {
+
                     @Override
                     public void onSuccess(String data) {
 
@@ -1356,7 +1361,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                             JSONObject obj = new JSONObject(data);
                             String success_val = obj.getString("success");
 
-                            if ("true".equals(success_val)) {
+                            if ("true".equals(true)) {
                                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                                 Boolean result = db.insert_for_go_to_cart(product_id);
 
@@ -1962,6 +1967,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("cart", cart_data);
                 params.put("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
+
 
                 return params;
             }
