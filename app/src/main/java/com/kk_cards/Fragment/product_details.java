@@ -1317,22 +1317,15 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                         JSONObject item1 = new JSONObject();
                         item1.put("product_id", product_id);
 
-
                         if ("1".equals(getIntent().getStringExtra("catId"))) {
-
                             Log.d("Marked", "marked");
                             item1.put("quantity", String.valueOf(quant));
                             item1.put("cardId", String.valueOf(cardId));
-
                         } else {
-
                             item1.put("quantity", countText.getText().toString());
                             item1.put("cardId", String.valueOf(50));
                             Log.d("poker", "poker");
-
                         }
-
-
                         item1.put("price", money.getText().toString());
                         items.add(item1);
                     }
@@ -1351,6 +1344,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                 Log.d("checkJO", String.valueOf(jo));
 
+                Log.d("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
+
                 add_cart(String.valueOf(jo), new CallBack() {
 
                     @Override
@@ -1361,7 +1356,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                             JSONObject obj = new JSONObject(data);
                             String success_val = obj.getString("success");
 
-                            if ("true".equals(true)) {
+                            if ("true".equals(success_val)) {
                                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                                 Boolean result = db.insert_for_go_to_cart(product_id);
 
