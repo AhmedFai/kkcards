@@ -234,6 +234,15 @@ public class ItemData {
     private String productImage;
     private String cartID;
     private String deliveryCharge;
+    private String cardID;
+
+    public String getCardID() {
+        return cardID;
+    }
+
+    public void setCardID(String cardID) {
+        this.cardID = cardID;
+    }
 
     public String getDeliveryCharge() {
         return deliveryCharge;

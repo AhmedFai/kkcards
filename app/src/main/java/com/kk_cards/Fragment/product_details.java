@@ -186,7 +186,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     String animals_list[];
     ArrayList<String> split_list;
     String id, quantity_val;
-    String price_txt, price_cut_txt, dicount_txt;
+    String price_txt, price_cut_txt, dicount_txt,cardkiID;
     ArrayList<String> path_list, fname_list;
     int quantity = 0;
 
@@ -298,7 +298,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                     grand_total_adpter = Integer.parseInt(countText.getText().toString()) * Integer.parseInt(price_txt);
 
-                    money.setText("\u20B9" + grand_total_adpter);
+                    money.setText( Integer.toString(grand_total_adpter));
 
 
                 } else {
@@ -322,7 +322,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                 grand_total_adpter = Integer.parseInt(countText.getText().toString()) * Integer.parseInt(price_txt);
 
-                money.setText("\u20B9" + grand_total_adpter);
+                money.setText(Integer.toString(grand_total_adpter));
             }
         });
 
@@ -1112,7 +1112,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     price_txt = feed.getPrice();
 
-                                    money.setText("\u20B9" + price_txt);
+                                    money.setText( price_txt);
 
                                     price_cut_txt = feed.getMrp();
                                     // dicount_txt=objj.getString("discount");
@@ -1298,6 +1298,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     @OnClick(R.id.add_cart)
     public void add_cart() {
 
+        sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
 
         if (session.isLoggedIn() == true) {
 
@@ -1320,10 +1322,10 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                         if ("1".equals(getIntent().getStringExtra("catId"))) {
                             Log.d("Marked", "marked");
                             item1.put("quantity", String.valueOf(quant));
-                            item1.put("cardId", String.valueOf(cardId));
+                            item1.put("cardID", String.valueOf(cardId));
                         } else {
                             item1.put("quantity", countText.getText().toString());
-                            item1.put("cardId", String.valueOf(50));
+                            item1.put("cardID", String.valueOf(50));
                             Log.d("poker", "poker");
                         }
                         item1.put("price", money.getText().toString());
@@ -1378,7 +1380,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                             } else {
 
-                                Log.d("firstLog", "firstwala");
+                                Log.d("checkLog", "firstwala");
                                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                                 i.putExtra("test", "");
                                 startActivity(i);
@@ -1412,7 +1414,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
 
-                Log.d("secondLog", "Secondwala");
+                Log.d("checkLog", "Secondwala");
                 i.putExtra("test", "");
                 startActivity(i);
 
@@ -1449,7 +1451,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             /*   Intent i = new Intent(getApplicationContext(), add_to_cart.class);
                startActivity(i);*/
                 } else {
-                    Log.d("thirdLog", "thirdwala");
+                    Log.d("checkLog", "thirdwala");
                     Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                     i.putExtra("test", "");
                     startActivity(i);
@@ -1460,7 +1462,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                 }
             } else {
 
-                Log.d("forthLog", "forthwala");
+                Log.d("checkLog", "forthwala");
 
                 Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
                 i.putExtra("test", "");
@@ -1541,7 +1543,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                 Log.d("amount ki position", String.valueOf(cardId));
 
-                money.setText("\u20B9" + String.valueOf(b));
+                money.setText(String.valueOf(b));
 
 
                 device.setBackgroundResource(R.drawable.background);
@@ -1626,7 +1628,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 0;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1636,7 +1638,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 3;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1646,7 +1648,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 6;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1656,7 +1658,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 9;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1685,7 +1687,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 1;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1695,7 +1697,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 4;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1705,7 +1707,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 7;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText( String.valueOf(b));
 
                         break;
                     }
@@ -1715,7 +1717,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 10;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText( String.valueOf(b));
 
                         break;
                     }
@@ -1744,7 +1746,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 2;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1754,7 +1756,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 5;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1764,7 +1766,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 8;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -1774,7 +1776,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                         cardId = 11;
 
-                        money.setText("\u20B9" + String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }

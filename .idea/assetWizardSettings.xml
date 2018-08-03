@@ -14,8 +14,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="cancel" />
-                            <entry key="sourceFile" value="C:\Users\user\Downloads\cancel.svg" />
+                            <entry key="height" value="18" />
+                            <entry key="outputName" value="rupee" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\user\Downloads\rupee-indian.svg" />
+                            <entry key="width" value="18" />
                           </map>
                         </option>
                       </PersistentState>

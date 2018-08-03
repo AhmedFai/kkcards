@@ -329,34 +329,34 @@ public class check_out_activity extends AppCompatActivity {
                                 JSONObject objj = product_list.getJSONObject(i);
 
 
-                                feed.setId(objj.getString("id"));
+                                feed.setCartID(objj.getString("cartID"));
 
-                                feed.setProduct_id(objj.getString("productID"));
+                                feed.setProductID(objj.getString("productID"));
                                 feed.setQuantity(objj.getString("quantity"));
                                 Log.d("quannnnnn_ddddd", feed.getQuantity());
 
 
-                                feed.setCat_name(objj.getString("pname"));
-                                feed.setCat_image(objj.getString("image"));
-                                feed.setDel_charge(objj.getString("dCharge"));
-                                feed.setTot_quantity(objj.getString("balance"));
+                                feed.setProductName(objj.getString("productName"));
+                                feed.setProductImage(objj.getString("image"));
+                                feed.setDeliveryCharge(objj.getString("deliveryCharge"));
+                                feed.setTot_quantity(objj.getString("productBalance"));
 
-                                total_del=total_del+Integer.parseInt(feed.getDel_charge());
+                                total_del=total_del+Integer.parseInt(feed.getDeliveryCharge());
 
 
 
-                                int discount = Integer.parseInt(objj.getString("discount"));
+                               // int discount = Integer.parseInt(objj.getString("discount"));
                                 int price = Integer.parseInt(objj.getString("price"));
 
 
                                // int price_cut = (100 - discount) * price / 100;
                                 feed.setPrice(objj.getString("price"));
                                // feed.setPrice_cut(String.valueOf(price_cut));
-                                feed.setDiscount(String.valueOf(discount));
+                               // feed.setDiscount(String.valueOf(discount));
 
                                 os_versions.add(feed);
 
-                                Boolean result=  db.insert_server(os_versions.get(i).getCat_name(),os_versions.get(i).getPrice(),os_versions.get(i).getPrice_cut(),os_versions.get(i).getQuantity(),os_versions.get(i).getDiscount(),os_versions.get(i).getId(),os_versions.get(i).getCat_image(),objj.getString("dCharge"));
+                                Boolean result=  db.insert_server(os_versions.get(i).getProductName(),os_versions.get(i).getPrice(),os_versions.get(i).getPrice_cut(),os_versions.get(i).getQuantity(),os_versions.get(i).getDiscount(),os_versions.get(i).getCartID(),os_versions.get(i).getProductImage(),objj.getString("deliveryCharge"));
                                 Log.d("fffffff", String.valueOf(result));
 
                                 total_price_items = total_price_items + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
@@ -369,7 +369,7 @@ public class check_out_activity extends AppCompatActivity {
 
 
 
-                                grand_total=grand_total+Integer.valueOf(objj.getString("dCharge"));
+                                grand_total=grand_total+Integer.valueOf(objj.getString("deliveryCharge"));
 
                                 SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                 editor.putInt("total_price",grand_total);
@@ -579,7 +579,7 @@ public class check_out_activity extends AppCompatActivity {
             for(int i=0;i<os_versions.size();i++) {
 
                 JSONObject item1 = new JSONObject();
-                item1.put("tempid", os_versions.get(i).getId());
+                item1.put("tempid", os_versions.get(i).getCartID());
                 item1.put("quantity",os_versions.get(i).getQuantity());
                 items.add(item1);
             }

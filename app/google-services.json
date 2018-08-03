@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "555334062378",
+    "firebase_url": "https://kkcards-ebede.firebaseio.com",
+    "project_id": "kkcards-ebede",
+    "storage_bucket": "kkcards-ebede.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555334062378:android:5250c7e9440da190",
+        "android_client_info": {
+          "package_name": "com.kk_cards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555334062378-ot1vlpv9gd2758elnpsvt0bn1un11705.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcouwUPptfT-JITvXno4r-J2QeVPtAnZw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

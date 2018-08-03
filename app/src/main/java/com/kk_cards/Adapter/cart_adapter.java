@@ -93,20 +93,67 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
         fp = os_versions.get(position);
 
 
-        viewHolder.price_cut.setPaintFlags(viewHolder.price_cut.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+       // viewHolder.price_cut.setPaintFlags(viewHolder.price_cut.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
 
         viewHolder.cat_name.setText(fp.getProductName());
-        viewHolder.price_cut.setText(" \u20B9" + fp.getMrp());
+       // viewHolder.price_cut.setText(" \u20B9" + fp.getMrp());
+        viewHolder.tot.setText(fp.getCardID());
         viewHolder.price.setText(" \u20B9" + fp.getPrice());
         viewHolder.code.setText("Code: " + fp.getProductID());
        // viewHolder.discount.setText(fp.getDiscount() + "% off");
         Picasso.with(mContext).load(fp.getProductImage()).into(viewHolder.image);
 
 
+        switch (fp.getCardID()){
+            case "0":
+                viewHolder.tot.setText("Lense > 1 piece");
+                break;
+            case "1":
+                viewHolder.tot.setText("Lense > 6 piece");
+                break;
+            case "2":
+                viewHolder.tot.setText("lense > 1 pack");
+                break;
+            case "3":
+                viewHolder.tot.setText("Device > simple > 1 piece");
+                break;
+            case "4":
+                viewHolder.tot.setText("Device > simple > 6 piece");
+                break;
+            case "5":
+                viewHolder.tot.setText("Device > simple > 1 pack");
+                break;
+            case "6":
+                viewHolder.tot.setText("Device > 4G > 1 piece");
+                break;
+            case "7":
+                viewHolder.tot.setText("Device > 4G > 6 piece");
+                break;
+            case "8":
+                viewHolder.tot.setText("Device > 4G > 1 pack");
+                break;
+            case "9":
+                viewHolder.tot.setText("Device > 10G > 1 piece");
+                break;
+            case "10":
+                viewHolder.tot.setText("Device > 10G > 6 piece");
+                break;
+            case "11":
+                viewHolder.tot.setText("Device > 10G > 1 pack");
+                break;
+            case "12":
+                viewHolder.tot.setText("For Both > 1 Box");
+                break;
+            case "50":
+                viewHolder.tot.setText("Quantity : " + fp.getQuantity());
+                break;
+        }
+
+
 //        Log.d("coden",fp.getProduct_id());
 
-        viewHolder.count_txt.setText(os_versions.get(position).getQuantity());
+     //   viewHolder.count_txt.setText(os_versions.get(position).getQuantity());
 
         if("cart".equals(check_value)) {
 
@@ -136,6 +183,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
       //  final int update_id = Integer.parseInt(os_versions.get(position).getId());
 //        final int[] counter = new int[1];
+/*
         viewHolder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -237,7 +285,8 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                             }}
                         }
                     else
-                    {  /*AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
+                    {  */
+/*AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
                         builder1.setMessage("Only "+os_versions.get(position).getTot_quantity()+ " left in Stock");
                         builder1.setCancelable(true);
                         builder1.setNegativeButton(
@@ -249,7 +298,8 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                 });
 
                         AlertDialog alert11 = builder1.create();
-                        alert11.show();*/
+                        alert11.show();*//*
+
 
                         Toast.makeText(mContext, "You can only select maximum 10 items", Toast.LENGTH_SHORT).show();
                     }
@@ -257,6 +307,8 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
              //   notifyDataSetChanged();
             }
         });
+*/
+/*
         viewHolder.subtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -269,10 +321,12 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
                         //testing
 
-                       /* int numquantity=Integer.parseInt(os_versions.get(position).getTot_quantity());
+                       */
+/* int numquantity=Integer.parseInt(os_versions.get(position).getTot_quantity());
                         Log.d("quantitty",String.valueOf(numquantity));
                         Toast.makeText(mContext," "+String.valueOf(numquantity),Toast.LENGTH_SHORT).show();
-*/
+*//*
+
 
                         //testing
 
@@ -400,6 +454,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
                     }}
             });
+*/
 
 
 
@@ -494,7 +549,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                                 else
                                                 {
 
-                                                    delete_cart_item(os_versions.get(position).getId(),new CallBack() {
+                                                    delete_cart_item(os_versions.get(position).getCartID(),new CallBack() {
                                                         @Override
                                                         public void onSuccess(String data) {
 
@@ -523,7 +578,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                                                             while (c.moveToNext());
 
                                                                         }
-                                                                    product_details.add_to_cart.setText("ADD TO CART");
+                                                                   // product_details.add_to_cart.setText("ADD TO CART");
 
                                                                                //
                                                                     Intent i = new Intent(mContext, add_to_cart.class);
@@ -609,8 +664,10 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
         @BindView(R.id.text1)
         TextView cat_name;
-        @BindView(R.id.price2)
-        TextView price_cut;
+        @BindView(R.id.tot)
+        TextView tot;
+        /*@BindView(R.id.price2)
+        TextView price_cut;*/
         @BindView(R.id.price1)
         TextView price;
         @BindView(R.id.code)
@@ -619,12 +676,12 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
         TextView discount;*/
         @BindView(R.id.image1)
         ImageView image;
-        @BindView(R.id.subtract)
-        TextView subtract;
-        @BindView(R.id.count)
-        TextView count_txt;
-        @BindView(R.id.add)
-        TextView add;
+       /* @BindView(R.id.subtract)
+        TextView subtract;*/
+        /*@BindView(R.id.count)
+        TextView count_txt;*/
+        /*@BindView(R.id.add)
+        TextView add;*/
         @BindView(R.id.remove)
         TextView remove;
 

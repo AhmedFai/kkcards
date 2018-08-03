@@ -1,15 +1,20 @@
 package com.kk_cards;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +24,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +32,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.kk_cards.Database.DatabaseHandler;
 import com.kk_cards.Fragment.Home;
 import com.kk_cards.Fragment.add_to_cart;
@@ -48,6 +55,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import butterknife.ButterKnife;
 
@@ -63,12 +71,13 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     ArrayList<String> id_list, image_list, name_list, count_list;
     SessionManagement session;
-    public  TextView cartcounterTV;
+    public TextView cartcounterTV;
     private String MY_PREFS_NAME;
     int MODE_PRIVATE;
     CallBack mResultCallback = null;
     Cart_Counter_class mVolleyService;
     String cart_counter_real;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,14 +106,14 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         getdata();
 
-        Boolean result_val=session.isLoggedIn();
+        Boolean result_val = session.isLoggedIn();
         View header = navigationView.getHeaderView(0);
 
         TextView text1 = (TextView) header.findViewById(R.id.text2);
         ImageView image = (ImageView) header.findViewById(R.id.imageView);
-        TextView text =(TextView) header.findViewById(R.id.text1);;
-        if(result_val==true)
-        {
+        TextView text = (TextView) header.findViewById(R.id.text1);
+        ;
+        if (result_val == true) {
 
 
             HashMap<String, String> user = session.getUserDetails();
@@ -118,12 +127,7 @@ public class MainActivity extends AppCompatActivity
             image.setImageResource(R.drawable.dummy_profile);
 
 
-
-
-        }
-
-        else
-        {
+        } else {
             Menu menu = navigationView.getMenu();
 
             // find MenuItem you want to change
@@ -136,26 +140,34 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                if (session.isLoggedIn()==false)
-                {
-                    Intent i =new Intent(getApplicationContext(),LoginActivity.class);
+                if (session.isLoggedIn() == false) {
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
                     finish();
-                }}
+                }
+            }
         });
-
-
 
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView, new Home()).commit();
+
+
+        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        Log.d("deviceToken", android_id);
+
+
+
+       // Log.d("deviceTokenTelephone", deviceId);
+
 
         // onTrimMemory(ComponentCallbacks2.TRIM_MEMORY_BACKGROUND);
 
@@ -675,6 +687,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume(){
         super.onResume();
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        Log.d("firebase", refreshedToken.toString());
 
         VersionHelper.refreshActionBarMenu(this);
         // put your code here...

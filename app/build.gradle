@@ -42,5 +42,9 @@ dependencies {
     implementation 'swarajsaaj:otpreader:1.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.7.0'
     implementation 'com.github.tcking:giraffeplayer2:0.1.19-full'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
 
 }
+
+apply plugin: 'com.google.gms.google-services'

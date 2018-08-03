@@ -447,6 +447,7 @@ public class add_to_cart extends AppCompatActivity {
 
                                 feed.setProductID(objj.getString("productID"));
                                 feed.setQuantity(objj.getString("quantity"));
+                                feed.setCardID(objj.getString("cardID"));
                                 feed.setProductName(objj.getString("productName"));
                                 feed.setProductImage(objj.getString("image"));
                                 feed.setDeliveryCharge(objj.getString("deliveryCharge"));

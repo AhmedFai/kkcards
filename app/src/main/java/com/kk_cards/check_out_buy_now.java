@@ -137,26 +137,26 @@ public class check_out_buy_now extends AppCompatActivity {
 
             ItemData feed = new ItemData();
 
-            feed.setProduct_id(prefs.getString("product_id", null));
+            feed.setProductID(prefs.getString("product_id", null));
 
-            feed.setId(prefs.getString("product_id", null));
+            feed.setCartID(prefs.getString("product_id", null));
 
             feed.setQuantity(prefs.getString("quantity_value", null));
         feed.setTot_quantity(prefs.getString("total_quantity", null));
 
-            feed.setCat_name(prefs.getString("name_product", null));
-            feed.setCat_image(prefs.getString("image", null));
+            feed.setProductName(prefs.getString("name_product", null));
+            feed.setProductImage(prefs.getString("image", null));
 
-            int discount = Integer.parseInt(prefs.getString("discount_value", null));
+          //  int discount = Integer.parseInt(prefs.getString("discount_value", null));
             int price = Integer.parseInt(prefs.getString("price_value_product", null));
 
 
            // int price_cut = (100 - discount) * price / 100;
             feed.setPrice(prefs.getString("price_value_product", null));
            // feed.setPrice_cut(String.valueOf(price_cut));
-            feed.setDiscount(String.valueOf(discount));
+           // feed.setDiscount(String.valueOf(discount));
 
-            feed.setDel_charge(prefs.getString("delivery_price", null));
+            feed.setDeliveryCharge(prefs.getString("delivery_price", null));
 
             os_versions.add(feed);
 
