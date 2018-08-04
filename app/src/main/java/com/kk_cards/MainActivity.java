@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -158,20 +159,66 @@ public class MainActivity extends AppCompatActivity
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView, new Home()).commit();
 
-
-        String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-
-        Log.d("deviceToken", android_id);
-
-
-
-       // Log.d("deviceTokenTelephone", deviceId);
-
-
-        // onTrimMemory(ComponentCallbacks2.TRIM_MEMORY_BACKGROUND);
+        displayFirebaseRegId();
 
     }
+
+    private void displayFirebaseRegId() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+        send_token(regId);
+
+    /*    if (!TextUtils.isEmpty(regId))
+        //  Log.d("issssssssss",regId);
+
+        else
+          //  Log.d("issssssssss","not generated");*/
+
+    }
+
+
+    private void send_token(final String token){
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.kkcardsdelhi.com/admin/API/deviceTokenApi.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("tokkkkkkkkk",response);
+
+                        //  callback.onSuccessResponse(response);
+                      /*  SharedPreferences.Editor editor =getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putString("hello",response);
+                        editor.commit();
+*/
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //  Toast.makeText(getActivity(), "Please check your network connection and try again", Toast.LENGTH_SHORT).show();
+
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
+                params.put("deviceToken",token);
+
+
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -180,7 +227,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.home:
-                    Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);
                     return true;
                 case R.id.category:
@@ -200,20 +247,16 @@ public class MainActivity extends AppCompatActivity
                     return true;
 
                 case R.id.my_account:
-                    Boolean value=session.isLoggedIn();
+                    Boolean value = session.isLoggedIn();
                     Log.d("dddd", String.valueOf(value));
 
-                    if(value==true)
-                    {
+                    if (value == true) {
                         my_account grid = new my_account();
                         mFragmentManager = getSupportFragmentManager();
                         mFragmentTransaction = mFragmentManager.beginTransaction();
                         mFragmentTransaction.replace(R.id.containerView, grid).addToBackStack(null).commit();
 
-                    }
-
-                    else
-                    {
+                    } else {
                         session.checkLogin();
 
                     }
@@ -232,39 +275,35 @@ public class MainActivity extends AppCompatActivity
         ImageView cart_icon = (ImageView) menu_item_cart.findViewById(R.id.carticon);
 
 
-
         cart_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),add_to_cart.class);
-                i.putExtra("test","");
+                Intent i = new Intent(getApplicationContext(), add_to_cart.class);
+                i.putExtra("test", "");
                 startActivity(i);
-
 
 
             }
         });
-        if(session.isLoggedIn()==true) {
+        if (session.isLoggedIn() == true) {
             cart_counter(new CallBack() {
                 @Override
                 public void onSuccess(String data) {
 
 
                     try {
-                        JSONObject obj=new JSONObject(data);
-                        cart_counter_real=obj.getString("count");
+                        JSONObject obj = new JSONObject(data);
+                        cart_counter_real = obj.getString("count");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
 
-
-                    if(session.isLoggedIn()==true) {
+                    if (session.isLoggedIn() == true) {
                         if (!"0".equals(cart_counter_real)) {
                             cartcounterTV.setVisibility(View.VISIBLE);
                             cartcounterTV.setText(cart_counter_real);
-                        }
-                        else
+                        } else
                             cartcounterTV.setVisibility(View.GONE);
 
                     }
@@ -279,29 +318,20 @@ public class MainActivity extends AppCompatActivity
                 }
             });
 
-        }
+        } else {
+            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
-
-
-        else
-        {
-            DatabaseHandler db=new DatabaseHandler(getApplicationContext());
-
-            String cart_value= String.valueOf(db.count_rows());
-
+            String cart_value = String.valueOf(db.count_rows());
 
 
             if (!"0".equals(cart_value)) {
                 cartcounterTV.setVisibility(View.VISIBLE);
                 cartcounterTV.setText(cart_value);
-            }
-            else
+            } else
                 cartcounterTV.setVisibility(View.GONE);
 
 
-
         }
-
 
 
         return true;
@@ -316,19 +346,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cart) {
-            Intent i=new Intent(getApplicationContext(),add_to_cart.class);
-            i.putExtra("test","");
+            Intent i = new Intent(getApplicationContext(), add_to_cart.class);
+            i.putExtra("test", "");
             startActivity(i);
 
 
-        }
-
-        else if(item.getItemId()==R.id.action_search){
-            Intent i = new Intent(this,search_activity.class);
+        } else if (item.getItemId() == R.id.action_search) {
+            Intent i = new Intent(this, search_activity.class);
             startActivity(i);
             return true;
         }
-
 
 
         return super.onOptionsItemSelected(item);
@@ -351,60 +378,46 @@ public class MainActivity extends AppCompatActivity
 
         if (item.getItemId() == R.id.my_account) {
 
-            Boolean value=session.isLoggedIn();
+            Boolean value = session.isLoggedIn();
             Log.d("dddd", String.valueOf(value));
 
-            if(value==true)
-            {
+            if (value == true) {
                 my_account grid = new my_account();
                 mFragmentManager = getSupportFragmentManager();
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 mFragmentTransaction.replace(R.id.containerView, grid).commit();
 
-            }
-
-            else
-            {
+            } else {
                 session.checkLogin();
 
             }
 
-        }
-        else if (item.getItemId() == R.id.my_orders) {
+        } else if (item.getItemId() == R.id.my_orders) {
 
-            Boolean value=session.isLoggedIn();
+            Boolean value = session.isLoggedIn();
             Log.d("dddd", String.valueOf(value));
 
-            if(value==true)
-            {
+            if (value == true) {
                 my_orders grid = new my_orders();
                 mFragmentManager = getSupportFragmentManager();
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 mFragmentTransaction.replace(R.id.containerView, grid).addToBackStack(null).commit();
 
-            }
-
-            else
-            {
-                Intent i=new Intent(MainActivity.this,LoginActivity.class);
+            } else {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
 
             }
 
-        }
-
-        else   if (item.getItemId() == R.id.my_cart) {
+        } else if (item.getItemId() == R.id.my_cart) {
 
 
-            Intent i=new Intent(getApplicationContext(),add_to_cart.class);
-            i.putExtra("test","");
+            Intent i = new Intent(getApplicationContext(), add_to_cart.class);
+            i.putExtra("test", "");
             startActivity(i);
 
 
-        }
-
-
-        else   if (item.getItemId() == R.id.share) {
+        } else if (item.getItemId() == R.id.share) {
 
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
@@ -414,8 +427,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(sendIntent);
 
 
-        }
-        else   if (item.getItemId() == R.id.rate) {
+        } else if (item.getItemId() == R.id.rate) {
 
             Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
@@ -425,28 +437,22 @@ public class MainActivity extends AppCompatActivity
                     Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             try {
-               startActivity(goToMarket);
+                startActivity(goToMarket);
             } catch (ActivityNotFoundException e) {
-               startActivity(new Intent(Intent.ACTION_VIEW,
+                startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
             }
 
 
-        }
+        } else if (item.getItemId() == R.id.home) {
 
 
-        else if(item.getItemId() == R.id.home)
-        {
-
-
-            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
 
-        }
-        else if(item.getItemId() == R.id.log_out)
-        {
+        } else if (item.getItemId() == R.id.log_out) {
 
-            if (session.isLoggedIn()==true) {
+            if (session.isLoggedIn() == true) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 alertDialogBuilder.setMessage("Are you sure you want to logout of this app?");
                 alertDialogBuilder.setPositiveButton("NO",
@@ -488,54 +494,38 @@ public class MainActivity extends AppCompatActivity
 
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
-            }
-
-            else
-            {
+            } else {
 
 
-                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);
 
                 //  Toast.makeText(this, "Please Login", Toast.LENGTH_SHORT).show();
             }
 
 
-
-        }
-
-        else if(item.getItemId() == R.id.category)
-        {
+        } else if (item.getItemId() == R.id.category) {
 
 
-
-        }
-
-        else if("0".equals(count_list.get(currentPosition-8))) {
+        } else if ("0".equals(count_list.get(currentPosition - 8))) {
 
             // Toast.makeText(context,"Hey.... Categories",Toast.LENGTH_LONG).show();
-            Intent i=new Intent(getApplicationContext(),product_list.class);
-            i.putExtra("id_value", id_list.get(currentPosition-8));
+            Intent i = new Intent(getApplicationContext(), product_list.class);
+            i.putExtra("id_value", id_list.get(currentPosition - 8));
             i.putExtra("sub_cat_val", "0");
-            i.putExtra("sub_cat_name",name_list.get(currentPosition-8));
+            i.putExtra("sub_cat_name", name_list.get(currentPosition - 8));
             startActivity(i);
-        }
+        } else {
 
-
-
-        else
-        {
-
-            Log.d("ffffffffff","hhhh");
+            Log.d("ffffffffff", "hhhh");
 
             sub_cat_list grid = new sub_cat_list();
             Bundle bg = new Bundle();
-            bg.putString("id_value", id_list.get(currentPosition-8));
+            bg.putString("id_value", id_list.get(currentPosition - 8));
             grid.setArguments(bg);
             mFragmentManager = getSupportFragmentManager();
             mFragmentTransaction = mFragmentManager.beginTransaction();
             mFragmentTransaction.replace(R.id.containerView, grid).addToBackStack(null).commit();
-
 
 
         }
@@ -550,7 +540,7 @@ public class MainActivity extends AppCompatActivity
     public void getdata() {
 
         // Request a string response
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.Base_Url+"/API/categoryBannerApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.Base_Url + "/API/categoryBannerApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -584,7 +574,6 @@ public class MainActivity extends AppCompatActivity
                             //    Group gp=navigationView.
 
                             final Menu menu = navigationView.getMenu();
-
 
 
                             for (int i = 0; i < id_list.size(); i++) {
@@ -640,13 +629,13 @@ public class MainActivity extends AppCompatActivity
     protected void cart_counter(final CallBack mResultCallback) {
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url+"/API/cartCounterApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/cartCounterApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         mResultCallback.onSuccess(response);
 
-                        Log.d("sssssssssss",response);
+                        Log.d("sssssssssss", response);
 
 
                         //  callback.onSuccessResponse(response);
@@ -676,30 +665,21 @@ public class MainActivity extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
-    static class VersionHelper
-    {
-        static void refreshActionBarMenu(Activity activity)
-        {
+
+    static class VersionHelper {
+        static void refreshActionBarMenu(Activity activity) {
             activity.invalidateOptionsMenu();
         }
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-
-        Log.d("firebase", refreshedToken.toString());
 
         VersionHelper.refreshActionBarMenu(this);
         // put your code here...
 
     }
-
-
-
-
 
 
 }

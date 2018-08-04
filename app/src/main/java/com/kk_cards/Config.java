@@ -13,4 +13,8 @@ public final class Config {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyAe-zaKObYXNUHqzkJ8xQdOtbxFBe6v3FE";
 
+    public static final String REGISTRATION_COMPLETE = "registrationComplete";
+
+    public static final String SHARED_PREF = "notifications";
+
 }
