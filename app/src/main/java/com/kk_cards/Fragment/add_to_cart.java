@@ -491,6 +491,7 @@ public class add_to_cart extends AppCompatActivity {
                                 grand_total = grand_total + Integer.valueOf(objj.getString("deliveryCharge"));
 
                                 SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                editor.putString("cardKiId", objj.getString("cardID"));
                                 editor.putInt("total_price", grand_total);
                                 editor.putInt("total_price_with_del", total_price_items);
                                 editor.putString("check_value", "");
@@ -678,7 +679,7 @@ public class add_to_cart extends AppCompatActivity {
 
                     ItemData feed = new ItemData();
 
-                    feed.setId(c.getString(c.getColumnIndex("product_id")));
+                    feed.setProductID(c.getString(c.getColumnIndex("product_id")));
                     feed.setQuantity(c.getString(c.getColumnIndex("quantity")));
 
 

@@ -98,7 +98,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
         viewHolder.cat_name.setText(fp.getProductName());
        // viewHolder.price_cut.setText(" \u20B9" + fp.getMrp());
-        viewHolder.tot.setText(fp.getCardID());
+       // viewHolder.tot.setText(fp.getCardID());
         viewHolder.price.setText(" \u20B9" + fp.getPrice());
         viewHolder.code.setText("Code: " + fp.getProductID());
        // viewHolder.discount.setText(fp.getDiscount() + "% off");
@@ -571,7 +571,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
                                                                               Boolean resultt=  db.delete_for_go_cart(c.getInt(c.getColumnIndex("id")));
 
-                                                                           //   Log.d("fjigo", String.valueOf(resultt));
+                                                                              Log.d("fjigo", String.valueOf(resultt));
 
 
                                                                             }
@@ -592,7 +592,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                                                                 else
                                                                 {
 
-                                                                    Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(mContext, "Something ", Toast.LENGTH_SHORT).show();
 
 
                                                                 }

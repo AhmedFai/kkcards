@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -55,6 +56,7 @@ import com.kk_cards.Modal.ItemData;
 import com.kk_cards.NonScrollListView;
 import com.kk_cards.R;
 import com.kk_cards.SessionManagement;
+import com.kk_cards.bott_fragment;
 import com.kk_cards.check_out_buy_now;
 import com.kk_cards.search_activity;
 import com.kk_cards.youtube_video;
@@ -100,13 +102,11 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.bottom)
     TextView btnBottomSheet;
 
-    LinearLayout lin1, lin2, lin3, mainLin, mainLin1;
 
-    TextView device, lense, both, simple, medium, high, piece1, piece2, piece3, money, minus, plus, countText;
 
     ImageView cancel;
 
-    @BindView(R.id.bottom_sheet)
+    @BindView(R.id.bott)
     LinearLayout layoutBottomSheet;
 
     BottomSheetBehavior sheetBehavior;
@@ -174,7 +174,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     int cardId;
     int quant = 1;
 
-    //int catId ;
+    int catId ;
 
     SessionManagement session;
 
@@ -191,6 +191,8 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     int quantity = 0;
 
     String amount[];
+
+   public String countText, money;
 
     Boolean visibility_cart = false;
     int cartquantity;
@@ -224,33 +226,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         add_to_cart = (Button) findViewById(R.id.add_cart);
         // cancel = (ImageView)findViewById(R.id.cancel);
 
-        lin1 = (LinearLayout) findViewById(R.id.lin1);
-        lin2 = (LinearLayout) findViewById(R.id.lin2);
-        lin3 = (LinearLayout) findViewById(R.id.lin3);
-        money = (TextView) findViewById(R.id.money);
-        minus = (TextView) findViewById(R.id.minus);
-        countText = (TextView) findViewById(R.id.counting);
-        plus = (TextView) findViewById(R.id.plus);
-        device = (TextView) findViewById(R.id.forDevice);
-        device.setOnClickListener(this);
-        lense = (TextView) findViewById(R.id.forLence);
-        lense.setOnClickListener(this);
-        both = (TextView) findViewById(R.id.forBoth);
-        both.setOnClickListener(this);
-        mainLin = (LinearLayout) findViewById(R.id.mainLin);
-        mainLin1 = (LinearLayout) findViewById(R.id.mainLin1);
-        simple = (TextView) findViewById(R.id.simple);
-        simple.setOnClickListener(this);
-        medium = (TextView) findViewById(R.id.medium);
-        medium.setOnClickListener(this);
-        high = (TextView) findViewById(R.id.high);
-        high.setOnClickListener(this);
-        piece1 = (TextView) findViewById(R.id.piece1);
-        piece1.setOnClickListener(this);
-        piece2 = (TextView) findViewById(R.id.piece6);
-        piece2.setOnClickListener(this);
-        piece3 = (TextView) findViewById(R.id.piece12);
-        piece3.setOnClickListener(this);
+
         session = new SessionManagement(getApplicationContext());
 
 
@@ -266,65 +242,12 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-        Log.d("categoryIdCatWali", getIntent().getStringExtra("catId"));
+       // Log.d("categoryIdCatWali", getIntent().getStringExtra("catId"));
 
 
-        if ("1".equals(getIntent().getStringExtra("catId"))) {
-
-            Log.d("main", "main wala");
-            mainLin.setVisibility(View.VISIBLE);
-
-        } else {
-
-            Log.d("duantity", "quantity wala");
-            mainLin1.setVisibility(View.VISIBLE);
-            //cardId = 50;
-
-        }
 
 
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Integer.parseInt(countText.getText().toString()) <= 4) {
 
-                    int counter = Integer.parseInt(countText.getText().toString());
-
-                    counter = counter + 1;
-
-                    countText.setText(Integer.toString(counter));
-
-                    int grand_total_adpter = 0, total_without_del = 0;
-
-                    grand_total_adpter = Integer.parseInt(countText.getText().toString()) * Integer.parseInt(price_txt);
-
-                    money.setText( Integer.toString(grand_total_adpter));
-
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "You can only select maximum 5 items", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int counter = Integer.parseInt(countText.getText().toString());
-                if (counter == 1) {
-                    counter = 1;
-                } else {
-                    counter = counter - 1;
-                }
-                countText.setText(Integer.toString(counter));
-
-                int grand_total_adpter = 0, total_without_del = 0;
-
-                grand_total_adpter = Integer.parseInt(countText.getText().toString()) * Integer.parseInt(price_txt);
-
-                money.setText(Integer.toString(grand_total_adpter));
-            }
-        });
 
 
 /*
@@ -673,6 +596,31 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     public void toggleBottomSheet() {
         if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
             sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+            while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStackImmediate();
+            }
+
+            bott_fragment frag1 = new bott_fragment();
+            frag1.updateArray(amount);
+            Bundle b = new Bundle();
+            b.putString("catid" , String.valueOf(catId));
+            b.putString("priceTxt",price_txt);
+            b.putString("product",product_id);
+            b.putString("cardType",cardType);
+            b.putString("name", name.getText().toString());
+            b.putString("price_cut_txt", price_cut_txt);
+            b.putString("dicount_txt",dicount_txt);
+            b.putString("image", image);
+            b.putString("quantity",String.valueOf(quantity));
+            frag1.setArguments(b);
+            ft.replace(R.id.bott, frag1);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+            ft.commit();
+
+
             // btnBottomSheet.setText("Close sheet");
         } else {
             sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -982,6 +930,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     feed.setQuantity(objj.getString("quantity"));
 
                                     quantity = Integer.parseInt(feed.getQuantity());
+                                    catId = Integer.parseInt(feed.getCategoryID());
 
                                     feed.setFeature(objj.getString("feature"));
 
@@ -1005,7 +954,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                                     if (c.getString(c.getColumnIndex("product_id")).equals(feed.getProductID())) {
 
-                                                        add_to_cart.setText("GO TO CART");
+                                                        //add_to_cart.setText("GO TO CART");
 
                                                         visibility_cart = true;
 
@@ -1112,7 +1061,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     price_txt = feed.getPrice();
 
-                                    money.setText( price_txt);
+
 
                                     price_cut_txt = feed.getMrp();
                                     // dicount_txt=objj.getString("discount");
@@ -1295,185 +1244,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    @OnClick(R.id.add_cart)
-    public void add_cart() {
-
-        sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-
-
-        if (session.isLoggedIn() == true) {
-
-            if (visibility_cart == false) {
-
-
-                JSONObject jo = new JSONObject();
-
-
-                try {
-
-                    Collection<JSONObject> items = new ArrayList<JSONObject>();
-
-
-                    for (int i = 0; i < 1; i++) {
-
-                        JSONObject item1 = new JSONObject();
-                        item1.put("product_id", product_id);
-
-                        if ("1".equals(getIntent().getStringExtra("catId"))) {
-                            Log.d("Marked", "marked");
-                            item1.put("quantity", String.valueOf(quant));
-                            item1.put("cardID", String.valueOf(cardId));
-                        } else {
-                            item1.put("quantity", countText.getText().toString());
-                            item1.put("cardID", String.valueOf(50));
-                            Log.d("poker", "poker");
-                        }
-                        item1.put("price", money.getText().toString());
-                        items.add(item1);
-                    }
-
-                    jo.put("cart_data", new JSONArray(items));
-
-                    Log.d("jsonmaidata", new JSONArray(items).toString());
-
-                    System.out.println(jo.toString());
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-
-
-                }
-
-                Log.d("checkJO", String.valueOf(jo));
-
-                Log.d("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
-
-                add_cart(String.valueOf(jo), new CallBack() {
-
-                    @Override
-                    public void onSuccess(String data) {
-
-                        Log.d("loginnnnninnnter", data);
-                        try {
-                            JSONObject obj = new JSONObject(data);
-                            String success_val = obj.getString("success");
-
-                            if ("true".equals(success_val)) {
-                                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                                Boolean result = db.insert_for_go_to_cart(product_id);
-
-                                //   Log.d("hjffhui", String.valueOf(result));
-
-                                Toast.makeText(product_details.this, " added in cart", Toast.LENGTH_SHORT).show();
-                                add_to_cart.setText("GO TO CART");
-
-
-                                onResume();
-
-                                AppRater.showRateDialog(product_details.this);
-
-
-                                // AppRater.app_launched(product_details.this);
-
-                      /*   Intent i=new Intent(getApplicationContext(), com.active_india.Fragment.add_to_cart.class);
-                         startActivity(i);*/
-
-                            } else {
-
-                                Log.d("checkLog", "firstwala");
-                                Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                                i.putExtra("test", "");
-                                startActivity(i);
-                                Toast.makeText(product_details.this, "Item already exist in cart", Toast.LENGTH_SHORT).show();
-
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        Log.d("jhvfff", data);
-
-
-                        //    Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    @Override
-                    public void onFail(String msg) {
-
-                        Toast.makeText(product_details.this, "Invalid Login Details", Toast.LENGTH_SHORT).show();
-                        Log.d("jhvfff", "failed");
-                        // Do Stuff
-                    }
-                });
-
-            } else {
-
-                Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-
-                Log.d("checkLog", "Secondwala");
-                i.putExtra("test", "");
-                startActivity(i);
-
-
-            }
-
-        } else {
-
-
-            if (visibility_cart == false) {
-
-                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-
-                Boolean result = db.insert(name.getText().toString(), price_txt, price_cut_txt, "1", dicount_txt, product_id, image);
-
-                Log.d("count", product_id);
-                //((MyApplication)this.getApplication()).setCartquantity(String.valueOf(quantity));
-
-                SharedPreferences preferences = getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("Name", quantity);
-                editor.apply();
-
-                if (result == true) {
-
-
-                    Toast.makeText(this, "Item Added to cart", Toast.LENGTH_SHORT).show();
-                    db.insert_for_go_to_cart_logout(product_id);
-
-                    add_to_cart.setText("GO TO CART");
-
-
-                    onResume();
-            /*   Intent i = new Intent(getApplicationContext(), add_to_cart.class);
-               startActivity(i);*/
-                } else {
-                    Log.d("checkLog", "thirdwala");
-                    Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                    i.putExtra("test", "");
-                    startActivity(i);
-                    Toast.makeText(this, "Item Already available in cart", Toast.LENGTH_SHORT).show();
-
-               /*Intent i = new Intent(getApplicationContext(), add_to_cart.class);
-               startActivity(i);*/
-                }
-            } else {
-
-                Log.d("checkLog", "forthwala");
-
-                Intent i = new Intent(getApplicationContext(), com.kk_cards.Fragment.add_to_cart.class);
-                i.putExtra("test", "");
-                startActivity(i);
-
-
-            }
-        }
-
-
-    }
 
     private void hidePDialog() {
         if (p_bar != null) {
@@ -1488,314 +1258,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
 
 
-        switch (view.getId()) {
-            case R.id.forDevice: {
-
-                step = "device";
-
-                device.setBackgroundResource(R.drawable.background_blue);
-                device.setTextColor(Color.parseColor("#ffffff"));
-                lense.setBackgroundResource(R.drawable.background);
-                lense.setTextColor(Color.parseColor("#125688"));
-                both.setBackgroundResource(R.drawable.background);
-                both.setTextColor(Color.parseColor("#125688"));
-                lin2.setVisibility(View.VISIBLE);
-                lin3.setVisibility(View.GONE);
-
-
-                if (cardType.equals("plastic")) {
-                    simple.setEnabled(false);
-                    simple.setBackgroundResource(R.drawable.background_grey);
-                    simple.setTextColor(Color.parseColor("#e2e2e2"));
-                    medium.setEnabled(false);
-                    medium.setBackgroundResource(R.drawable.background_grey);
-                    medium.setTextColor(Color.parseColor("#e2e2e2"));
-                }
-
-
-                break;
-            }
-
-            case R.id.forLence: {
-
-                step = "lense";
-
-                lense.setBackgroundResource(R.drawable.background_blue);
-                lense.setTextColor(Color.parseColor("#ffffff"));
-                device.setBackgroundResource(R.drawable.background);
-                device.setTextColor(Color.parseColor("#125688"));
-                both.setBackgroundResource(R.drawable.background);
-                both.setTextColor(Color.parseColor("#125688"));
-                lin2.setVisibility(View.GONE);
-                lin3.setVisibility(View.VISIBLE);
-
-                break;
-
-            }
-
-            case R.id.forBoth: {
-
-                step = "both";
-
-                int b = Integer.parseInt(amount[12]);
-
-                cardId = 12;
-
-                Log.d("amount ki position", String.valueOf(cardId));
-
-                money.setText(String.valueOf(b));
-
-
-                device.setBackgroundResource(R.drawable.background);
-                device.setTextColor(Color.parseColor("#125688"));
-                lense.setBackgroundResource(R.drawable.background);
-                lense.setTextColor(Color.parseColor("#125688"));
-                both.setBackgroundResource(R.drawable.background_blue);
-                both.setTextColor(Color.parseColor("#ffffff"));
-                lin2.setVisibility(View.GONE);
-                lin3.setVisibility(View.GONE);
-                break;
-
-            }
-
-            case R.id.simple: {
-
-                step = "simple";
-
-                high.setBackgroundResource(R.drawable.background);
-                high.setTextColor(Color.parseColor("#125688"));
-                medium.setBackgroundResource(R.drawable.background);
-                medium.setTextColor(Color.parseColor("#125688"));
-                simple.setBackgroundResource(R.drawable.background_blue);
-                simple.setTextColor(Color.parseColor("#ffffff"));
-                //lin2.setVisibility(View.GONE);
-                lin3.setVisibility(View.VISIBLE);
-                break;
-
-            }
-
-            case R.id.medium: {
-
-                step = "medium";
-
-                high.setBackgroundResource(R.drawable.background);
-                high.setTextColor(Color.parseColor("#125688"));
-                simple.setBackgroundResource(R.drawable.background);
-                simple.setTextColor(Color.parseColor("#125688"));
-                medium.setBackgroundResource(R.drawable.background_blue);
-                medium.setTextColor(Color.parseColor("#ffffff"));
-                //lin2.setVisibility(View.GONE);
-                lin3.setVisibility(View.VISIBLE);
-                break;
-
-            }
-
-            case R.id.high: {
-
-                step = "high";
-
-                simple.setBackgroundResource(R.drawable.background);
-                simple.setTextColor(Color.parseColor("#125688"));
-                medium.setBackgroundResource(R.drawable.background);
-                medium.setTextColor(Color.parseColor("#125688"));
-                high.setBackgroundResource(R.drawable.background_blue);
-                high.setTextColor(Color.parseColor("#ffffff"));
-                //lin2.setVisibility(View.GONE);
-                lin3.setVisibility(View.VISIBLE);
-
-
-                if (cardType.equals("plastic")) {
-                    simple.setEnabled(false);
-                    simple.setBackgroundResource(R.drawable.background_grey);
-                    simple.setTextColor(Color.parseColor("#e2e2e2"));
-                    medium.setEnabled(false);
-                    medium.setBackgroundResource(R.drawable.background_grey);
-                    medium.setTextColor(Color.parseColor("#e2e2e2"));
-                }
-
-
-                break;
-
-            }
-
-            case R.id.piece1: {
-
-                switch (step) {
-                    case "lense": {
-
-                        // int a = Integer.parseInt(price_txt);
-                        int b = Integer.parseInt(amount[0]);
-
-                        cardId = 0;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "simple": {
-
-                        int b = Integer.parseInt(amount[3]);
-
-                        cardId = 3;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "medium": {
-
-                        int b = Integer.parseInt(amount[6]);
-
-                        cardId = 6;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "high": {
-
-                        int b = Integer.parseInt(amount[9]);
-
-                        cardId = 9;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                }
-
-
-                piece2.setBackgroundResource(R.drawable.background);
-                piece2.setTextColor(Color.parseColor("#125688"));
-                piece3.setBackgroundResource(R.drawable.background);
-                piece3.setTextColor(Color.parseColor("#125688"));
-                piece1.setBackgroundResource(R.drawable.background_blue);
-                piece1.setTextColor(Color.parseColor("#ffffff"));
-                //lin2.setVisibility(View.GONE);
-                //lin3.setVisibility(View.VISIBLE);
-                break;
-
-            }
-
-            case R.id.piece6: {
-
-                switch (step) {
-                    case "lense": {
-
-                        // int a = Integer.parseInt(price_txt);
-                        int b = Integer.parseInt(amount[1]);
-
-                        cardId = 1;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "simple": {
-
-                        int b = Integer.parseInt(amount[4]);
-
-                        cardId = 4;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "medium": {
-
-                        int b = Integer.parseInt(amount[7]);
-
-                        cardId = 7;
-
-                        money.setText( String.valueOf(b));
-
-                        break;
-                    }
-                    case "high": {
-
-                        int b = Integer.parseInt(amount[10]);
-
-                        cardId = 10;
-
-                        money.setText( String.valueOf(b));
-
-                        break;
-                    }
-                }
-
-
-                piece1.setBackgroundResource(R.drawable.background);
-                piece1.setTextColor(Color.parseColor("#125688"));
-                piece3.setBackgroundResource(R.drawable.background);
-                piece3.setTextColor(Color.parseColor("#125688"));
-                piece2.setBackgroundResource(R.drawable.background_blue);
-                piece2.setTextColor(Color.parseColor("#ffffff"));
-                //lin2.setVisibility(View.GONE);
-                //lin3.setVisibility(View.VISIBLE);
-                break;
-
-            }
-
-            case R.id.piece12: {
-
-                switch (step) {
-                    case "lense": {
-
-                        // int a = Integer.parseInt(price_txt);
-                        int b = Integer.parseInt(amount[2]);
-
-                        cardId = 2;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "simple": {
-
-                        int b = Integer.parseInt(amount[5]);
-
-                        cardId = 5;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "medium": {
-
-                        int b = Integer.parseInt(amount[8]);
-
-                        cardId = 8;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                    case "high": {
-
-                        int b = Integer.parseInt(amount[11]);
-
-                        cardId = 11;
-
-                        money.setText(String.valueOf(b));
-
-                        break;
-                    }
-                }
-
-
-                piece1.setBackgroundResource(R.drawable.background);
-                piece1.setTextColor(Color.parseColor("#125688"));
-                piece2.setBackgroundResource(R.drawable.background);
-                piece2.setTextColor(Color.parseColor("#125688"));
-                piece3.setBackgroundResource(R.drawable.background_blue);
-                piece3.setTextColor(Color.parseColor("#ffffff"));
-                //lin2.setVisibility(View.GONE);
-                //lin3.setVisibility(View.VISIBLE);
-                break;
-
-            }
-
-        }
 
 
     }
@@ -1935,74 +1397,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
-    private void add_cart(final String cart_data, final CallBack onCallBack) {
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/cartApi.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        onCallBack.onSuccess(response);
-                        Log.d("derailss", response);
-
-                        //  callback.onSuccessResponse(response);
-                      /*  SharedPreferences.Editor editor =getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                        editor.putString("hello",response);
-                        editor.commit();
-*/
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //  Toast.makeText(getActivity(), "Please check your network connection and try again", Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("cart", cart_data);
-                params.put("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
-
-
-                return params;
-            }
-
-            private Map<String, String> checkParams(Map<String, String> map) {
-                Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, String> pairs = (Map.Entry<String, String>) it.next();
-                    if (pairs.getValue() == null) {
-                        map.put(pairs.getKey(), "");
-                    }
-                }
-                return map;
-            }
-
-
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                if (response.headers == null) {
-                    // cant just set a new empty map because the member is final.
-                    response = new NetworkResponse(
-                            response.statusCode,
-                            response.data,
-                            Collections.<String, String>emptyMap(), // this is the important line, set an empty but non-null map.
-                            response.notModified,
-                            response.networkTimeMs);
-
-
-                }
-
-                return super.parseNetworkResponse(response);
-            }
-        };
-
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-    }
 
 
     protected void cart_counter(final CallBack mResultCallback) {
