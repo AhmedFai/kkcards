@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
+import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,8 +60,8 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
     String step;
 
-    String cardType,price_txt,name,price_cut_txt,dicount_txt,image;
-    int cardId,quantity;
+    String cardType, price_txt, name, price_cut_txt, dicount_txt, image;
+    int cardId = -1, quantity;
 
     product_details pd;
 
@@ -72,7 +73,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
     SessionManagement session;
 
-   // BottomSheetBehavior sheetBehavior;
+    // BottomSheetBehavior sheetBehavior;
     Boolean visibility_cart = false;
     public static Button add_to_cart;
 
@@ -81,22 +82,20 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
     private String MY_PREFS_NAME;
 
 
-    public void updateArray(String amount[])
-    {
+    public void updateArray(String amount[]) {
         this.amount = amount;
     }
-
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.bottom_sheet , container , false);
+        View view = inflater.inflate(R.layout.bottom_sheet, container, false);
         ButterKnife.bind(this, view);
 
         session = new SessionManagement(getContext());
 
-        pd = ((product_details)getActivity());
+        pd = ((product_details) getActivity());
 
         catId = getArguments().getString("catid");
         price_txt = getArguments().getString("priceTxt");
@@ -111,9 +110,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
         os_versions = new ArrayList<ItemData>();
 
 
-
-
-      //  sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+        //  sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
         //sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         add_to_cart = (Button) view.findViewById(R.id.add_cart);
 
@@ -147,7 +144,6 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
         piece3.setOnClickListener(this);
 
 
-
         if ("1".equals(catId)) {
 
             Log.d("main", "main wala");
@@ -161,8 +157,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
         }
 
-        money.setText( price_txt);
-
+        money.setText(price_txt);
 
 
         if (session.isLoggedIn() == true) {
@@ -284,9 +279,6 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
         }*/
 
 
-
-
-
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -302,7 +294,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                     grand_total_adpter = Integer.parseInt(countText.getText().toString()) * Integer.parseInt(price_txt);
 
-                    money.setText( Integer.toString(grand_total_adpter));
+                    money.setText(Integer.toString(grand_total_adpter));
 
 
                 } else {
@@ -341,6 +333,18 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                 step = "device";
 
+                money.setText(price_txt);
+                cardId = -1;
+                add_to_cart.setVisibility(View.GONE);
+
+                high.setBackgroundResource(R.drawable.background);
+                high.setTextColor(Color.parseColor("#125688"));
+                medium.setBackgroundResource(R.drawable.background);
+                medium.setTextColor(Color.parseColor("#125688"));
+                simple.setBackgroundResource(R.drawable.background);
+                simple.setTextColor(Color.parseColor("#125688"));
+
+
                 device.setBackgroundResource(R.drawable.background_blue);
                 device.setTextColor(Color.parseColor("#ffffff"));
                 lense.setBackgroundResource(R.drawable.background);
@@ -349,6 +353,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                 both.setTextColor(Color.parseColor("#125688"));
                 lin2.setVisibility(View.VISIBLE);
                 lin3.setVisibility(View.GONE);
+
 
 
                 if (cardType.equals("plastic")) {
@@ -368,6 +373,17 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                 step = "lense";
 
+                money.setText(price_txt);
+                cardId = -1;
+                add_to_cart.setVisibility(View.GONE);
+
+                piece2.setBackgroundResource(R.drawable.background);
+                piece2.setTextColor(Color.parseColor("#125688"));
+                piece3.setBackgroundResource(R.drawable.background);
+                piece3.setTextColor(Color.parseColor("#125688"));
+                piece1.setBackgroundResource(R.drawable.background);
+                piece1.setTextColor(Color.parseColor("#125688"));
+
                 lense.setBackgroundResource(R.drawable.background_blue);
                 lense.setTextColor(Color.parseColor("#ffffff"));
                 device.setBackgroundResource(R.drawable.background);
@@ -384,6 +400,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
             case R.id.forBoth: {
 
                 step = "both";
+                add_to_cart.setVisibility(View.VISIBLE);
 
                 int b = Integer.parseInt(amount[12]);
 
@@ -409,6 +426,15 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
             case R.id.simple: {
 
                 step = "simple";
+                add_to_cart.setVisibility(View.GONE);
+
+                piece2.setBackgroundResource(R.drawable.background);
+                piece2.setTextColor(Color.parseColor("#125688"));
+                piece3.setBackgroundResource(R.drawable.background);
+                piece3.setTextColor(Color.parseColor("#125688"));
+                piece1.setBackgroundResource(R.drawable.background);
+                piece1.setTextColor(Color.parseColor("#125688"));
+
 
                 high.setBackgroundResource(R.drawable.background);
                 high.setTextColor(Color.parseColor("#125688"));
@@ -425,6 +451,15 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
             case R.id.medium: {
 
                 step = "medium";
+                add_to_cart.setVisibility(View.GONE);
+
+                piece2.setBackgroundResource(R.drawable.background);
+                piece2.setTextColor(Color.parseColor("#125688"));
+                piece3.setBackgroundResource(R.drawable.background);
+                piece3.setTextColor(Color.parseColor("#125688"));
+                piece1.setBackgroundResource(R.drawable.background);
+                piece1.setTextColor(Color.parseColor("#125688"));
+
 
                 high.setBackgroundResource(R.drawable.background);
                 high.setTextColor(Color.parseColor("#125688"));
@@ -441,6 +476,15 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
             case R.id.high: {
 
                 step = "high";
+                add_to_cart.setVisibility(View.GONE);
+
+                piece2.setBackgroundResource(R.drawable.background);
+                piece2.setTextColor(Color.parseColor("#125688"));
+                piece3.setBackgroundResource(R.drawable.background);
+                piece3.setTextColor(Color.parseColor("#125688"));
+                piece1.setBackgroundResource(R.drawable.background);
+                piece1.setTextColor(Color.parseColor("#125688"));
+
 
                 simple.setBackgroundResource(R.drawable.background);
                 simple.setTextColor(Color.parseColor("#125688"));
@@ -468,8 +512,12 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
             case R.id.piece1: {
 
+                add_to_cart.setVisibility(View.VISIBLE);
+
                 switch (step) {
                     case "lense": {
+
+
 
                         // int a = Integer.parseInt(price_txt);
                         int b = Integer.parseInt(amount[0]);
@@ -527,6 +575,8 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
             case R.id.piece6: {
 
+                add_to_cart.setVisibility(View.VISIBLE);
+
                 switch (step) {
                     case "lense": {
 
@@ -555,7 +605,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                         cardId = 7;
 
-                        money.setText( String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -565,7 +615,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                         cardId = 10;
 
-                        money.setText( String.valueOf(b));
+                        money.setText(String.valueOf(b));
 
                         break;
                     }
@@ -585,6 +635,8 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
             }
 
             case R.id.piece12: {
+
+                add_to_cart.setVisibility(View.VISIBLE);
 
                 switch (step) {
                     case "lense": {
@@ -651,12 +703,9 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
     @OnClick(R.id.add_cart)
     public void add_cart() {
 
+        if (session.isLoggedIn()) {
 
-
-
-        if (session.isLoggedIn() == true) {
-
-            if (visibility_cart == false) {
+            if (!visibility_cart) {
 
 
                 JSONObject jo = new JSONObject();
@@ -738,10 +787,6 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                                 //sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 
-
-
-
-
                             } else {
 
                                 Log.d("checkLog", "firstwala");
@@ -792,7 +837,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                 DatabaseHandler db = new DatabaseHandler(getContext());
 
-                Boolean result = db.insert(name, price_txt, price_cut_txt, "1", dicount_txt, product_id, image);
+                Boolean result = db.insert(name, money.getText().toString(), price_cut_txt, "1", dicount_txt, product_id, image);
 
                 Log.d("count", product_id);
                 //((MyApplication)this.getApplication()).setCartquantity(String.valueOf(quantity));
@@ -808,7 +853,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                     Toast.makeText(getContext(), "Item Added to cart", Toast.LENGTH_SHORT).show();
                     db.insert_for_go_to_cart_logout(product_id);
 
-                   // SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    // SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                     editor.putString("cardKiId", String.valueOf(cardId));
                     editor.commit();
 

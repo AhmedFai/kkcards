@@ -276,7 +276,13 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                             });
                             // onSignupFailed();
-                            progressDialog.dismiss();
+                            try {
+                                progressDialog.dismiss();
+                            }catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+
                         }
                     }, 3000);
 

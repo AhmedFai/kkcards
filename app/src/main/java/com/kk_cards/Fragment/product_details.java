@@ -103,7 +103,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     TextView btnBottomSheet;
 
 
-
     ImageView cancel;
 
     @BindView(R.id.bott)
@@ -174,7 +173,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     int cardId;
     int quant = 1;
 
-    int catId ;
+    int catId;
 
     SessionManagement session;
 
@@ -186,13 +185,13 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     String animals_list[];
     ArrayList<String> split_list;
     String id, quantity_val;
-    String price_txt, price_cut_txt, dicount_txt,cardkiID;
+    String price_txt, price_cut_txt, dicount_txt, cardkiID;
     ArrayList<String> path_list, fname_list;
     int quantity = 0;
 
     String amount[];
 
-   public String countText, money;
+    public String countText, money;
 
     Boolean visibility_cart = false;
     int cartquantity;
@@ -242,7 +241,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-       // Log.d("categoryIdCatWali", getIntent().getStringExtra("catId"));
+        // Log.d("categoryIdCatWali", getIntent().getStringExtra("catId"));
 
 
 
@@ -606,15 +605,15 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
             bott_fragment frag1 = new bott_fragment();
             frag1.updateArray(amount);
             Bundle b = new Bundle();
-            b.putString("catid" , String.valueOf(catId));
-            b.putString("priceTxt",price_txt);
-            b.putString("product",product_id);
-            b.putString("cardType",cardType);
+            b.putString("catid", String.valueOf(catId));
+            b.putString("priceTxt", price_txt);
+            b.putString("product", product_id);
+            b.putString("cardType", cardType);
             b.putString("name", name.getText().toString());
             b.putString("price_cut_txt", price_cut_txt);
-            b.putString("dicount_txt",dicount_txt);
+            b.putString("dicount_txt", dicount_txt);
             b.putString("image", image);
-            b.putString("quantity",String.valueOf(quantity));
+            b.putString("quantity", String.valueOf(quantity));
             frag1.setArguments(b);
             ft.replace(R.id.bott, frag1);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
@@ -1062,7 +1061,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     price_txt = feed.getPrice();
 
 
-
                                     price_cut_txt = feed.getMrp();
                                     // dicount_txt=objj.getString("discount");
 
@@ -1258,8 +1256,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
 
 
-
-
     }
 
     static class VersionHelper {
@@ -1396,7 +1392,6 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 */
         return super.onOptionsItemSelected(item);
     }
-
 
 
     protected void cart_counter(final CallBack mResultCallback) {

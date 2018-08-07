@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgot_password;
     SessionManagement session;
     private static final String REGISTER_URL = Config.Base_Url + "/API/signinApi.php";
-    private String MY_PREFS_NAME;
+    private String MY_PREFS_NAME = "AndroidHivePref";
     int MODE_PRIVATE;
     @BindView(R.id.cbShowPwd)
     CheckBox cbShowPwd;
@@ -242,11 +242,11 @@ public class LoginActivity extends AppCompatActivity {
                                             // Staring MainActivity
 
 
-                                           // display_address(Config.Base_Url + "/API/addressApi.php?mobile=" + obj.getString("mobile"));
+                                            display_address(Config.Base_Url + "/API/addressApi.php?mobile=" + obj.getString("mobile"));
 
 
 
-                                            SharedPreferences pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                                            /*SharedPreferences pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
                                             if ("buy_now".equals(pref.getString("from_where", null))) {
 
@@ -263,7 +263,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 startActivity(i);
                                                 finish();
 
-                                            }
+                                            }*/
 
 
                                         } else {
@@ -434,7 +434,7 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString("phone", os_versions.get(i).getMobile());
                                     editor.putString("address", os_versions.get(i).getFlat_no() + " , " + os_versions.get(i).getArea() + " , " + os_versions.get(i).getCity() + " , " + os_versions.get(i).getState() + " - " + os_versions.get(i).getPincode() + " , " + os_versions.get(i).getLandmark());
 
-                                    editor.commit();
+                                    editor.apply();
 
                                 }
 
@@ -463,7 +463,24 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         } catch (JSONException e) {
+                            SharedPreferences pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
+                            if ("buy_now".equals(pref.getString("from_where", null))) {
+
+                                Intent i1 = new Intent(getApplicationContext(), check_out_buy_now.class);
+                                startActivity(i1);
+
+
+                            } else if ("add_to_cart".equals(pref.getString("from_where", null))) {
+                                Intent i1 = new Intent(getApplicationContext(), check_out_activity.class);
+                                startActivity(i1);
+
+                            } else {
+                                Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(i1);
+                                finish();
+
+                            }
 
                             e.printStackTrace();
                         }

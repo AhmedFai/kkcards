@@ -110,7 +110,7 @@ public class check_out_activity extends AppCompatActivity {
 
     @BindView(R.id.pric_r_layout)
     RelativeLayout pric_r_layout;
-     private String MY_PREFS_NAME;
+     private String MY_PREFS_NAME = "AndroidHivePref";
     int MODE_PRIVATE;
 
     @BindView(R.id.linearrr)
