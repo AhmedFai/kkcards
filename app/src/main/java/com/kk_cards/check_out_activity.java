@@ -330,6 +330,7 @@ public class check_out_activity extends AppCompatActivity {
 
 
                                 feed.setCartID(objj.getString("cartID"));
+                                feed.setCardID(objj.getString("cardID"));
 
                                 feed.setProductID(objj.getString("productID"));
                                 feed.setQuantity(objj.getString("quantity"));
@@ -554,7 +555,7 @@ public class check_out_activity extends AppCompatActivity {
 
                     ItemData feed = new ItemData();
 
-                    feed.setId(c.getString(c.getColumnIndex("product_id")));
+                    feed.setProductID(c.getString(c.getColumnIndex("product_id")));
                     feed.setQuantity(c.getString(c.getColumnIndex("quantity")));
 
 

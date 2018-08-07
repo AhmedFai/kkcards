@@ -382,14 +382,14 @@ public class add_to_cart extends AppCompatActivity {
 
                             progressDialog.dismiss();
                         }
-                    }, 10000);
+                    }, 5000);
 
 
         } else {
             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
             editor.putString("from_where","add_to_cart");
-            editor.commit();
+            editor.apply();
 
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);

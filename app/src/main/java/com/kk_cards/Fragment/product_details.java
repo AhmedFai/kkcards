@@ -939,7 +939,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     path_list.add(objj.getString("productImage"));
                                     fname_list.add("productImage");
 
-                                    if (session.isLoggedIn() == true) {
+                              /*      if (session.isLoggedIn() == true) {
 
                                         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
@@ -992,7 +992,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                             }
 
 
-                                    }
+                                    }*/
 
 
                                     feed.setDel_charge(objj.getString("deliveryCharge"));

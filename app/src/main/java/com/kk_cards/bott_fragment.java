@@ -1,8 +1,10 @@
 package com.kk_cards;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kk_cards.Database.DatabaseHandler;
 import com.kk_cards.Fragment.product_details;
+import com.kk_cards.Modal.ItemData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +45,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.kk_cards.Fragment.product_details.cartcounterTV;
 
 public class bott_fragment extends Fragment implements View.OnClickListener {
@@ -72,6 +76,10 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
     Boolean visibility_cart = false;
     public static Button add_to_cart;
 
+    ArrayList<ItemData> os_versions;
+
+    private String MY_PREFS_NAME;
+
 
     public void updateArray(String amount[])
     {
@@ -99,6 +107,8 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
         image = getArguments().getString("image");
         quantity = Integer.parseInt(getArguments().getString("quantity"));
         cardType = getArguments().getString("cardType");
+
+        os_versions = new ArrayList<ItemData>();
 
 
 
@@ -202,6 +212,78 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
 
         }
+
+
+
+
+/*        if (session.isLoggedIn() == true) {
+
+            Log.d("session", "logedIn");
+
+            DatabaseHandler db = new DatabaseHandler(getContext());
+
+
+            Cursor c = db.get_go_to_cart();
+
+
+            if (c != null)
+                if (c.moveToFirst()) {
+                    do {
+
+
+                        if (c.getString(c.getColumnIndex("product_id")).equals(product_id)) {
+
+                            Boolean result = c.getString(c.getColumnIndex("product_id")).equals(product_id);
+
+                            Log.d("resultBhai", String.valueOf(result));
+
+                            add_to_cart.setText("GO TO CART");
+
+                            visibility_cart = true;
+
+                        }
+                    }
+                    while (c.moveToNext());
+
+                }
+
+        } else
+
+        {
+
+            Log.d("session", "notogedIn");
+
+            DatabaseHandler db = new DatabaseHandler(getContext());
+
+
+            Cursor c = db.get_go_to_cart_log_out();
+
+
+            if (c != null)
+                if (c.moveToFirst()) {
+                    do {
+
+
+                        if (c.getString(c.getColumnIndex("product_id")).equals(product_id)) {
+
+                            Boolean result = c.getString(c.getColumnIndex("product_id")).equals(product_id);
+
+                            Log.d("resultBhai", String.valueOf(result));
+
+                            add_to_cart.setText("GO TO CART");
+
+                            visibility_cart = true;
+
+                        }
+                    }
+                    while (c.moveToNext());
+
+                }
+
+
+        }*/
+
+
 
 
 
@@ -639,6 +721,11 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                                 add_to_cart.setText("GO TO CART");
 
 
+                                SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                editor.putString("cardKiId", String.valueOf(cardId));
+                                editor.commit();
+
+
                                 onResume();
 
                                 AppRater.showRateDialog(getContext());
@@ -710,7 +797,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                 Log.d("count", product_id);
                 //((MyApplication)this.getApplication()).setCartquantity(String.valueOf(quantity));
 
-                SharedPreferences preferences = getContext().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                SharedPreferences preferences = getContext().getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putInt("Name", quantity);
                 editor.apply();
@@ -720,6 +807,10 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                     Toast.makeText(getContext(), "Item Added to cart", Toast.LENGTH_SHORT).show();
                     db.insert_for_go_to_cart_logout(product_id);
+
+                   // SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putString("cardKiId", String.valueOf(cardId));
+                    editor.commit();
 
                     add_to_cart.setText("GO TO CART");
 
@@ -863,5 +954,20 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
         requestQueue.add(stringRequest);
     }
 
+    static class VersionHelper {
+        static void refreshActionBarMenu(Activity activity) {
+            activity.invalidateOptionsMenu();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        VersionHelper.refreshActionBarMenu((Activity) getContext());
+        // put your code here...
+
+    }
 
 }

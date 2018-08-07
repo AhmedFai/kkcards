@@ -105,7 +105,10 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
         Picasso.with(mContext).load(fp.getProductImage()).into(viewHolder.image);
 
 
-        switch (fp.getCardID()){
+
+        SharedPreferences prefs = mContext.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
+        switch (prefs.getString("cardKiId", "")){
             case "0":
                 viewHolder.tot.setText("Lense > 1 piece");
                 break;
@@ -176,7 +179,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
         {
 
             viewHolder.remove.setVisibility(View.GONE);
-            viewHolder.view1.setVisibility(View.GONE);
+            viewHolder.view1.setVisibility(View.VISIBLE);
             viewHolder.view2.setVisibility(View.GONE);
         }
 
@@ -458,7 +461,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
 
 
 
-        viewHolder.image.setOnClickListener(new View.OnClickListener() {
+  /*      viewHolder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -479,7 +482,7 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                 mContext.startActivity(i);
 
             }
-        });
+        });*/
 
 
         //  Log.d("bhs",fp.getCat_name());
