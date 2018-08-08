@@ -56,13 +56,15 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgot_password;
     SessionManagement session;
     private static final String REGISTER_URL = Config.Base_Url + "/API/signinApi.php";
-    private String MY_PREFS_NAME = "AndroidHivePref";
+    private String MY_PREFS_NAME ;
     int MODE_PRIVATE;
     @BindView(R.id.cbShowPwd)
     CheckBox cbShowPwd;
     String otp;
 
     ArrayList<ItemData> os_versions;
+
+    SharedPreferences pref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         session = new SessionManagement(getApplicationContext());
+
+        pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
 
         cbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -175,8 +179,10 @@ public class LoginActivity extends AppCompatActivity {
                                                                 ItemData feed = new ItemData();
 
 
-                                                                feed.setProduct_id(c.getString(c.getColumnIndex("product_id")));
+                                                                feed.setProductID(c.getString(c.getColumnIndex("product_id")));
                                                                 feed.setQuantity(c.getString(c.getColumnIndex("quantity")));
+                                                                feed.setCardID(pref.getString("cardKiId",""));
+                                                                feed.setPrice(c.getString(c.getColumnIndex("regular_price")));
 
                                                                 os_versions.add(feed);
                                                             }
@@ -185,12 +191,15 @@ public class LoginActivity extends AppCompatActivity {
                                                             for (int i = 0; i < os_versions.size(); i++) {
 
                                                                 JSONObject item1 = new JSONObject();
-                                                                item1.put("product_id", os_versions.get(i).getProduct_id());
+                                                                item1.put("product_id", os_versions.get(i).getProductID());
                                                                 item1.put("quantity", os_versions.get(i).getQuantity());
+                                                                item1.put("cardID", os_versions.get(i).getCardID());
+                                                                item1.put("price", os_versions.get(i).getPrice());
                                                                 items.add(item1);
                                                             }
 
                                                             jo.put("cart_data", new JSONArray(items));
+                                                            Log.d("cartMaiKyaHai", jo.toString());
                                                             System.out.println(jo.toString());
                                                         }
                                                 } catch (Exception e) {
@@ -242,28 +251,33 @@ public class LoginActivity extends AppCompatActivity {
                                             // Staring MainActivity
 
 
-                                            display_address(Config.Base_Url + "/API/addressApi.php?mobile=" + obj.getString("mobile"));
+                                           // display_address(Config.Base_Url + "/API/addressApi.php?mobile=" + obj.getString("mobile"));
 
 
 
-                                            /*SharedPreferences pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-                                            if ("buy_now".equals(pref.getString("from_where", null))) {
+
+                                         /*   if ("buy_now".equals(pref.getString("from_where", null))) {
+
+                                                Log.d("checkLOGIN", "buy now");
 
                                                 Intent i = new Intent(getApplicationContext(), check_out_buy_now.class);
                                                 startActivity(i);
 
 
-                                            } else if ("add_to_cart".equals(pref.getString("from_where", null))) {
+                                            }*/  if ("add_to_cart".equals(pref.getString("from_where", null))) {
+
+                                                Log.d("checkLOGIN", "add to cart");
                                                 Intent i = new Intent(getApplicationContext(), check_out_activity.class);
                                                 startActivity(i);
 
                                             } else {
+                                                Log.d("checkLOGIN", "main");
                                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                                 startActivity(i);
                                                 finish();
 
-                                            }*/
+                                            }
 
 
                                         } else {

@@ -161,17 +161,13 @@ public class select_address extends AppCompatActivity {
           }
           else {
 
-              if("cart_to_buy".equals(getIntent().getStringExtra("check_valuee"))) {
+             // if("cart_to_buy".equals(getIntent().getStringExtra("check_valuee")))
                   Intent i = new Intent(getApplicationContext(), check_out_activity.class);
                   startActivity(i);
-              }
+                  finish();
 
-              else
-              {
-                  Intent i = new Intent(getApplicationContext(), check_out_buy_now.class);
-                  startActivity(i);
 
-              }
+
           }
       }
     }

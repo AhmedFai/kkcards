@@ -153,6 +153,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
             Log.d("duantity", "quantity wala");
             mainLin1.setVisibility(View.VISIBLE);
+            add_to_cart.setVisibility(View.VISIBLE);
             //cardId = 50;
 
         }

@@ -204,7 +204,8 @@ public class add_to_cart extends AppCompatActivity {
             getcart_data(Config.Base_Url + "/API/fetchCartApi.php");
 
 
-            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+            SharedPreferences prefs = getSharedPreferences(
+                    MY_PREFS_NAME, MODE_PRIVATE);
 
             if ("price_update".equals(prefs.getString("check_value", null))) {
                 total_amt.setText(prefs.getString("check_value", null));
@@ -444,7 +445,6 @@ public class add_to_cart extends AppCompatActivity {
 
 
                                 feed.setCartID(objj.getString("cartID"));
-
                                 feed.setProductID(objj.getString("productID"));
                                 feed.setQuantity(objj.getString("quantity"));
                                 feed.setCardID(objj.getString("cardID"));
@@ -452,6 +452,7 @@ public class add_to_cart extends AppCompatActivity {
                                 feed.setProductImage(objj.getString("image"));
                                 feed.setDeliveryCharge(objj.getString("deliveryCharge"));
                                 feed.setPrice(objj.getString("price"));
+                                feed.setTot_quantity(objj.getString("productBalance"));
 
 
                                 total_del = total_del + Integer.parseInt(feed.getDeliveryCharge());

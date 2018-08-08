@@ -67,7 +67,7 @@ public class my_addresses extends Fragment
     ArrayList<ItemData> os_versions;
     View v;
     String key_mobile;
-    private String MY_PREFS_NAME;
+    private String MY_PREFS_NAME ;
     int MODE_PRIVATE;
     NetworkStatusChangeReceiver reciver;
     @Override

@@ -110,7 +110,7 @@ public class check_out_activity extends AppCompatActivity {
 
     @BindView(R.id.pric_r_layout)
     RelativeLayout pric_r_layout;
-     private String MY_PREFS_NAME = "AndroidHivePref";
+     private String MY_PREFS_NAME ;
     int MODE_PRIVATE;
 
     @BindView(R.id.linearrr)
@@ -331,12 +331,9 @@ public class check_out_activity extends AppCompatActivity {
 
                                 feed.setCartID(objj.getString("cartID"));
                                 feed.setCardID(objj.getString("cardID"));
-
                                 feed.setProductID(objj.getString("productID"));
                                 feed.setQuantity(objj.getString("quantity"));
                                 Log.d("quannnnnn_ddddd", feed.getQuantity());
-
-
                                 feed.setProductName(objj.getString("productName"));
                                 feed.setProductImage(objj.getString("image"));
                                 feed.setDeliveryCharge(objj.getString("deliveryCharge"));

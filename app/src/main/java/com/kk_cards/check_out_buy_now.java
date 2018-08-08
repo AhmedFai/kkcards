@@ -148,7 +148,7 @@ public class check_out_buy_now extends AppCompatActivity {
             feed.setProductImage(prefs.getString("image", null));
 
           //  int discount = Integer.parseInt(prefs.getString("discount_value", null));
-            int price = Integer.parseInt(prefs.getString("price_value_product", null));
+           // int price = Integer.parseInt(prefs.getString("price_value_product", null));
 
 
            // int price_cut = (100 - discount) * price / 100;

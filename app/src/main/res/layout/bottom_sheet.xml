@@ -312,6 +312,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="PROCEED PAYMENT"
+        android:visibility="gone"
         android:textColor="#fff" />
 
 
