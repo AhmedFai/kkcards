@@ -187,6 +187,8 @@ public class display_add_adapter extends RecyclerView.Adapter<display_add_adapte
                     i.putExtra("address_type", os_versions.get(position).getAdd_type());
                     i.putExtra("address_id", os_versions.get(position).getId());
 
+
+
                     mContext.startActivity(i);
 
 
@@ -237,6 +239,8 @@ public class display_add_adapter extends RecyclerView.Adapter<display_add_adapte
                 i.putExtra("check_value","edit");
                 i.putExtra("address_id",os_versions.get(position).getId());
                 i.putExtra("address_type", os_versions.get(position).getAdd_type());
+
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 mContext.startActivity(i);
 

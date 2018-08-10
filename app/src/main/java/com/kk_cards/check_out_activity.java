@@ -357,9 +357,9 @@ public class check_out_activity extends AppCompatActivity {
                                 Boolean result=  db.insert_server(os_versions.get(i).getProductName(),os_versions.get(i).getPrice(),os_versions.get(i).getPrice_cut(),os_versions.get(i).getQuantity(),os_versions.get(i).getDiscount(),os_versions.get(i).getCartID(),os_versions.get(i).getProductImage(),objj.getString("deliveryCharge"));
                                 Log.d("fffffff", String.valueOf(result));
 
-                                total_price_items = total_price_items + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
+                                total_price_items = total_price_items + Integer.parseInt(feed.getPrice());
 
-                                grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
+                                grand_total = grand_total + Integer.parseInt(feed.getPrice());
                                 tot_price_items.setText("\u20B9"+total_price_items);
 
 

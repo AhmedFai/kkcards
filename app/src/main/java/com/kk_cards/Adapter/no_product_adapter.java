@@ -68,7 +68,7 @@ public class no_product_adapter extends RecyclerView.Adapter<no_product_adapter.
 
         }
 
-        else
+        /*else
           {
 
               video_path=path_list.get(position);
@@ -77,7 +77,7 @@ public class no_product_adapter extends RecyclerView.Adapter<no_product_adapter.
                       .into(viewHolder.cat_image);
 
 
-          }
+          }*/
 
           Log.d("image_size", String.valueOf(image_list.size())) ;
 

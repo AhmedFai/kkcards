@@ -70,6 +70,8 @@ public class forgot_password extends AppCompatActivity {
     @OnClick(R.id.submit)
     public void send_mail() {
 
+        Log.d("number",edit_text.getText().toString());
+
         if("forgot".equals(getIntent().getStringExtra("check_val"))) {
 
             if (edit_text.length() == 0) {
@@ -109,6 +111,7 @@ public class forgot_password extends AppCompatActivity {
 
                                             else
                                             {
+                                                Log.d("checkLOG", "firstWala");
 
                                                 Toast.makeText(forgot_password.this, "Mail not sent, Please try again", Toast.LENGTH_SHORT).show();
                                             }

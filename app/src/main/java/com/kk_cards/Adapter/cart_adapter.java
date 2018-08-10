@@ -105,10 +105,17 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
         Picasso.with(mContext).load(fp.getProductImage()).into(viewHolder.image);
 
 
+        Log.d("quaaaaaanttttt", fp.getQuantity());
+
+        Log.d("caaaaaard", fp.getCardID());
+
+       /* if (fp.getCardID().equals(String.valueOf(50))){
+            viewHolder.tot.setText("Quantity : " + fp.getQuantity());
+        }*/
 
         SharedPreferences prefs = mContext.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-        switch (prefs.getString("cardKiId", "")){
+        switch (fp.getCardID()){
             case "0":
                 viewHolder.tot.setText("Lense > 1 piece");
                 break;
@@ -152,6 +159,11 @@ public class cart_adapter extends RecyclerView.Adapter<cart_adapter.ViewHolder> 
                 viewHolder.tot.setText("Quantity : " + fp.getQuantity());
                 break;
         }
+
+
+      /*  if (!session.isLoggedIn()){
+            viewHolder.tot.setText("Quantity : " + prefs.getString("qua", ""));
+        }*/
 
 
 //        Log.d("coden",fp.getProduct_id());

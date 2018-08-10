@@ -61,7 +61,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
     String step;
 
     String cardType, price_txt, name, price_cut_txt, dicount_txt, image;
-    int cardId = -1, quantity;
+    int cardId , quantity;
 
     product_details pd;
 
@@ -154,7 +154,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
             Log.d("duantity", "quantity wala");
             mainLin1.setVisibility(View.VISIBLE);
             add_to_cart.setVisibility(View.VISIBLE);
-            //cardId = 50;
+            cardId = 50;
 
         }
 
@@ -335,7 +335,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                 step = "device";
 
                 money.setText(price_txt);
-                cardId = -1;
+               // cardId = -1;
                 add_to_cart.setVisibility(View.GONE);
 
                 high.setBackgroundResource(R.drawable.background);
@@ -375,7 +375,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                 step = "lense";
 
                 money.setText(price_txt);
-                cardId = -1;
+                //cardId = -1;
                 add_to_cart.setVisibility(View.GONE);
 
                 piece2.setBackgroundResource(R.drawable.background);
@@ -771,10 +771,10 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
                                 add_to_cart.setText("GO TO CART");
 
 
-                                SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                               /* SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                 editor.putString("cardKiId", String.valueOf(cardId));
                                 editor.commit();
-
+*/
 
                                 onResume();
 
@@ -838,7 +838,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                 DatabaseHandler db = new DatabaseHandler(getContext());
 
-                Boolean result = db.insert(name, money.getText().toString(), price_cut_txt, "1", dicount_txt, product_id, image);
+                Boolean result = db.insert(name, money.getText().toString(), price_cut_txt, countText.getText().toString(), String.valueOf(cardId), product_id, image);
 
                 Log.d("count", product_id);
                 //((MyApplication)this.getApplication()).setCartquantity(String.valueOf(quantity));
@@ -856,6 +856,7 @@ public class bott_fragment extends Fragment implements View.OnClickListener {
 
                     // SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                     editor.putString("cardKiId", String.valueOf(cardId));
+                    editor.putString("qua",countText.getText().toString());
                     editor.commit();
 
                     add_to_cart.setText("GO TO CART");

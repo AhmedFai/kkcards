@@ -291,14 +291,14 @@ public class add_to_cart extends AppCompatActivity {
                         feed.setProductID(c.getString(c.getColumnIndex("product_id")));
                         feed.setProductName(c.getString(c.getColumnIndex("product_name")));
                         String quantity = c.getString(c.getColumnIndex("quantity"));
-                       // Log.d("iddddddddd", feed.getId());
+                        Log.d("iddddddddd", quantity);
                         feed.setQuantity(c.getString(c.getColumnIndex("quantity")));
                         feed.setPrice(c.getString(c.getColumnIndex("regular_price")));
                         feed.setMrp(c.getString(c.getColumnIndex("sale_price")));
                         feed.setProductImage(c.getString(c.getColumnIndex("product_image")));
-                        feed.setDiscount(c.getString(c.getColumnIndex("discount")));
+                        feed.setCardID(c.getString(c.getColumnIndex("discount")));
 
-                        grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
+                        grand_total = grand_total +  Integer.parseInt(feed.getPrice());
 
 
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
@@ -480,12 +480,12 @@ public class add_to_cart extends AppCompatActivity {
                                 os_versions.add(feed);
 
 
-                                Boolean result = db.insert_server(os_versions.get(i).getProductName(), os_versions.get(i).getPrice(), os_versions.get(i).getMrp(), os_versions.get(i).getQuantity(), os_versions.get(i).getDiscount(), os_versions.get(i).getCartID(), os_versions.get(i).getProductImage(), objj.getString("deliveryCharge"));
+                                Boolean result = db.insert_server(os_versions.get(i).getProductName(), os_versions.get(i).getPrice(), os_versions.get(i).getMrp(), os_versions.get(i).getQuantity(), os_versions.get(i).getCardID(), os_versions.get(i).getCartID(), os_versions.get(i).getProductImage(), objj.getString("deliveryCharge"));
                                 Log.d("fffffff", String.valueOf(result));
 
-                                total_price_items = total_price_items + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
+                                total_price_items = total_price_items +  Integer.parseInt(feed.getPrice());
 
-                                grand_total = grand_total + Integer.parseInt(feed.getQuantity()) * Integer.parseInt(feed.getPrice());
+                                grand_total = grand_total + Integer.parseInt(feed.getPrice());
                                 tot_price_items.setText("\u20B9" + total_price_items);
 
 

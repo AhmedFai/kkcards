@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                                 feed.setProductID(c.getString(c.getColumnIndex("product_id")));
                                                                 feed.setQuantity(c.getString(c.getColumnIndex("quantity")));
-                                                                feed.setCardID(pref.getString("cardKiId",""));
+                                                                feed.setCardID(c.getString(c.getColumnIndex("discount")));
                                                                 feed.setPrice(c.getString(c.getColumnIndex("regular_price")));
 
                                                                 os_versions.add(feed);

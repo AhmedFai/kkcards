@@ -571,7 +571,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     });
 
 
-                        } else {
+                        } /*else {
 
 
                             Intent i = new Intent(getApplicationContext(), youtube_video.class);
@@ -579,7 +579,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                             startActivity(i);
 
                             Log.d("video_path", path_list.get(position));
-                        }
+                        }*/
 
 
                         // TODO Handle item click
