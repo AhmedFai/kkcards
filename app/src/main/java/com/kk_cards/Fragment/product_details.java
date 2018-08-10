@@ -936,7 +936,7 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                                     product_id = objj.getString("productID");
                                     image = objj.getString("productImage");
                                     path_list.add(objj.getString("productImage"));
-                                    fname_list.add("productImage");
+                                    fname_list.add("Image");
 
                               /*      if (session.isLoggedIn() == true) {
 
@@ -1067,6 +1067,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
                                     if (!"no_images".equals(getIntent().getStringExtra("image_path"))) {
 //                                     Log.d("dhdhjdj",getIntent().getStringExtra("image_path"));
+
+                                        Log.d("asdasasdsad" , getIntent().getStringExtra("image_path"));
+
                                         Picasso.with(getApplicationContext())
                                                 .load(getIntent().getStringExtra("image_path")).into(product_image);
 
@@ -1133,10 +1136,15 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
                             if (obj.has("media")) {
                                 JSONArray media_array = obj.getJSONArray("media");
 
+                                //path_list.add(getIntent().getStringExtra("image_path"));
+
+
+
+                                //fname_list.add(getIntent().getStringExtra("Image"));
 
                                 for (int i = 0; i < media_array.length(); i++) {
                                     JSONObject objj = media_array.getJSONObject(i);
-
+                                    Log.d("asdasdasd123" , String.valueOf(media_array.length()));
 
                                     path_list.add(objj.getString("mediaName"));
                                     fname_list.add(objj.getString("mediaType"));

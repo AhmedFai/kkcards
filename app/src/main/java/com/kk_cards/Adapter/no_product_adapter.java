@@ -64,8 +64,6 @@ public class no_product_adapter extends RecyclerView.Adapter<no_product_adapter.
         {
             image_list.add(path_list.get(position));
             Picasso.with(mContext).load(path_list.get(position)).placeholder(R.drawable.load).fit().into(viewHolder.cat_image);
-
-
         }
 
         /*else
