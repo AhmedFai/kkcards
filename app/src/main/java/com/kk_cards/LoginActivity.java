@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     int MODE_PRIVATE;
     @BindView(R.id.cbShowPwd)
     CheckBox cbShowPwd;
-    String otp;
+    String otp,chek;
 
     ArrayList<ItemData> os_versions;
 
@@ -75,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManagement(getApplicationContext());
 
         pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
+        chek = getIntent().getStringExtra("checkOut");
 
 
         cbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -251,7 +253,7 @@ public class LoginActivity extends AppCompatActivity {
                                             // Staring MainActivity
 
 
-                                           // display_address(Config.Base_Url + "/API/addressApi.php?mobile=" + obj.getString("mobile"));
+                                            //display_address(Config.Base_Url + "/API/addressApi.php?mobile=" + obj.getString("mobile"));
 
 
 
@@ -265,7 +267,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 startActivity(i);
 
 
-                                            }*/  if ("add_to_cart".equals(pref.getString("from_where", null))) {
+                                            }*/  if ("checkout".equals(chek)) {
 
                                                 Log.d("checkLOGIN", "add to cart");
                                                 Intent i = new Intent(getApplicationContext(), check_out_activity.class);
@@ -455,13 +457,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                 SharedPreferences pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-                                if ("buy_now".equals(pref.getString("from_where", null))) {
+                                /*if ("buy_now".equals(pref.getString("from_where", null))) {
 
                                     Intent i1 = new Intent(getApplicationContext(), check_out_buy_now.class);
                                     startActivity(i1);
 
 
-                                } else if ("add_to_cart".equals(pref.getString("from_where", null))) {
+                                }*/  if ("add_to_cart".equals(pref.getString("from_where", null))) {
                                     Intent i1 = new Intent(getApplicationContext(), check_out_activity.class);
                                     startActivity(i1);
 
@@ -479,13 +481,13 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             SharedPreferences pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-                            if ("buy_now".equals(pref.getString("from_where", null))) {
+                            /*if ("buy_now".equals(pref.getString("from_where", null))) {
 
                                 Intent i1 = new Intent(getApplicationContext(), check_out_buy_now.class);
                                 startActivity(i1);
 
 
-                            } else if ("add_to_cart".equals(pref.getString("from_where", null))) {
+                            }*/ if ("add_to_cart".equals(pref.getString("from_where", null))) {
                                 Intent i1 = new Intent(getApplicationContext(), check_out_activity.class);
                                 startActivity(i1);
 

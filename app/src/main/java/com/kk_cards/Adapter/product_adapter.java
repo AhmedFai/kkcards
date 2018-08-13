@@ -133,6 +133,7 @@ public class product_adapter extends RecyclerView.Adapter {
                 ((StudentViewHolder)viewHolder).price_cut.setText("\u20B9"+fp.getMrp());
                 ((StudentViewHolder)viewHolder).price.setText("\u20B9"+fp.getPrice());
                 ((StudentViewHolder)viewHolder).code.setText("Code: "+fp.getProductID());
+                //Log.d("product ka name bhai", fp.getProductName());
                 //((StudentViewHolder)viewHolder).discount.setText(fp.getDiscount()+"% off");
 
                 Picasso.with(mContext).load(fp.getProductImage()).into(((StudentViewHolder)viewHolder).image);

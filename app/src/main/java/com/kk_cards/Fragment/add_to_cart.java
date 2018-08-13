@@ -387,12 +387,13 @@ public class add_to_cart extends AppCompatActivity {
 
 
         } else {
-            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            /*SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
             editor.putString("from_where","add_to_cart");
-            editor.apply();
+            editor.apply();*/
 
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            i.putExtra("checkOut","checkout");
             startActivity(i);
             finish();
 

@@ -169,8 +169,10 @@ public class add_new_address extends Fragment {
             name.setError("Please fill necessary details");
        else if(phone.length()==0)
             phone.setError("Please fill necessary details");
-        else if (phone.length() < 9 || phone.length() > 9)
+        else if (phone.length() > 10 || phone.length() < 10){
+            phone.requestFocus();
             phone.setError("Enter Valid Number");
+        }
       else   if(address_type==null)
             Toast.makeText(getActivity(), "Please Choose address type", Toast.LENGTH_SHORT).show();
 

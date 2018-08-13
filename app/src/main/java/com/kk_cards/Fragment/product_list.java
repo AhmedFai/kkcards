@@ -165,6 +165,8 @@ public class product_list extends AppCompatActivity {
 
                             if(product_list.length()>10) {
 
+                                Log.d("LOGP","tenth value");
+
                                 for (int i = 0; i < product_list.length(); i++) {
                                     ItemData feed = new ItemData();
                                     JSONObject objj = product_list.getJSONObject(i);
@@ -173,6 +175,9 @@ public class product_list extends AppCompatActivity {
                                     feed.setCategoryID(objj.getString("categoryID"));
                                     feed.setProductName(objj.getString("productName"));
                                     feed.setProductImage(objj.getString("productImage"));
+
+
+                                    Log.d("productssssss", objj.getString("productName"));
 
                                    // feed.setDiscount(objj.getString("discount"));
 
@@ -277,6 +282,7 @@ public class product_list extends AppCompatActivity {
                             }
                             else
                             {
+                                Log.d("LOGP","eleventh value");
 
 
                                     for (int i = 0; i < product_list.length(); i++) {
@@ -284,9 +290,11 @@ public class product_list extends AppCompatActivity {
                                         JSONObject objj = product_list.getJSONObject(i);
 
                                         feed.setProductID(objj.getString("productID"));
-                                        feed.setProductImage(objj.getString("productName"));
+                                        feed.setProductName(objj.getString("productName"));
                                         feed.setProductImage(objj.getString("productImage"));
                                         feed.setCategoryID(objj.getString("categoryID"));
+
+                                        Log.d("eleventhProduct", objj.getString("productName"));
 
                                         feed.setMrp(objj.getString("mrp"));
 
@@ -334,6 +342,8 @@ public class product_list extends AppCompatActivity {
                             }
 
                         } catch (JSONException e) {
+
+                            Log.d("LOGP","twelth value");
 
                             mAdapter.setVisibility(View.GONE);
 

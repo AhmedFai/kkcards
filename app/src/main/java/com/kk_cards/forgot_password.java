@@ -251,6 +251,7 @@ public class forgot_password extends AppCompatActivity {
 
                                                 Intent i=new Intent(getApplicationContext(),LoginActivity.class);
                                                 startActivity(i);
+                                                finish();
 
 
 

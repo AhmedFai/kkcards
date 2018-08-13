@@ -403,7 +403,7 @@ public class display_add_adapter extends RecyclerView.Adapter<display_add_adapte
             super(view);
             ButterKnife.bind(this, view);
 
-            view.setOnClickListener(new View.OnClickListener() {
+            radioButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     lastCheckedPosition = getAdapterPosition();

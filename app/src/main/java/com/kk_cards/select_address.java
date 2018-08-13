@@ -139,13 +139,23 @@ public class select_address extends AppCompatActivity {
 
 
           SharedPreferences pref =getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+          if("no".equals(pref.getString("radio_select",null)))
+          {
+              Toast.makeText(getApplicationContext(),"Please Select Address",Toast.LENGTH_LONG).show();
 
+          }else {
+              Intent i = new Intent(getApplicationContext(), payment_page.class);
+              // i.putExtra("check_vall", "cart");
 
-          Intent i = new Intent(getApplicationContext(), payment_page.class);
+              startActivity(i);
+              finish();
+          }
+
+          /*Intent i = new Intent(getApplicationContext(), payment_page.class);
          // i.putExtra("check_vall", "cart");
 
           startActivity(i);
-          finish();
+          finish();*/
 
 
       }

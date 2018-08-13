@@ -181,6 +181,7 @@ public class SignupActivity extends AppCompatActivity {
                                                 Toast.makeText(SignupActivity.this, "Registered Successfuly", Toast.LENGTH_SHORT).show();
                                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                                 startActivity(i);
+                                                finish();
 
                                             } else {
 

@@ -52,6 +52,7 @@ import com.kk_cards.Config;
 import com.kk_cards.Database.DatabaseHandler;
 import com.kk_cards.Listener.RecyclerItemClickListener;
 import com.kk_cards.LoginActivity;
+import com.kk_cards.MainActivity;
 import com.kk_cards.Modal.ItemData;
 import com.kk_cards.NonScrollListView;
 import com.kk_cards.R;
@@ -1368,7 +1369,9 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
 
         if (id == android.R.id.home) {
-            finish();
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
 
         } else if (item.getItemId() == R.id.action_search) {
             Intent i = new Intent(this, search_activity.class);

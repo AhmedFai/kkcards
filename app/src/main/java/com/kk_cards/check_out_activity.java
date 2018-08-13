@@ -54,9 +54,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-
-
-
 /**
  * Created by pooja on 7/19/2017.
  */
@@ -88,7 +85,6 @@ public class check_out_activity extends AppCompatActivity {
     ProgressBar progressBar;
 
 
-
     int grand_total = 0;
 
     @BindView(R.id.no_item)
@@ -110,24 +106,25 @@ public class check_out_activity extends AppCompatActivity {
 
     @BindView(R.id.pric_r_layout)
     RelativeLayout pric_r_layout;
-     private String MY_PREFS_NAME ;
+    private String MY_PREFS_NAME;
     int MODE_PRIVATE;
 
     @BindView(R.id.linearrr)
     LinearLayout linear;
 
-    String cart_counter_real=null;
+    String cart_counter_real = null;
 
     public static TextView total_amt;
-    public static TextView   tot_price_items;
+    public static TextView tot_price_items;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart);
         ButterKnife.bind(this);
         session = new SessionManagement(getApplicationContext());
-        total_amt=(TextView) findViewById(R.id.total);
-        tot_price_items=(TextView) findViewById(R.id.tot_price_items);
+        total_amt = (TextView) findViewById(R.id.total);
+        tot_price_items = (TextView) findViewById(R.id.tot_price_items);
 
         //   MainActivity.footer.setVisibility(View.GONE);
 
@@ -141,61 +138,50 @@ public class check_out_activity extends AppCompatActivity {
         }
 
 
-
-
-
         pric_r_layout.setVisibility(View.GONE);
 
         this.setTitle("Checkout");
 
 
-
-            getcart_data(Config.Base_Url+"/API/fetchCartApi.php");
-
+        getcart_data(Config.Base_Url + "/API/fetchCartApi.php");
 
 
         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-        editor.putString("buy_now_or_cart","cart");
+        editor.putString("buy_now_or_cart", "cart");
         editor.commit();
 
 
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        if ("price_update".equals(prefs.getString("check_value", null))) {
+            total_amt.setText(prefs.getString("check_value", null));
+            tot_price_items.setText("\u20B9" + prefs.getString("check_value", null));
 
-            if ("price_update".equals(prefs.getString("check_value", null))) {
-                total_amt.setText(prefs.getString("check_value", null));
-                tot_price_items.setText("\u20B9"+prefs.getString("check_value",null));
-
-            }
-
-
-            linear.setVisibility(View.VISIBLE);
+        }
 
 
-            name.setText(prefs.getString("name", null));
-            phone.setText(prefs.getString("phone", null));
-            addressss.setText(prefs.getString("address", null));
+        linear.setVisibility(View.VISIBLE);
 
 
-            if(prefs.getString("name", null)==null)
-            {
-                name.setVisibility(View.GONE);
-                phone.setVisibility(View.GONE);
-                addressss.setVisibility(View.GONE);
+        name.setText(prefs.getString("name", null));
+        phone.setText(prefs.getString("phone", null));
+        addressss.setText(prefs.getString("address", null));
 
-            }
 
-        if(name.getText().toString()==null||name.getText().toString()=="")
-        {
+        if (prefs.getString("name", null) == null) {
+            name.setVisibility(View.GONE);
+            phone.setVisibility(View.GONE);
+            addressss.setVisibility(View.GONE);
+
+        }
+
+        if (name.getText().toString() == null || name.getText().toString() == "") {
 
             chage_add.setText("Add Address");
-        }
-        else
-        {
+        } else {
             chage_add.setText("Change or Add Address");
 
         }
-
 
 
     }
@@ -205,88 +191,73 @@ public class check_out_activity extends AppCompatActivity {
 
     {
 
-         if(name.getText().toString()==null||name.getText().toString()=="")
-         {
-             Toast.makeText(this, "Please choose a address", Toast.LENGTH_SHORT).show();
-         }
+        if (name.getText().toString() == null || name.getText().toString() == "") {
+            Toast.makeText(this, "Please choose a address", Toast.LENGTH_SHORT).show();
+        } else {
 
-         else {
+            android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(check_out_activity.this);
+            alertDialogBuilder.setMessage("Is your Shipping Address and Billing Address Same?");
+            alertDialogBuilder.setPositiveButton("NO",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
 
-             android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(check_out_activity.this);
-             alertDialogBuilder.setMessage("Is your Shipping Address and Billing Address Same?");
-             alertDialogBuilder.setPositiveButton("NO",
-                     new DialogInterface.OnClickListener() {
-                         @Override
-                         public void onClick(DialogInterface arg0, int arg1) {
+                            Intent i = new Intent(getApplicationContext(), select_address.class);
+                            i.putExtra("address", "billing_address");
+                            i.putExtra("check", getIntent().getStringExtra("check"));
 
-                             Intent i = new Intent(getApplicationContext(), select_address.class);
-                             i.putExtra("address","billing_address");
-                             i.putExtra("check",getIntent().getStringExtra("check"));
+                            startActivity(i);
+                            finish();
+                        }
+                    });
 
-                             startActivity(i);
-                             finish();
-                         }
-                     });
+            alertDialogBuilder.setNegativeButton("YES",
+                    new DialogInterface.OnClickListener() {
 
-             alertDialogBuilder.setNegativeButton("YES",
-                     new DialogInterface.OnClickListener() {
-
-                         @Override
-                         public void onClick(DialogInterface arg0, int arg1) {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
 
 
-                             final ProgressDialog progressDialog = new ProgressDialog(check_out_activity.this,
-                                     R.style.AppTheme_Dark_Dialog);
-                             progressDialog.setIndeterminate(true);
-                             progressDialog.setMessage("Please Wait.....");
-                             progressDialog.show();
+                            final ProgressDialog progressDialog = new ProgressDialog(check_out_activity.this,
+                                    R.style.AppTheme_Dark_Dialog);
+                            progressDialog.setIndeterminate(true);
+                            progressDialog.setMessage("Please Wait.....");
+                            progressDialog.show();
 
 
-                             // TODO: Implement your own authentication logic here.
+                            // TODO: Implement your own authentication logic here.
 
-                             new android.os.Handler().postDelayed(
-                                     new Runnable() {
-                                         public void run() {
-
-
+                            new android.os.Handler().postDelayed(
+                                    new Runnable() {
+                                        public void run() {
 
 
-                                             Intent i = new Intent(getApplicationContext(), payment_page.class);
+                                            Intent i = new Intent(getApplicationContext(), payment_page.class);
                                             /* i.putExtra("no_of_items", no_item.getText().toString());
                                              i.putExtra("delivery", del_price.getText().toString());*/
-                                             i.putExtra("check_vall", "cart");
-                                             startActivity(i);
-                                             finish();
-                                             // onLoginFailed();
-                                             progressDialog.dismiss();
-                                         }
-                                     }, 3000);
+                                            i.putExtra("check_vall", "cart");
+                                            startActivity(i);
+                                            finish();
+                                            // onLoginFailed();
+                                            progressDialog.dismiss();
+                                        }
+                                    }, 3000);
 
 
-
-
-
-                         }
-                     });
+                        }
+                    });
 
                           /*
                          }
                      });*/
 
-             android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
-             alertDialog.show();
+            android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
 
 
-
-
-
-         }
+        }
 
     }
-
-
-
-
 
 
     @OnClick(R.id.chage_add)
@@ -295,10 +266,10 @@ public class check_out_activity extends AppCompatActivity {
     {
 
         Intent i = new Intent(getApplicationContext(), select_address.class);
-        i.putExtra("address","shipping_address");
-        i.putExtra("check_valuee","cart_to_buy");
+        i.putExtra("address", "shipping_address");
+        i.putExtra("check_valuee", "cart_to_buy");
         startActivity(i);
-      finish();
+        finish();
     }
 
     public void getcart_data(String url) {
@@ -310,7 +281,7 @@ public class check_out_activity extends AppCompatActivity {
                     public void onResponse(String response) {
                         hidePDialog();
 
-                        DatabaseHandler db=new DatabaseHandler(getApplicationContext());
+                        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
                         db.delete_cart_table_server();
                         Log.d("detalllllllllllll", response);
@@ -318,12 +289,9 @@ public class check_out_activity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
 
 
-
-
-
                             JSONArray product_list = obj.getJSONArray("cart");
 
-                            int total_del=0,total_price_items=0;
+                            int total_del = 0, total_price_items = 0;
                             for (int i = 0; i < product_list.length(); i++) {
                                 ItemData feed = new ItemData();
                                 JSONObject objj = product_list.getJSONObject(i);
@@ -339,49 +307,43 @@ public class check_out_activity extends AppCompatActivity {
                                 feed.setDeliveryCharge(objj.getString("deliveryCharge"));
                                 feed.setTot_quantity(objj.getString("productBalance"));
 
-                                total_del=total_del+Integer.parseInt(feed.getDeliveryCharge());
+                                total_del = total_del + Integer.parseInt(feed.getDeliveryCharge());
 
 
-
-                               // int discount = Integer.parseInt(objj.getString("discount"));
+                                // int discount = Integer.parseInt(objj.getString("discount"));
                                 int price = Integer.parseInt(objj.getString("price"));
 
 
-                               // int price_cut = (100 - discount) * price / 100;
+                                // int price_cut = (100 - discount) * price / 100;
                                 feed.setPrice(objj.getString("price"));
-                               // feed.setPrice_cut(String.valueOf(price_cut));
-                               // feed.setDiscount(String.valueOf(discount));
+                                // feed.setPrice_cut(String.valueOf(price_cut));
+                                // feed.setDiscount(String.valueOf(discount));
 
                                 os_versions.add(feed);
 
-                                Boolean result=  db.insert_server(os_versions.get(i).getProductName(),os_versions.get(i).getPrice(),os_versions.get(i).getPrice_cut(),os_versions.get(i).getQuantity(),os_versions.get(i).getDiscount(),os_versions.get(i).getCartID(),os_versions.get(i).getProductImage(),objj.getString("deliveryCharge"));
+                                Boolean result = db.insert_server(os_versions.get(i).getProductName(), os_versions.get(i).getPrice(), os_versions.get(i).getPrice_cut(), os_versions.get(i).getQuantity(), os_versions.get(i).getDiscount(), os_versions.get(i).getCartID(), os_versions.get(i).getProductImage(), objj.getString("deliveryCharge"));
                                 Log.d("fffffff", String.valueOf(result));
 
                                 total_price_items = total_price_items + Integer.parseInt(feed.getPrice());
 
                                 grand_total = grand_total + Integer.parseInt(feed.getPrice());
-                                tot_price_items.setText("\u20B9"+total_price_items);
+                                tot_price_items.setText("\u20B9" + total_price_items);
 
 
-
-
-
-
-                                grand_total=grand_total+Integer.valueOf(objj.getString("deliveryCharge"));
+                                grand_total = grand_total + Integer.valueOf(objj.getString("deliveryCharge"));
 
                                 SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                                editor.putInt("total_price",grand_total);
-                                editor.putInt("total_price_with_del",total_price_items);
+                                editor.putInt("total_price", grand_total);
+                                editor.putInt("total_price_with_del", total_price_items);
 
-                                editor.putString("check_value","");
+                                editor.putString("check_value", "");
 
 
                                 editor.commit();
 
                                 SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-                                total_amt.setText("\u20B9"+prefs.getInt("total_price",0));
-                                no_item.setText("Price("+os_versions.size()+" items)");
-
+                                total_amt.setText("\u20B9" + prefs.getInt("total_price", 0));
+                                no_item.setText("Price(" + os_versions.size() + " items)");
 
 
                                 //   total_amt.setText("Total: " + "Rs." + grand_total);
@@ -391,10 +353,9 @@ public class check_out_activity extends AppCompatActivity {
                                 //
 
 
-
                             }
 
-                            del_price.setText(" \u20B9"+total_del);
+                            del_price.setText(" \u20B9" + total_del);
 
                             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                             editor.putString("delivery_price", del_price.getText().toString());
@@ -402,12 +363,8 @@ public class check_out_activity extends AppCompatActivity {
                             editor.commit();
 
 
-
-
-
-
                             gridLayoutManager = new GridLayoutManager(check_out_activity.this, GridLayoutManager.VERTICAL);
-                            mAdapter1 = new cart_adapter(check_out_activity.this, os_versions, "check_out","");
+                            mAdapter1 = new cart_adapter(check_out_activity.this, os_versions, "check_out", "");
                             mAdapter.setHasFixedSize(true);
                             // mAdapter.setLayoutManager(new StaggeredGridLayoutManager(2,1)); for tils
 
@@ -492,7 +449,7 @@ public class check_out_activity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         View menu_item_cart = menu.findItem(R.id.cart).getActionView();
-       final TextView cartcounterTV = (TextView) menu_item_cart.findViewById(R.id.cartcounter);
+        final TextView cartcounterTV = (TextView) menu_item_cart.findViewById(R.id.cartcounter);
         ImageView cart_icon = (ImageView) menu_item_cart.findViewById(R.id.carticon);
 
 
@@ -503,9 +460,6 @@ public class check_out_activity extends AppCompatActivity {
 
         return true;
     }
-
-
-
 
 
     @Override
@@ -533,15 +487,16 @@ public class check_out_activity extends AppCompatActivity {
 
         }
     }
+
     @Override
     protected void onPause() {
 
 
-        os_versions=new ArrayList<>();
-        DatabaseHandler db=new DatabaseHandler(getApplicationContext());
+        os_versions = new ArrayList<>();
+        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
         Cursor c = db.getall_data_server();
 
-        int count=db.count_rows();
+        int count = db.count_rows();
         Log.d("countt", String.valueOf(count));
 
 
@@ -556,7 +511,7 @@ public class check_out_activity extends AppCompatActivity {
                     feed.setQuantity(c.getString(c.getColumnIndex("quantity")));
 
 
-                    Log.d("quantityyy",feed.getQuantity());
+                    Log.d("quantityyy", feed.getQuantity());
                     os_versions.add(feed);
                 }
                 while (c.moveToNext());
@@ -572,45 +527,37 @@ public class check_out_activity extends AppCompatActivity {
             Collection<JSONObject> items = new ArrayList<JSONObject>();
 
 
-
-
-            for(int i=0;i<os_versions.size();i++) {
+            for (int i = 0; i < os_versions.size(); i++) {
 
                 JSONObject item1 = new JSONObject();
                 item1.put("tempid", os_versions.get(i).getCartID());
-                item1.put("quantity",os_versions.get(i).getQuantity());
+                item1.put("quantity", os_versions.get(i).getQuantity());
                 items.add(item1);
             }
 
             jo.put("cart_data", new JSONArray(items));
             System.out.println(jo.toString());
-        }
-
-        catch(Exception e)
-        {
+        } catch (Exception e) {
 
 
         }
 
-        add_cart(String.valueOf(jo),new CallBack() {
+        add_cart(String.valueOf(jo), new CallBack() {
             @Override
             public void onSuccess(String data) {
 
-                Log.d("loginnnnninnnter",data);
+                Log.d("loginnnnninnnter", data);
                 try {
-                    JSONObject obj=new JSONObject(data);
-                    String success_val=obj.getString("success");
+                    JSONObject obj = new JSONObject(data);
+                    String success_val = obj.getString("success");
 
-                    if ("true".equals(success_val))
-                    {
+                    if ("true".equals(success_val)) {
 
 
                         //                Toast.makeText(add_to_cart.this, " added in cart", Toast.LENGTH_SHORT).show();
 
 
-                    }
-                    else
-                    {
+                    } else {
 
                         //       Toast.makeText(add_to_cart.this, "not added", Toast.LENGTH_SHORT).show();
 
@@ -622,8 +569,7 @@ public class check_out_activity extends AppCompatActivity {
                 }
 
 
-
-                Log.d("jhvfff",data);
+                Log.d("jhvfff", data);
 
 
                 //    Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
@@ -639,22 +585,18 @@ public class check_out_activity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
         super.onPause();
     }
-    private void add_cart(final String cart_data, final CallBack onCallBack){
+
+    private void add_cart(final String cart_data, final CallBack onCallBack) {
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url+"/API/updateCartApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.Base_Url + "/API/updateCartApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         onCallBack.onSuccess(response);
-                        Log.d("derailss",response);
+                        Log.d("derailss", response);
 
                         //  callback.onSuccessResponse(response);
                       /*  SharedPreferences.Editor editor =getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
@@ -669,11 +611,11 @@ public class check_out_activity extends AppCompatActivity {
                         //  Toast.makeText(getActivity(), "Please check your network connection and try again", Toast.LENGTH_SHORT).show();
 
                     }
-                }){
+                }) {
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("cart",cart_data);
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("cart", cart_data);
                 params.put("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
 
                 return params;
