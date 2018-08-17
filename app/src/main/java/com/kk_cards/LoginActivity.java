@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         session = new SessionManagement(getApplicationContext());
+        os_versions = new ArrayList<ItemData>();
 
         pref = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
@@ -463,13 +464,16 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(i1);
 
 
-                                }*/  if ("add_to_cart".equals(pref.getString("from_where", null))) {
-                                    Intent i1 = new Intent(getApplicationContext(), check_out_activity.class);
-                                    startActivity(i1);
+                                }*/  if ("checkout".equals(chek)) {
+
+                                    Log.d("checkLOGIN", "add to cart");
+                                    Intent l = new Intent(getApplicationContext(), check_out_activity.class);
+                                    startActivity(l);
 
                                 } else {
-                                    Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(i1);
+                                    Log.d("checkLOGIN", "main");
+                                    Intent m = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(m);
                                     finish();
 
                                 }

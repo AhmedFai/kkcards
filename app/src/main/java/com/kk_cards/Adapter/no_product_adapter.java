@@ -66,7 +66,7 @@ public class no_product_adapter extends RecyclerView.Adapter<no_product_adapter.
             Picasso.with(mContext).load(path_list.get(position)).placeholder(R.drawable.load).fit().into(viewHolder.cat_image);
         }
 
-        /*else
+        else
           {
 
               video_path=path_list.get(position);
@@ -75,7 +75,7 @@ public class no_product_adapter extends RecyclerView.Adapter<no_product_adapter.
                       .into(viewHolder.cat_image);
 
 
-          }*/
+          }
 
           Log.d("image_size", String.valueOf(image_list.size())) ;
 
