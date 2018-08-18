@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -78,7 +79,7 @@ public class Home extends Fragment {
     @BindView(R.id.linear_layout)
     LinearLayout linear_layout;
     @BindView(R.id.scroll)
-    ScrollView scroll;
+    NestedScrollView scroll;
 
 
     @BindView(R.id.latset_linesr)

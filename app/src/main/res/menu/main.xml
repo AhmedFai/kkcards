@@ -5,7 +5,7 @@
     tools:context=".MainActivity">
  <item
      android:id="@+id/action_search"
-     android:icon="@drawable/searchhh"
+     android:icon="@drawable/glass"
      app:showAsAction="always"
      android:title="Search"/>
 
@@ -13,7 +13,7 @@
      android:id="@+id/cart"
      app:actionLayout="@layout/action_cart_layout"
      android:title="carttt"
-     android:icon="@drawable/cart"
+     android:icon="@drawable/shopping"
      android:orderInCategory="100"
      app:showAsAction="ifRoom"/>
 

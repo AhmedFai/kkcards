@@ -9,9 +9,9 @@
     style="@android:style/Widget.ActionButton">
     <ImageView
         android:id="@+id/carticon"
-        android:src="@drawable/cart"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:src="@drawable/shopping"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:gravity="center"
         android:contentDescription="carttttt" />
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"

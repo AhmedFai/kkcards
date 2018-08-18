@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -38,6 +39,7 @@ import com.kk_cards.Database.DatabaseHandler;
 import com.kk_cards.Fragment.Home;
 import com.kk_cards.Fragment.add_to_cart;
 import com.kk_cards.Fragment.category_fragment;
+import com.kk_cards.Fragment.discovery;
 import com.kk_cards.Fragment.my_account;
 import com.kk_cards.Fragment.my_orders;
 import com.kk_cards.Fragment.product_list;
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity
         id_list = new ArrayList<String>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setBackgroundColor(Color.parseColor("#f5f5f5"));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -235,6 +238,14 @@ public class MainActivity extends AppCompatActivity
                     mFragmentManager = getSupportFragmentManager();
                     mFragmentTransaction = mFragmentManager.beginTransaction();
                     mFragmentTransaction.replace(R.id.containerView, grid1).addToBackStack(null).commit();
+
+                    return true;
+
+                case R.id.discovery:
+                    discovery grid2 = new discovery();
+                    mFragmentManager = getSupportFragmentManager();
+                    mFragmentTransaction = mFragmentManager.beginTransaction();
+                    mFragmentTransaction.replace(R.id.containerView, grid2).addToBackStack(null).commit();
 
                     return true;
 
@@ -422,7 +433,7 @@ public class MainActivity extends AppCompatActivity
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT,
-                    "Hey check out my app at: https://play.google.com/store/apps/details?id=com.active_india");
+                    "Hey check out my app at: https://play.google.com/store/apps/details?id=com.kk_cards");
             sendIntent.setType("text/plain");
             startActivity(sendIntent);
 

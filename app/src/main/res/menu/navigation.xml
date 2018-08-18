@@ -12,6 +12,12 @@
         android:title="Category" />
 
     <item
+        android:id="@+id/discovery"
+        android:icon="@drawable/compass"
+        android:title="Discovery" />
+
+
+    <item
         android:id="@+id/videos"
         android:icon="@drawable/play"
         android:title="Demo" />
