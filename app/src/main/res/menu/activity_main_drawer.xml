@@ -10,32 +10,32 @@
 
        <item
            android:id="@+id/home"
-           android:icon="@drawable/home"
+           android:icon="@drawable/homec"
            android:title="Home" />
         <item
             android:id="@+id/my_account"
-            android:icon="@drawable/account"
+            android:icon="@drawable/avatar"
             android:title="My Account" />
        <item
            android:id="@+id/my_cart"
-           android:icon="@drawable/cart_black"
+           android:icon="@drawable/shopc"
            android:title="My Cart" />
        <item
            android:id="@+id/my_orders"
-           android:icon="@drawable/order"
+           android:icon="@drawable/shop"
            android:title="My Orders" />
        <item
            android:id="@+id/log_out"
-           android:icon="@drawable/log_out"
+           android:icon="@drawable/logoutc"
            android:title="Log Out" />
 
        <item
            android:id="@+id/share"
-           android:icon="@drawable/share"
+           android:icon="@drawable/sharec"
            android:title="Share" />
        <item
            android:id="@+id/rate"
-           android:icon="@drawable/rate"
+           android:icon="@drawable/rating"
            android:title="Rate Us" />
 
 

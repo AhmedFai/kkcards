@@ -130,7 +130,7 @@
                 android:text="Change or Add Address"
                 android:layout_margin="@dimen/dim_10"
                 android:id="@+id/chage_add"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 android:textColor="@color/list_item_title"/>
         </LinearLayout>
     </android.support.v7.widget.CardView></LinearLayout>

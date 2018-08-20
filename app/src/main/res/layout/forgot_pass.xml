@@ -29,7 +29,7 @@
             android:padding="12dp"
             android:textColor="@color/list_item_title"
             android:text="Submit"
-            android:background="@color/colorPrimary"/>
+            android:background="#e7a648"/>
 
         <TextView
             android:id="@+id/resent_otp"
@@ -38,7 +38,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dim_20"
             android:text="Resend OTP"
-            android:textColor="@color/colorPrimary"
+            android:textColor="#e7a648"
             android:textSize="@dimen/dim_15"
             android:visibility="gone"
             />

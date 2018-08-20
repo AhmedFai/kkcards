@@ -1,12 +1,17 @@
 package com.kk_cards.Adapter;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kk_cards.ExoPlayer;
@@ -20,13 +25,12 @@ import java.util.List;
 public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.MyViewHolder> {
 
 
-
     Context context;
     private List<Video> list;
 
     public video_list_adapter(Context context, List<Video> list) {
         this.context = context;
-       this.list=list;
+        this.list = list;
     }
 
 
@@ -44,12 +48,21 @@ public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.
 
         Picasso.with(context).load(video.getThumbnail()).fit().into(holder.title);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.vid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, ExoPlayer.class);
-                i.putExtra("link",video.getVurl());
+                i.putExtra("link", video.getVurl());
                 context.startActivity(i);
+            }
+        });
+
+        holder.call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phone = "+919650823988";
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                context.startActivity(intent);
             }
         });
 
@@ -66,13 +79,16 @@ public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView title;
-        TextView text;
+        TextView text,call;
+        LinearLayout vid;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             title = (ImageView)itemView.findViewById(R.id.cover);
             text = (TextView)itemView.findViewById(R.id.titleText);
+            vid = (LinearLayout)itemView.findViewById(R.id.video);
+            call = (TextView)itemView.findViewById(R.id.call);
         }
     }
 }

@@ -14,7 +14,7 @@
     <item
         android:id="@+id/discovery"
         android:icon="@drawable/compass"
-        android:title="Discovery" />
+        android:title="Discover" />
 
 
     <item

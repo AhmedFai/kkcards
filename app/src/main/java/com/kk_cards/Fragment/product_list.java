@@ -2,6 +2,7 @@ package com.kk_cards.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -91,6 +92,8 @@ public class product_list extends AppCompatActivity {
         Log.d("sesssssss",getIntent().getStringExtra("id_value"));
 
         this.setTitle(getIntent().getStringExtra("sub_cat_name"));
+        this.setTitleColor(Color.parseColor("#e7a648"));
+
 
 
 

@@ -61,7 +61,7 @@
             android:padding="12dp"
             android:text="Login"
             android:textColor="@color/list_item_title"
-            android:background="@color/colorPrimary"/>
+            android:background="#e7a648"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             android:textAlignment="center"
             android:padding="@dimen/dim_5"
             android:textColor="@color/list_item_title"
-            android:background="@color/colorPrimary"
+            android:background="#e7a648"
             android:textSize="16dip"/>
 
         <TextView android:id="@+id/forgot_password"
@@ -91,7 +91,7 @@
             android:padding="@dimen/dim_5"
             android:layout_marginLeft="@dimen/dim_5"
             android:textColor="@color/list_item_title"
-            android:background="@color/colorPrimary"
+            android:background="#e7a648"
             android:textSize="16dip"/></LinearLayout>
 
     </LinearLayout>

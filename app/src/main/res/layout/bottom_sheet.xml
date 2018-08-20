@@ -101,7 +101,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="For Device"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="#e7a648" />
 
             <TextView
                 android:id="@+id/forLence"
@@ -113,7 +113,7 @@
                 android:padding="5dp"
 
                 android:text="For Lense"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="#e7a648" />
 
             <TextView
                 android:id="@+id/forBoth"
@@ -125,7 +125,7 @@
                 android:padding="5dp"
 
                 android:text="For Both"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="#e7a648" />
 
         </LinearLayout>
 
@@ -310,7 +310,7 @@
         android:id="@+id/add_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="#e7a648"
         android:text="PROCEED PAYMENT"
         android:visibility="gone"
         android:textColor="#fff" />

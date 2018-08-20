@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         id_list = new ArrayList<String>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(Color.parseColor("#f5f5f5"));
+        toolbar.setBackgroundColor(Color.parseColor("#874e25"));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -595,7 +595,7 @@ public class MainActivity extends AppCompatActivity
 */
                               /*  int id = getResources().getIdentifier(image_list.get(i), "drawable", getPackageName());
                                 Drawable drawable = getResources().getDrawable(id);*/
-                                menu.add(name_list.get(i)).setIcon(R.drawable.category);
+                                menu.add(name_list.get(i)).setIcon(R.drawable.squares);
                                 menu.setGroupCheckable(R.id.second_group, true, true);
                                 menu.setGroupVisible(R.id.second_group, true);
                             }

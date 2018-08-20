@@ -42,7 +42,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:background="@color/colorPrimary"
+        android:background="#e7a648"
         android:textColor="@color/list_item_title"
         android:text="Get OTP"/>
 
@@ -54,7 +54,7 @@
         android:layout_marginBottom="24dp"
         android:padding="12dp"
         android:visibility="gone"
-        android:background="@color/colorPrimary"
+        android:background="#e7a648"
         android:textColor="@color/list_item_title"
         android:text="Proceed"/>
 

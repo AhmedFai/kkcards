@@ -6,13 +6,24 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+      //  <!--<item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->
+        <item name="android:itemTextAppearance">@style/myCustomMenuTextApearance</item>
     </style>
 
-    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+    <style name="myCustomMenuTextApearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ToolBarTheme.ToolBarStyle"    parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimaryInverse">@color/colorPrimaryDark</item>
+    </style>
+
+   <!-- <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">#e7a648</item>
-    </style>
+    </style>-->
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -29,10 +40,10 @@
 
         <item name="android:windowBackground">@color/colorPrimary</item>
 
-        <item name="colorControlNormal">@color/counter_text_color</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
         <item name="colorControlActivated">@color/list_item_title</item>
         <item name="colorControlHighlight">@color/list_item_title</item>
-        <item name="android:textColorHint">@color/counter_text_color</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
 
         <item name="colorButtonNormal">@color/colorPrimaryDark</item>
 
