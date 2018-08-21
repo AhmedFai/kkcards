@@ -38,30 +38,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     SessionManagement session;
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
-    String title,msg;
+    String title, msg;
     private String MY_PREFS_NAME;
     int MODE_PRIVATE;
     ArrayList<String> name_list;
 
     HashMap<String, String> user;
 
-    @Override public void onMessageReceived(RemoteMessage remoteMessage) {
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
 
 
-        Log.d("message",remoteMessage.getData().get("title"));
+        Log.d("message", remoteMessage.getData().get("title"));
 
 
-        name_list=new ArrayList<>();
-        session=new SessionManagement(getApplicationContext());
+        name_list = new ArrayList<>();
+        session = new SessionManagement(getApplicationContext());
         user = session.getUserDetails();
 
 
         //Log.d("loginnnnnnnnn",session.getUserDetails().get(SessionManagement.KEY_NAME));
 
-        title=remoteMessage.getData().get("title");
-        msg=remoteMessage.getData().get("message");
+        title = remoteMessage.getData().get("title");
+        msg = remoteMessage.getData().get("message");
         name_list.add(title);
-
 
 
         // Log.d("notihddd",remoteMessage.getData().get("title"));
@@ -69,24 +69,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         //    int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
-        SharedPreferences.Editor editor =getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-        editor.putString("title_notification",title);
-        editor.putString("message_notification",msg);
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString("title_notification", title);
+        editor.putString("message_notification", msg);
         editor.commit();
 
 
-
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("video", "videoFragment");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1410,
                 intent, PendingIntent.FLAG_ONE_SHOT);
 
 
-
         NotificationCompat.Builder notificationBuilder = new
                 NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.logo)
-                .addAction(R.drawable.notification, "See All",pendingIntent)
+                .setSmallIcon(R.drawable.kk)
+                .addAction(R.drawable.notification, "See All", pendingIntent)
                 .setContentTitle(title)
                 .setContentText(msg)
                 .setAutoCancel(true)
@@ -97,25 +96,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationManager.notify(1410, notificationBuilder.build());
 
 
-
-
-
-
-
-
-
     }
 
     @Override
     public void onNewToken(String token) {
-        Log.d("Refreshedtoken" , token);
+        Log.d("Refreshedtoken", token);
 
         session = new SessionManagement(getApplicationContext());
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
-       // sendRegistrationToServer(token);
+        // sendRegistrationToServer(token);
         storeRegIdInPref(token);
 
 
@@ -136,20 +128,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         editor.commit();
 
 
-
     }
 
 
-    private void send_token(final String token){
-
-
+    private void send_token(final String token) {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://www.kkcardsdelhi.com/admin/API/deviceTokenApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("responseeeeeee",response);
+                        Log.d("responseeeeeee", response);
 
                         //  callback.onSuccessResponse(response);
                       /*  SharedPreferences.Editor editor =getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
@@ -164,12 +153,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         //  Toast.makeText(getActivity(), "Please check your network connection and try again", Toast.LENGTH_SHORT).show();
 
                     }
-                }){
+                }) {
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("mobile", session.getUserDetails().get(SessionManagement.KEY_MOBILE));
-                params.put("deviceToken",token);
+                params.put("deviceToken", token);
 
 
                 return params;
@@ -180,7 +169,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
-
 
 
 }

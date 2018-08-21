@@ -33,6 +33,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.kk_cards.Database.DatabaseHandler;
@@ -157,10 +158,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //String videoFragment = getIntent().getStringExtra("video");
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView, new Home()).commit();
+
+       /* if (videoFragment != null) {
+
+            // Here we can decide what do to -- perhaps load other parameters from the intent extras such as IDs, etc
+            if (videoFragment.equals("videoFragment")) {
+                videos_fragment favoritesFragment = new videos_fragment();
+                mFragmentTransaction.replace(android.R.id.content, favoritesFragment);
+            }
+        } else {
+            // Activity was not launched with a menuFragment selected -- continue as if this activity was opened from a launcher (for example)
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }*/
+
 
         displayFirebaseRegId();
 
