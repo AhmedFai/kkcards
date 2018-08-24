@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.kk_cards.ExoPlayer;
 import com.kk_cards.Modal.Video;
 import com.kk_cards.R;
+import com.littlechoc.cornerlabel.CornerLabel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -81,6 +82,7 @@ public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.
         ImageView title;
         TextView text,call;
         LinearLayout vid;
+        CornerLabel label;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -89,6 +91,7 @@ public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.
             text = (TextView)itemView.findViewById(R.id.titleText);
             vid = (LinearLayout)itemView.findViewById(R.id.video);
             call = (TextView)itemView.findViewById(R.id.call);
+           // label = (CornerLabel)itemView.findViewById(R.id.label);
         }
     }
 }

@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.github.tcking:giraffeplayer2:0.1.19-full'
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'com.littlechoc.cornerlabel:cornerlabel:1.0.0'
 
 }
 
