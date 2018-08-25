@@ -37,18 +37,17 @@ public class videos_fragment extends Fragment {
     private List<Video> video;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view  = inflater.inflate(R.layout.fragment_videos_fragment,container,false);
+        View view = inflater.inflate(R.layout.fragment_videos_fragment, container, false);
 
-        homeRecycler = (RecyclerView)view.findViewById(R.id.recycler);
+        homeRecycler = (RecyclerView) view.findViewById(R.id.recycler);
         manager = new GridLayoutManager(getContext(), 1);
         video = new ArrayList<>();
-        adapter = new video_list_adapter(getContext(),video);
+        adapter = new video_list_adapter(getContext(), video);
         homeRecycler.setLayoutManager(manager);
         homeRecycler.setAdapter(adapter);
 
@@ -59,9 +58,9 @@ public class videos_fragment extends Fragment {
 
     }
 
-    public void get_data(){
+    public void get_data() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.Base_Url+"/API/videoApi.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.Base_Url + "/API/videoApi.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -69,21 +68,16 @@ public class videos_fragment extends Fragment {
                         //video=new ArrayList<String>();
 
 
-
-
                         try {
-                            JSONObject obj=new JSONObject(response);
+                            JSONObject obj = new JSONObject(response);
 
 
-                            JSONArray arry=obj.getJSONArray("video");
+                            JSONArray arry = obj.getJSONArray("video");
 
 
+                            for (int i = 0; i < arry.length(); i++) {
 
-
-                            for(int i=0;i<arry.length();i++)
-                            {
-
-                                JSONObject objj=arry.getJSONObject(i);
+                                JSONObject objj = arry.getJSONObject(i);
 
                                 Video vid = new Video();
 
@@ -91,7 +85,7 @@ public class videos_fragment extends Fragment {
                                 vid.setThumbnail(objj.getString("thumbnail"));
                                 vid.setVurl(objj.getString("vurl"));
 
-                                Log.d("link",objj.getString("vurl"));
+                                Log.d("link", objj.getString("vurl"));
 
                                 video.add(vid);
 
@@ -119,11 +113,6 @@ public class videos_fragment extends Fragment {
                             adapter.notifyDataSetChanged();
 
 
-
-
-
-
-
                         } catch (JSONException e) {
 
                             //   linear_layout.setBackgroundResource(R.drawable.emptybag);
@@ -132,7 +121,6 @@ public class videos_fragment extends Fragment {
 
 
                         // Result handling
-
 
 
                     }
@@ -152,8 +140,6 @@ public class videos_fragment extends Fragment {
 
 
     }
-
-
 
 
 }

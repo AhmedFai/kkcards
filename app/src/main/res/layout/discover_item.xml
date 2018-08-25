@@ -4,10 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    app:cardElevation="2dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp">
+    android:layout_marginTop="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,26 +13,35 @@
         android:padding="10dp">
 
         <ImageView
+            android:id="@+id/back"
             android:layout_width="match_parent"
-            android:layout_height="130dp" />
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"/>
 
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Some text should be here"
-            android:layout_marginTop="10dp"/>
-        <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Some text should be here"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Some text should be here"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"/>
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="2dp"
+            android:textSize="10sp"/>
 
 
 

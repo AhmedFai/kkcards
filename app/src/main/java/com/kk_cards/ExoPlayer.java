@@ -51,7 +51,7 @@ public class ExoPlayer extends AppCompatActivity {
 
         Intent intent = getIntent();
         link = intent.getStringExtra("link");
-       // _mobileText.setText(num);
+        // _mobileText.setText(num);
 
 
         videoView.setVideoPath(link).getPlayer().start();
@@ -68,8 +68,8 @@ public class ExoPlayer extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       // hideSystemUi();
-       // initializePlayer();
+        // hideSystemUi();
+        // initializePlayer();
     }
 
 
@@ -106,7 +106,7 @@ public class ExoPlayer extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-       // releasePlayer();
+        // releasePlayer();
     }
 
 /*
