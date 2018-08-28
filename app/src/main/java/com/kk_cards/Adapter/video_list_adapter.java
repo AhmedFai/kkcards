@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kk_cards.ExoPlayer;
+import com.kk_cards.Fragment.product_details;
 import com.kk_cards.Modal.Video;
 import com.kk_cards.R;
 import com.littlechoc.cornerlabel.CornerLabel;
@@ -42,7 +44,7 @@ public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.
     }
 
     @Override
-    public void onBindViewHolder(video_list_adapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(video_list_adapter.MyViewHolder holder, final int position) {
 
         final Video video = list.get(position);
         holder.text.setText(video.getVname());
@@ -70,6 +72,20 @@ public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.
 
 
 
+
+
+        if (position == 0){
+            holder.label.setVisibility(View.VISIBLE);
+
+
+        }else if (position == 1){
+            holder.label.setVisibility(View.VISIBLE);
+
+        }else {
+            holder.label.setVisibility(View.INVISIBLE);
+        }
+
+
     }
 
     @Override
@@ -80,18 +96,30 @@ public class video_list_adapter extends RecyclerView.Adapter<video_list_adapter.
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView title;
-        TextView text,call;
+        TextView text, call;
         LinearLayout vid;
         CornerLabel label;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            title = (ImageView)itemView.findViewById(R.id.cover);
-            text = (TextView)itemView.findViewById(R.id.titleText);
-            vid = (LinearLayout)itemView.findViewById(R.id.video);
-            call = (TextView)itemView.findViewById(R.id.call);
-           // label = (CornerLabel)itemView.findViewById(R.id.label);
+            title = (ImageView) itemView.findViewById(R.id.cover);
+            text = (TextView) itemView.findViewById(R.id.titleText);
+            vid = (LinearLayout) itemView.findViewById(R.id.video);
+            call = (TextView) itemView.findViewById(R.id.call);
+            label = (CornerLabel) itemView.findViewById(R.id.label);
+
+            /*itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i=new Intent(context,product_details.class);
+                    i.putExtra(list.get(getPosition()))
+                    context.startActivity(i);
+                }
+            });*/
         }
+
+
     }
 }

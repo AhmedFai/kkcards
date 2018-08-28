@@ -2,6 +2,7 @@ package com.kk_cards;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,13 +18,16 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 
+import tcking.github.com.giraffeplayer2.GiraffePlayer;
+import tcking.github.com.giraffeplayer2.PlayerManager;
 import tcking.github.com.giraffeplayer2.VideoView;
 
 public class ExoPlayer extends AppCompatActivity {
 
     PlayerView playerView;
-    SimpleExoPlayer player;
+   // SimpleExoPlayer player;
     String link;
+    GiraffePlayer player;
 
     VideoView videoView;
 
@@ -57,6 +61,12 @@ public class ExoPlayer extends AppCompatActivity {
         videoView.setVideoPath(link).getPlayer().start();
 
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        PlayerManager.getInstance().onConfigurationChanged(newConfig);
     }
 
     @Override

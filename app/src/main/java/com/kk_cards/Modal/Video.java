@@ -19,6 +19,16 @@ public class Video {
     private String title;
     private String content;
     private String date;
+    private String productId;
+
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public String getId() {
         return id;

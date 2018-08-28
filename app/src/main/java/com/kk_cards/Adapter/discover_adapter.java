@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kk_cards.ExoPlayer;
+import com.kk_cards.Fragment.product_details;
 import com.kk_cards.Modal.Video;
 import com.kk_cards.R;
 import com.squareup.picasso.Picasso;
@@ -35,13 +36,24 @@ public class discover_adapter extends RecyclerView.Adapter<discover_adapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         final Video video = list.get(position);
 
 
         if ("Image".equals(video.getFtype())){
             Picasso.with(context).load(video.getDisUrl()).fit().into(holder.image);
+
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i=new Intent(context,product_details.class);
+                    i.putExtra("id_value",list.get(position).getProductId());
+                    i.putExtra("discover", "discover");
+                    i.putExtra("image_path","no_images");
+                    context.startActivity(i);
+                }
+            });
 
         }else {
             Picasso.with(context).load(video.getDisThumbnail()).fit().into(holder.image);

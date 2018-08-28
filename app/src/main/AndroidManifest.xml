@@ -137,7 +137,8 @@
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity android:name=".OtpActivity" />
-        <activity android:name=".ExoPlayer"></activity>
+        <activity android:name=".ExoPlayer"
+            android:configChanges="orientation|screenSize"></activity>
 
         <service
             android:name=".MyFirebaseMessagingService"

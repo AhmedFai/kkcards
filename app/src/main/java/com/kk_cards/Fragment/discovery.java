@@ -87,6 +87,9 @@ public class discovery extends Fragment {
                                 vid.setTitle(objj.getString("title"));
                                 vid.setContent(objj.getString("content"));
                                 vid.setDate(objj.getString("Date"));
+                                vid.setProductId(objj.getString("productId"));
+
+
 
                                 Log.d("link", objj.getString("disUrl"));
 

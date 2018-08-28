@@ -85,6 +85,8 @@ public class videos_fragment extends Fragment {
                                 vid.setThumbnail(objj.getString("thumbnail"));
                                 vid.setVurl(objj.getString("vurl"));
 
+
+
                                 Log.d("link", objj.getString("vurl"));
 
                                 video.add(vid);

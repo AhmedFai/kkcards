@@ -128,10 +128,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if (email.isEmpty() || _emailText.length() == 0) {
             _emailText.setError("enter a valid mobile number");
+            _emailText.requestFocus();
 
-        } else if (!_passwordText.getText().toString().matches(pattern)) {
+        } /*else if (!_passwordText.getText().toString().matches(pattern)) {
             _passwordText.setError("atleast 6 alphanumeric characters(atleast 1 lowercase and 1 digit)");
-        } else {
+        }*/ else {
             final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                     R.style.AppTheme_Dark_Dialog);
             progressDialog.setIndeterminate(true);

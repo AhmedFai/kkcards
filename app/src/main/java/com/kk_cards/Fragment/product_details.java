@@ -1369,8 +1369,16 @@ public class product_details extends AppCompatActivity implements View.OnClickLi
 
 
         if (id == android.R.id.home) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+
+            String dis =  getIntent().getStringExtra("discover");
+
+            if ("discover".equals(dis)){
+                finish();
+            }else {
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+            }
+
             return true;
 
         } else if (item.getItemId() == R.id.action_search) {

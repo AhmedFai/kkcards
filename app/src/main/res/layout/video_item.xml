@@ -112,7 +112,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="5dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:tl_background="#cc0000"
         app:tl_label="Latest"
         app:tl_labelColor="#FFFFFF"
