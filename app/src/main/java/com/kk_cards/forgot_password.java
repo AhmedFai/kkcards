@@ -220,9 +220,14 @@ public class forgot_password extends AppCompatActivity {
         {
             String pattern="(?=.*\\d)(?=.*[a-z]).{6,}";
 
-            if (!edit_text.getText().toString().matches(pattern)) {
+            if (edit_text.getText().toString().isEmpty() || edit_text.length() == 0) {
 
+                edit_text.setError("enter a valid password");
+                edit_text.requestFocus();
+
+/*
                 Toast.makeText(this, "Atleast 6 alphanumeric characters(atleast 1 lowercase and 1 digit)", Toast.LENGTH_SHORT).show();
+*/
             } else {
 
                 final ProgressDialog progressDialog = new ProgressDialog(forgot_password.this,

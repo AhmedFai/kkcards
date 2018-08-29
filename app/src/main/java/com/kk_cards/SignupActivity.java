@@ -128,12 +128,13 @@ public class SignupActivity extends AppCompatActivity {
 
         if (_nameText.getText().toString().isEmpty() || _nameText.length() == 0) {
             _nameText.setError("enter a valid name");
+            _nameText.requestFocus();
 
         } else if (_mobileText.getText().toString().isEmpty() || _mobileText.getText().toString().length() == 0 || _mobileText.getText().toString().length() < 10)
             _mobileText.setError("enter a valid mobile no");
-       else if(!_passwordText.getText().toString().matches(pattern)){
+       /*else if(!_passwordText.getText().toString().matches(pattern)){
             _passwordText.setError("atleast 6 alphanumeric characters(atleast 1 lowercase and 1 digit)");
-        }
+        }*/
 
         else if(_emailText.length()==0) {
             Context context = getApplicationContext();

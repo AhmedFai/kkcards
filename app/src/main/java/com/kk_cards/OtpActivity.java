@@ -39,7 +39,7 @@ public class OtpActivity extends AppCompatActivity implements OTPListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
-        OtpReader.bind(this, "TX-KKCARD");
+        OtpReader.bind(this, "KKCARD");
 
         phn = (EditText) findViewById(R.id.number);
         otp = (EditText) findViewById(R.id.potp);
@@ -272,5 +272,6 @@ public class OtpActivity extends AppCompatActivity implements OTPListener {
         String substr = mess.substring(length - 6, length);
 
         otp.setText(substr);
+        //otp.requestFocus();
     }
 }
